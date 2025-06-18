@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/18 13:08:44 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/18 16:39:02 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,25 +44,27 @@ typedef struct s_color
 
 typedef struct s_textures
 {
-    char *no;
-    char *so;
-    char *we;
-    char *ea;
-}   t_textures;
+    char    *no;
+    char    *so;
+    char    *we;
+    char    *ea;
+}       t_textures;
 
 typedef struct s_params
 {
-    t_textures textures;
-    t_color floor;
-    t_color ceiling;
-}   t_params;
+    t_textures  textures;
+    t_color     floor;
+    t_color     ceiling;
+}           t_params;
 
 typedef struct s_map
 {
-    //int north;
-    //int south;
-    //int west;
-    //int east;
+    int north;
+    int south;
+    int west;
+    int east;
+    int height;
+    int width;
     char    **map;
 }   t_map;
 
@@ -76,12 +78,25 @@ typedef struct s_data
 
 
 // INITIALISATION
-char    **init_map(int fd, t_params *params);
-void    init_data(t_data *data);
+char	**init_map(int fd, t_params *params, t_map *map);
+void	init_data(t_data *data);
 
 int     is_param_line(char *line, t_params *params);
+int	    is_param_map(char *line);
 
-// PARSING
+// CHECK
+int     check_map(t_map *map);
+
+// PARSING MAP
+char	**load_map(char **av, t_params *params, t_map *map);
+char    **add_line_to_map(t_map *map, char *line);
+int     is_param_map(char *line);
+
+// PARSING TEXTURES AND COLOR
 int     parse_color(char *line, t_color *color);
 int     parse_texture(char *line, char **texture);
+
+// UTILS
+void	count_elements(t_map *map);
+void	print_map(char **map);
 #endif

@@ -4,11 +4,12 @@ SRC_DIR     = ./srcs
 INC_DIR     = ./include
 LIB_DIR     = ./libft
 MLX_DIR     = ./minilib42
-MLX_LIB     = $(MLX_DIR)/libmlx_$(UNAME).a
+MLX_LIB     = 	$(MLX_DIR)/libmlx_$(UNAME).a
 
-LIB			= $(LIB_DIR)/libft.a
-SRC         = $(SRC_DIR)/main.c $(SRC_DIR)/init.c
-OBJ         = ${SRC:.c=.o}
+LIB			= 	$(LIB_DIR)/libft.a
+SRC         =	$(SRC_DIR)/main.c $(SRC_DIR)/init.c $(SRC_DIR)/check.c $(SRC_DIR)/utils.c \
+				$(SRC_DIR)/parsing/parsing_color_and_textures.c $(SRC_DIR)/parsing/parsing_map.c 
+OBJ         = 	${SRC:.c=.o}
 
 # Détection du système d'exploitation
 UNAME := $(shell uname)
