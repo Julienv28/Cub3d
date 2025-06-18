@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/18 13:09:50 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/18 13:19:20 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,19 +52,19 @@ char    **load_map(char **av, t_params *params)
 // Check 
 int	main(int ac, char **av)
 {
-    t_data data;
+	t_data	data;
 
-    if (ac != 2)
-    {
-        fprintf(stderr, "Usage: %s map.cub\n", av[0]);
-        return (1);
-    }
-    init_data(&data);
-    data.map.map = load_map(av, &data.params);
-    if (!data.map.map)
-    {
-        perror("Error chargement map\n");
-        return (1);
-    }
-    return (0);
+	if (ac != 2)
+	{
+		fprintf(stderr, "Usage: %s map.cub\n", av[0]);
+		return (1);
+	}
+	init_data(&data);
+	data.map.map = load_map(av, &data.params);
+	if (!data.map.map)
+	{
+		perror("Error chargement map\n");
+		return (1);
+	}
+	return (0);
 }
