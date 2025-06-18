@@ -6,16 +6,16 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/18 12:23:33 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/18 13:08:44 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <mlx.h>
-# include <X11/X.h>
-# include <X11/keysym.h>
+//# include <mlx.h>
+//# include <X11/X.h>
+//# include <X11/keysym.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -79,5 +79,9 @@ typedef struct s_data
 char    **init_map(int fd, t_params *params);
 void    init_data(t_data *data);
 
-int is_param_line(char *line, t_params *params);
+int     is_param_line(char *line, t_params *params);
+
+// PARSING
+int     parse_color(char *line, t_color *color);
+int     parse_texture(char *line, char **texture);
 #endif
