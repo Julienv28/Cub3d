@@ -1,0 +1,53 @@
+NAME        = cub3D
+
+SRC_DIR     = ./srcs
+INC_DIR     = ./include
+LIB_DIR     = ./libft
+MLX_DIR     = ./minilib42
+MLX_LIB     = $(MLX_DIR)/libmlx_$(UNAME).a
+
+LIB			= $(LIB_DIR)/libft.a
+SRC         = $(SRC_DIR)/main.c $(SRC_DIR)/init.c
+OBJ         = ${SRC:.c=.o}
+
+# Détection du système d'exploitation
+UNAME := $(shell uname)
+
+ifeq ($(UNAME), Linux)
+    INCLUDES    = -I/usr/include -I$(MLX_DIR)
+    MLXFLAGS    = -L$(MLX_DIR) -lmlx -lX11 -lXext
+else ifeq ($(UNAME), Darwin) # macOS
+    INCLUDES    = -I/opt/X11/include -I/opt/X11/include/X11 -I$(MLX_DIR)
+    MLXFLAGS    = -L$(MLX_DIR) -lmlx -L/opt/X11/lib -lX11 -lXext
+else
+    $(error Unsupported OS: $(UNAME))
+endif
+
+CC          = cc
+CFLAGS      = -Wall -Wextra -Werror -I$(INC_DIR) -I$(LIB_DIR) $(INCLUDES) 
+MFLAGS      = $(MLXFLAGS)
+
+all: $(NAME) $(LIB)
+
+$(LIB):
+	make -C $(LIB_DIR)
+
+# Compiler MinilibX (attention à la version)
+$(NAME): $(OBJ) $(LIB)
+	make -C $(MLX_DIR)
+	$(CC) $(CFLAGS) $(OBJ) $(MFLAGS) -L$(LIB_DIR) -lft -o $(NAME)
+
+.c.o:
+	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)
+
+clean:
+	rm -f $(OBJ)
+	make clean -C $(MLX_DIR)
+	make clean -C $(LIB_DIR)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re
