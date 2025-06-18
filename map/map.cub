@@ -1,5 +1,5 @@
 F 220,100,0
-C 300,30,0
+C 225,255,0
 
 NO textures/wall_north.xpm
 SO textures/wall_south.xpm
