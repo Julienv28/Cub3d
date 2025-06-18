@@ -1,14 +1,14 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    parsing_color_and_texttures                        :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: opique <opique@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2025/06/18 13:06:36 by opique            #+#    #+#              #
-#    Updated: 2025/06/18 13:07:47 by opique           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_color_and_textures.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
+/*   Updated: 2025/06/18 13:50:42 by opique           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
@@ -30,14 +30,14 @@ int	parse_number(char *line, int *i)
 }
 
 // Coueur au format RGB
-int parse_color(char *line, t_color *color)
+int	parse_color(char *line, t_color *color)
 {
-    int r = 0;
-    int g = 0;
-    int b = 0;
-    int i = 1;
+	int	r = 0;
+	int	g = 0;
+	int	b = 0;
+	int	i = 1;
 
-    while (line[i] == ' ')
+	while (line[i] == ' ')
 		i++;
     r = parse_number(line, &i);
 	if (line[i++] != ',' || r < 0 || r > 255)
@@ -53,18 +53,22 @@ int parse_color(char *line, t_color *color)
     color->r = r;
     color->g = g;
     color->b = b;
-    return (1);
+	return (1);
 }
 
-int parse_texture(char *line, char **texture)
+int	parse_texture(char *line, char **texture)
 {
-    int i;
+	int		i;
+	char	*path;
 
-    i = 0;
-    while (line[i])
-    {
-        printf("line = %s\n", line);
-        i++;
-    }
-    
+    i = 2;
+	path = NULL;
+	while (line[i] && line[i] == ' ')
+		i++;
+	path = &line[i];
+	*texture = malloc((sizeof(char) * ft_strlen(path) + 1));
+	if (*texture == NULL)
+		return (0);
+	ft_strcpy(*texture, path);
+	return (1);
 }
