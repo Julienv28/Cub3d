@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/18 16:39:02 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/19 13:03:23 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,13 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
-# include "../minilib42/mlx.h"
+# include "../mlx/mlx.h"
+
+# define GREEN				"\033[0;32m"
+# define ORANGE				"\033[1;33m"
+# define MAGENTA			"\033[1;95m"
+# define GREY				"\033[0;90m"
+# define RESET				"\033[0m"
 
 # define KEY_W				119
 # define KEY_A				97
@@ -36,27 +42,47 @@
 # define KEY_Q				113
 # define KEY_ESC			65307
 
+# define WIN_LEN			1500
+# define WIN_HEIGHT			1000
+
+# define NORTH				1
+# define SOUTH              2
+# define EAST               3
+# define WEST               4
+
 typedef struct s_color
 {
-    int r;
-    int g;
-    int b;
-}   t_color;
+	int		r;
+	int		g;
+	int		b;
+}	t_color;
+
+typedef struct s_image
+{
+	void	*xpm_ptr;
+	int		or;
+	int		x;
+	int		y;
+}	t_image;
 
 typedef struct s_textures
 {
-    char    *no;
-    char    *so;
-    char    *we;
-    char    *ea;
-}       t_textures;
+	char	*no_xpm;
+	char	*so_xpm;
+	char	*we_xpm;
+	char	*ea_xpm;
+	t_image	no;
+	t_image	so;
+	t_image	ea;
+	t_image	we;
+}	t_textures;
 
 typedef struct s_params
 {
-    t_textures  textures;
-    t_color     floor;
-    t_color     ceiling;
-}           t_params;
+	t_textures	textures;
+	t_color		floor;
+	t_color		ceiling;
+}	t_params;
 
 typedef struct s_map
 {
@@ -71,11 +97,13 @@ typedef struct s_map
 
 typedef struct s_data
 {
-    void    *win_ptr;
-    void    *mlx_ptr;
-    t_params params;
-    t_map   map;
-} t_data;
+	void		*win_ptr;
+	void		*mlx_ptr;
+	t_map		map;
+	t_textures	textures;
+	t_color		floor;
+	t_color		ceiling;
+}	t_data;
 
 
 // INITIALISATION
@@ -96,6 +124,9 @@ int     is_param_map(char *line);
 // PARSING TEXTURES AND COLOR
 int     parse_color(char *line, t_color *color);
 int     parse_texture(char *line, char **texture);
+
+//CLOSING MAPS
+int     ft_error_close(char *message, t_data *data);
 
 // UTILS
 void	count_elements(t_map *map);
