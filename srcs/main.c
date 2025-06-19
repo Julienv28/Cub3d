@@ -6,9 +6,12 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 12:51:33 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/19 13:18:02 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+// Check que la carte est entoure de mur
+// Parsing joueur + position
 
 #include "../includes/cub3d.h"
 
@@ -47,6 +50,6 @@ int	main(int ac, char **av)
 		return (perror("Error chargement map\n"), 1);
 	print_map(data.map.map);
 	if (!check_map(&data.map))
-		return (1);
+		return (perror("false\n"), 1);
 	return (0);
 }

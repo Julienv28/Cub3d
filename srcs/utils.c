@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/18 16:34:37 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/19 12:33:50 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	count_elements(t_map *map)
 				map->south++;
 			else if (cell == 'E')
 				map->east++;
-			else if (cell == 'O')
+			else if (cell == 'W')
 				map->west++;
             x++;
 		}
