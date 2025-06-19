@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color_and_textures.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/18 13:50:42 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/19 10:34:13 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	parse_texture(char *line, char **texture)
 	int		i;
 	char	*path;
 
-    i = 2;
+	i = 2;
 	path = NULL;
 	while (line[i] && line[i] == ' ')
 		i++;
