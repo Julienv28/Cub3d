@@ -3,7 +3,7 @@ NAME        = cub3D
 SRC_DIR     = ./srcs
 INC_DIR     = ./include
 LIB_DIR     = ./libft
-MLX_DIR     = ./minilib42
+MLX_DIR     = ./mlx
 MLX_LIB     = 	$(MLX_DIR)/libmlx_$(UNAME).a
 
 LIB			= 	$(LIB_DIR)/libft.a

@@ -62,7 +62,7 @@ char	**load_map(char **av, t_data *data, t_map *map)
 		perror("Error: ouverture map\n");
 		return (NULL);
 	}
-	map->map = init_map(fd, params, map);
+	map->map = init_map(fd, data, map);
 	close(fd);
 	return (map->map);
 }
