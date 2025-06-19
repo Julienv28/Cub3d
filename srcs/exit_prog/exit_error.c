@@ -16,5 +16,5 @@ int	ft_error_close(char *message, t_data *data)
 {
 	free(data);
 	printf(ORANGE"ERROR\n"GREY"%s\n"RESET, message);
-	exit (EXIT_FAILURE);
+	exit(EXIT_FAILURE);
 }
