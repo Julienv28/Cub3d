@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 09:41:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 09:47:58 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/19 13:55:38 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,6 @@
 int	ft_error_close(char *message, t_data *data)
 {
 	free(data);
-	ft_printf(ORANGE"ERROR\n"GREY"%s\n"RESET, message);
+	printf(ORANGE"ERROR\n"GREY"%s\n"RESET, message);
 	exit (EXIT_FAILURE);
 }

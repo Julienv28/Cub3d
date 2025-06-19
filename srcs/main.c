@@ -3,15 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 13:18:02 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/19 16:34:40 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// Check que la carte est entoure de mur
-// Parsing joueur + position
+// Check qu il y ai toutes les lignes au moins 1 fois
+// Check que la map soit bien place (en derniere) ou pas inexistante
+// type de fichier incorrecte ou inexistant (pas .cub)
+// Pas de joueur sur la carte
+// Mauvais chemin pour les textures
 
 #include "../includes/cub3d.h"
 
@@ -22,17 +25,35 @@ int	is_param_line(char *line, t_data *data)
 	while (*line == ' ')
 		line++;
 	if (ft_strncmp(line, "NO", 2) == 0)
+	{
+		data->textures.no_check++;
 		return (parse_texture(line, &data->textures.no_xpm));
+	}
 	if (ft_strncmp(line, "SO", 2) == 0)
+	{
+		data->textures.so_check++;
 		return (parse_texture(line, &data->textures.so_xpm));
+	}
 	if (ft_strncmp(line, "WE", 2) == 0)
+	{
+		data->textures.we_check++;
 		return (parse_texture(line, &data->textures.we_xpm));
+	}
 	if (ft_strncmp(line, "EA", 2) == 0)
+	{
+		data->textures.ea_check++;
 		return (parse_texture(line, &data->textures.ea_xpm));
+	}
 	if (ft_strncmp(line, "F", 1) == 0)
+	{
+		data->check_f++;
 		return (parse_color(line, &data->floor));
+	}
 	if (ft_strncmp(line, "C", 1) == 0)
+	{
+		data->check_c++;
 		return (parse_color(line, &data->ceiling));
+	}
 	return (0);
 }
 

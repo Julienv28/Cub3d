@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 13:03:23 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/19 15:59:41 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,10 @@ typedef struct s_textures
 	t_image	so;
 	t_image	ea;
 	t_image	we;
+	int no_check;
+    int so_check;
+    int we_check;
+    int ea_check;
 }	t_textures;
 
 typedef struct s_params
@@ -103,21 +107,24 @@ typedef struct s_data
 	t_textures	textures;
 	t_color		floor;
 	t_color		ceiling;
+	int 	check_f;
+    int 	check_c;
 }	t_data;
 
 
 // INITIALISATION
-char	**init_map(int fd, t_params *params, t_map *map);
+char	**init_map(int fd, t_data *data, t_map *map);
 void	init_data(t_data *data);
 
-int     is_param_line(char *line, t_params *params);
+int     is_param_line(char *line, t_data *data);
 int	    is_param_map(char *line);
 
 // CHECK
 int     check_map(t_map *map);
+int		check_param(t_data *data);
 
 // PARSING MAP
-char	**load_map(char **av, t_params *params, t_map *map);
+char	**load_map(char **av, t_data *data, t_map *map);
 char    **add_line_to_map(t_map *map, char *line);
 int     is_param_map(char *line);
 

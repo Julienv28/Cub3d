@@ -3,14 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
-/*   Updated: 2025/06/19 13:03:49 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/19 16:21:11 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+int	check_param(t_data *data)
+{
+	printf("EA check: %d, NO check: %d, SO check: %d, WE check: %d, F check: %d, C check: %d\n",
+           data->textures.ea_check, data->textures.no_check, data->textures.so_check, 
+           data->textures.we_check, data->check_f, data->check_c);
+	if (data->textures.ea_check > 1)
+		return (ft_putstr_fd("Error: doublon EA\n", STDERR_FILENO), 0);
+	if (data->textures.no_check > 1)
+		return (ft_putstr_fd("Error: doublon NO\n", STDERR_FILENO), 0);
+	if (data->textures.so_check > 1)
+		return (ft_putstr_fd("Error: doublon SO\n", STDERR_FILENO), 0);
+	if (data->textures.we_check > 1)
+		return (ft_putstr_fd("Error: doublon WE\n", STDERR_FILENO), 0);
+	if (data->check_f > 1)
+		return (ft_putstr_fd("Error: doublon F\n", STDERR_FILENO), 0);
+	if (data->check_c > 1)
+		return (ft_putstr_fd("Error: doublon C\n", STDERR_FILENO), 0);
+	if (data->textures.ea_check == 0 || data->textures.no_check == 0
+		|| data->textures.so_check == 0 || data->textures.we_check == 0)
+		return (ft_putstr_fd("Missing param\n", STDERR_FILENO), 0);
+	return (1);
+}
 
 // La 1er et dernier ligne dovent etre 1 
 // Sinon 1e et dernier caractere de la ligne doivent etre 1
