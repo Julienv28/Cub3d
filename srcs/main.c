@@ -15,24 +15,24 @@
 
 #include "../includes/cub3d.h"
 
-int	is_param_line(char *line, t_params *params)
+int	is_param_line(char *line, t_data *data)
 {
 	if (!line)
 		return (0);
 	while (*line == ' ')
-        line++;
-	if (ft_strncmp(line, "NO",2) == 0)
-		return (parse_texture(line, &params->textures.no));
-	if (ft_strncmp(line, "SO",2) == 0)
-		return (parse_texture(line, &params->textures.so));
-	if (ft_strncmp(line, "WE",2) == 0)
-		return (parse_texture(line, &params->textures.we));
-	if (ft_strncmp(line, "EA",2) == 0)
-		return (parse_texture(line, &params->textures.ea));
+		line++;
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return (parse_texture(line, &data->textures.no_xpm));
+	if (ft_strncmp(line, "SO", 2) == 0)
+		return (parse_texture(line, &data->textures.so_xpm));
+	if (ft_strncmp(line, "WE", 2) == 0)
+		return (parse_texture(line, &data->textures.we_xpm));
+	if (ft_strncmp(line, "EA", 2) == 0)
+		return (parse_texture(line, &data->textures.ea_xpm));
 	if (ft_strncmp(line, "F", 1) == 0)
-		return (parse_color(line, &params->floor));
+		return (parse_color(line, &data->floor));
 	if (ft_strncmp(line, "C", 1) == 0)
-		return (parse_color(line, &params->ceiling));
+		return (parse_color(line, &data->ceiling));
 	return (0);
 }
 
@@ -46,7 +46,7 @@ int	main(int ac, char **av)
 		return (1);
 	}
 	init_data(&data);
-	if (!load_map(av, &data.params, &data.map))
+	if (!load_map(av, &data, &data.map))
 		return (perror("Error chargement map\n"), 1);
 	print_map(data.map.map);
 	if (!check_map(&data.map))

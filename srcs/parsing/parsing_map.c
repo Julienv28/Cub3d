@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:36:07 by opique            #+#    #+#             */
 /*   Updated: 2025/06/19 13:01:41 by opique           ###   ########.fr       */
@@ -52,11 +52,11 @@ char	**add_line_to_map(t_map *map, char *line)
 	return (map->map);
 }
 
-char	**load_map(char **av, t_params *params, t_map *map)
+char	**load_map(char **av, t_data *data, t_map *map)
 {
 	int		fd;
 
-    fd = open(av[1], O_RDONLY);
+	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 	{
 		perror("Error: ouverture map\n");

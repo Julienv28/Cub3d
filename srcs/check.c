@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
 /*   Updated: 2025/06/19 13:03:49 by opique           ###   ########.fr       */
@@ -82,10 +82,11 @@ int	check_map(t_map *map)
 	int	total_positions;
 
 	count_elements(map);
-    total_positions = map->north + map->south + map->east + map->west;
+	total_positions = map->north + map->south + map->east + map->west;
 	if (total_positions != 1)
 	{
-		ft_putstr_fd("Error: position joueur sur la map\n", STDERR_FILENO);
+		ft_putstr_fd("Error: plus d'une position de joueur sur la carte\n", \
+			STDERR_FILENO);
 		return (0);
 	}
 	replace_spaces_by_walls(map);
