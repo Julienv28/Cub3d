@@ -1,20 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_error.c                                       :+:      :+:    :+:   */
+/*   playr_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 09:41:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 14:44:51 by juvitry          ###   ########.fr       */
+/*   Created: 2025/06/19 14:31:36 by juvitry           #+#    #+#             */
+/*   Updated: 2025/06/19 14:38:20 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-int	ft_error_close(char *message, t_data *data)
+void	parse_player(t_map *map)
 {
-	free(data);
-	printf(ORANGE"ERROR\n"GREY"%s\n"RESET, message);
-	exit(EXIT_FAILURE);
+	int		x;
+	int		y;
+	char	**maps;
+
+	maps = map->map;
+	y = 0;
+	while (maps[y])
+	{
+		x = 0;
+		while (maps[y][x])
+		{
+			if (maps[y][x] == 'N' || maps[y][x] == 'S' || maps[y][x] == 'E'
+				|| maps[y][x] == 'W')
+			{
+				map->play->x = (float)x;
+				map->play->y = (float)y;
+				break ;
+			}
+			x++;
+		}
+		y++;
+	}
 }
