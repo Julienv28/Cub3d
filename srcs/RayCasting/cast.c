@@ -6,11 +6,12 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 15:53:26 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/20 13:51:57 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <math.h>
 
 static t_cast	*init_val_cast(t_cast *cast, t_map *map, float rayAngle)
 {
@@ -64,6 +65,7 @@ float	*init_distaces(t_map *map)
 	{
 		rayAngle = playerAngle - (FOV / 2) + (FOV / NUM_RAYS) * i;
 		distances[i] = get_dist_from_player(map, rayAngle);
+		distances[i] *= cosf(rayAngle - playerAngle); //correctif de vision et eviter l'effet fisheye
 		i++;
 	}
 	return (distances);
