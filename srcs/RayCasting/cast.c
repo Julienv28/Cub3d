@@ -6,11 +6,12 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 15:53:26 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/20 14:35:56 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+#include <math.h>
 
 static t_cast	*init_val_cast(t_cast *cast, t_map *map, float rayAngle)
 {
@@ -52,18 +53,20 @@ float	get_dist_from_player(t_map *map, float rayAngle)
 
 float	*init_distaces(t_map *map)
 {
-	float	playerAngle;
-	float	rayAngle;
+	float	playerangle;
+	float	rayangle;
 	float	*distances;
 	int		i;
 
 	i = 0;
-	distances = ft_calloc(sizeof(float), NUM_RAYS);
-	playerAngle = M_PI / 2;
+	distances = ft_calloc(sizeof(float), NUM_RAYS); // ATTENTION IL EST PAS FREE !
+	playerangle = M_PI / 2;
 	while (i < NUM_RAYS)
 	{
-		rayAngle = playerAngle - (FOV / 2) + (FOV / NUM_RAYS) * i;
-		distances[i] = get_dist_from_player(map, rayAngle);
+		rayangle = playerangle - (map->play->fov / 2)
+			+ (map->play->fov / NUM_RAYS) * i;
+		distances[i] = get_dist_from_player(map, rayangle);
+		distances[i] *= cosf(rayangle - playerangle); //correctif de vision et eviter l'effet fish-eye
 		i++;
 	}
 	return (distances);

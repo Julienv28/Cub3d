@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 15:59:41 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/20 14:35:03 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@
 # define WEST               4
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
-# define FOV				M_PI / 3
 # define NUM_RAYS			60
 
 typedef	struct s_cast
@@ -77,6 +76,9 @@ typedef struct s_position
 {
 	float	x;
 	float	y;
+	int		orientation; // cardinal
+	float	angle; // radians
+	float	fov; // Pour la norme
 }	t_position;
 
 typedef struct s_image
