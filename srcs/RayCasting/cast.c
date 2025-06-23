@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 11:53:51 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/23 14:06:11 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_cast	*init_val_cast(t_cast *cast, t_map *map, float rayAngle)
 	return (cast);
 }
 
-float	get_dist_from_player(t_map *map, float rayAngle)
+float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 {
 	t_cast	*cast;
 	int		mapx;
@@ -49,43 +49,42 @@ float	get_dist_from_player(t_map *map, float rayAngle)
 		if (map->map[mapy][mapx] == '1')
 		{
 			distance = cast->distance;
+			rc->w_or = get_w_or(cast->dx, cast->dy);
+			rc->impact_x = get_impact_x(cast->rayx, cast->rayy, rc->w_or);
 			return (free(cast), distance);
 		}
 	}
 	return (free(cast), FLT_MAX);
 }
 
-float	*init_distaces(t_map *map)
+void	render_game(t_data *data)
 {
 	float	playerangle;
 	float	rayangle;
-	float	*distances;
-	int		constante;
+	t_rc	*rc;
 	int		ray;
-	float	projected_height;
-	int		top_pixel;
-	int		bottom_pixel;
 
+	rc = malloc(sizeof(t_rc));
+	if (!rc)
+		return ;
 	ray = 0;
-	distances = ft_calloc(sizeof(float), NUM_RAYS); // ATTENTION IL EST PAS FREE !
-	playerangle = M_PI / 2;
-	constante = WIN_HEIGHT * TILE_SIZE;
+	playerangle = data->map.play->angle;
+	rc->constante = WIN_HEIGHT * TILE_SIZE;
 	while (ray < NUM_RAYS)
 	{
-		rayangle = playerangle - (map->play->fov / 2)
-			+ (map->play->fov / NUM_RAYS) * ray;
-		distances[ray] = get_dist_from_player(map, rayangle);
-		distances[ray] *= cosf(rayangle - playerangle); //correctif de vision et eviter l'effet fish-eye
-		if (distances[ray] == 0)
-			distances[ray] = 0.0001;
-		projected_height = constante / distances[ray];
-		top_pixel = (WIN_HEIGHT / 2) - (projected_height / 2);
-		bottom_pixel = (WIN_HEIGHT / 2) + (projected_height / 2);
-		if (top_pixel < 0)
-			top_pixel = 0;
-		if (bottom_pixel > WIN_HEIGHT)
-			bottom_pixel = WIN_HEIGHT;
+		rayangle = playerangle - (data->map.play->fov / 2)
+			+ (data->map.play->fov / NUM_RAYS) * ray;
+		rc->distance = get_dist_from_player(&data->map, rayangle, rc);
+		rc->distance *= cosf(rayangle - playerangle);
+		if (rc->distance == 0)
+			rc->distance = 0.0001;
+		rc->pr_hght = rc->constante / rc->distance;
+		rc->top_pixel = (WIN_HEIGHT / 2) - (rc->pr_hght / 2);
+		rc->bttm_pixel = (WIN_HEIGHT / 2) + (rc->pr_hght / 2);
+		if (rc->top_pixel < 0)
+			rc->top_pixel = 0;
+		if (rc->bttm_pixel > WIN_HEIGHT)
+			rc->bttm_pixel = WIN_HEIGHT;
 		ray++;
 	}
-	return (distances);
 }

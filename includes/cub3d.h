@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 11:06:42 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/23 13:48:51 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <float.h>
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
+
+# define _USE_MATH_DEFINES
 
 # define GREEN				"\033[0;32m"
 # define ORANGE				"\033[1;33m"
@@ -82,6 +84,17 @@ typedef struct s_position
 	float	fov; // Pour la norme
 }	t_position;
 
+typedef struct s_rc
+{
+	float	distance;
+	float	pr_hght;
+	float	impact_x;
+	int		top_pixel;
+	int		bttm_pixel;
+	int		constante;
+	int		w_or;
+}	t_rc;
+
 typedef struct s_image
 {
 	void	*xpm_ptr;
@@ -108,11 +121,11 @@ typedef struct s_textures
 
 typedef struct s_map
 {
-	int 		north;
-	int 		south;
-	int 		west;
-	int 		east;
-	int 		height;
+	int			north;
+	int			south;
+	int			west;
+	int			east;
+	int			height;
 	int			width;
 	char		**map;
 	t_position	*play;
@@ -135,28 +148,30 @@ typedef struct s_data
 char	**init_map(int fd, t_data *data, t_map *map);
 void	init_data(t_data *data);
 
-int     is_param_line(char *line, t_data *data);
-int	    is_param_map(char *line);
+int		is_param_line(char *line, t_data *data);
+int		is_param_map(char *line);
 
 // CHECK
-int     check_map(t_map *map);
+int		check_map(t_map *map);
 int		check_param(t_data *data);
 
 // PARSING MAP
 char	**load_map(char **av, t_data *data, t_map *map);
-char    **add_line_to_map(t_map *map, char *line);
-int     is_param_map(char *line);
+char	**add_line_to_map(t_map *map, char *line);
+int		is_param_map(char *line);
 void	parse_player(t_map *map);
 
 // PARSING TEXTURES AND COLOR
-int     parse_color(char *line, t_color *color);
-int     parse_texture(char *line, char **texture);
+int		parse_color(char *line, t_color *color);
+int		parse_texture(char *line, char **texture);
 
 // RAYCASTING ET 3D
-float	*init_distaces(t_map *map);
+void	render_game(t_data *data);
+int		get_w_or(float dx, float dy);
+float	get_impact_x(float rayx, float rayy, int w_or);
 
 //CLOSING MAPS
-int     ft_error_close(char *message, t_data *data);
+int		ft_error_close(char *message, t_data *data);
 
 // UTILS
 void	count_elements(t_map *map);
