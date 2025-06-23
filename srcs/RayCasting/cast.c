@@ -6,12 +6,11 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 14:06:11 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/23 14:57:27 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <math.h>
 
 static t_cast	*init_val_cast(t_cast *cast, t_map *map, float rayAngle)
 {
