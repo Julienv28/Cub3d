@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color_and_textures.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/19 10:34:13 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/23 11:55:36 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ int	parse_number(char *line, int *i)
 	return (num);
 }
 
+int	print_color_error(char *msg)
+{
+	ft_putstr_fd(msg, STDERR_FILENO);
+	exit(1);
+}
 // Coueur au format RGB
 int	parse_color(char *line, t_color *color)
 {
@@ -41,15 +46,15 @@ int	parse_color(char *line, t_color *color)
 		i++;
     r = parse_number(line, &i);
 	if (line[i++] != ',' || r < 0 || r > 255)
-		return (0);
+		return (print_color_error("Error: red color invalid\n"), 0);
 	g = parse_number(line, &i);
 	if (line[i++] != ',' || g < 0 || g > 255)
-		return (0);
+		return (print_color_error("Error: green color invalid\n"), 0);
 	b = parse_number(line, &i);
 	if (line[i] != '\0' && line[i] != '\n')
-		return (0);
+		return (print_color_error("Error: blue color invalid\n"), 0);
 	if (b < 0 || b > 255)
-		return (0);
+		return (print_color_error("Error: RGB invalid format\n"), 0);
     color->r = r;
     color->g = g;
     color->b = b;

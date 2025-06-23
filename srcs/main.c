@@ -6,15 +6,9 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/19 16:34:40 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/23 11:55:00 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-// Check qu il y ai toutes les lignes au moins 1 fois
-// Check que la map soit bien place (en derniere) ou pas inexistante
-// type de fichier incorrecte ou inexistant (pas .cub)
-// Pas de joueur sur la carte
-// Mauvais chemin pour les textures
 
 #include "../includes/cub3d.h"
 
@@ -62,15 +56,10 @@ int	main(int ac, char **av)
 	t_data	data;
 
 	if (ac != 2)
-	{
-		fprintf(stderr, "Usage: %s map.cub\n", av[0]);
-		return (1);
-	}
+		return (ft_putstr_fd("Usage: ./cub3D map.cub\n", STDERR_FILENO), 1);
 	init_data(&data);
-	if (!load_map(av, &data, &data.map))
-		return (perror("Error chargement map\n"), 1);
+	if (!load_map_and_param(av, &data, &data.map))
+		return (1);
 	print_map(data.map.map);
-	if (!check_map(&data.map))
-		return (perror("false\n"), 1);
 	return (0);
 }

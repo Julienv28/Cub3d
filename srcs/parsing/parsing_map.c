@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:36:07 by opique            #+#    #+#             */
-/*   Updated: 2025/06/19 16:30:39 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/23 10:12:10 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,5 @@ char	**add_line_to_map(t_map *map, char *line)
 		return (free(map->map), NULL);
     map->height++;
     map->map[map->height] = NULL;
-	return (map->map);
-}
-
-char	**load_map(char **av, t_data *data, t_map *map)
-{
-	int		fd;
-
-	fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-	{
-		perror("Error: ouverture map\n");
-		return (NULL);
-	}
-	map->map = init_map(fd, data, map);
-	close(fd);
 	return (map->map);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/20 14:35:03 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/23 10:24:02 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,6 @@ typedef struct s_data
 
 
 // INITIALISATION
-char	**init_map(int fd, t_data *data, t_map *map);
 void	init_data(t_data *data);
 
 int     is_param_line(char *line, t_data *data);
@@ -140,9 +139,12 @@ int	    is_param_map(char *line);
 // CHECK
 int     check_map(t_map *map);
 int		check_param(t_data *data);
+int		check_all(t_data *data, t_map *map);
 
 // PARSING MAP
-char	**load_map(char **av, t_data *data, t_map *map);
+char	**load_map(int fd, t_map *map, char *first_line);
+char	*load_param(int fd, t_data *data);
+int		load_map_and_param(char **av, t_data *data, t_map *map);
 char    **add_line_to_map(t_map *map, char *line);
 int     is_param_map(char *line);
 
@@ -155,6 +157,7 @@ int     ft_error_close(char *message, t_data *data);
 
 // UTILS
 void	count_elements(t_map *map);
+void	replace_spaces_by_walls(t_map *map);
 void	print_map(char **map);
 
 #endif
