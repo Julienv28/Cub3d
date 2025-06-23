@@ -25,6 +25,8 @@
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 
+# define _USE_MATH_DEFINES
+
 # define GREEN				"\033[0;32m"
 # define ORANGE				"\033[1;33m"
 # define MAGENTA			"\033[1;95m"
@@ -55,9 +57,10 @@
 # define WEST               4
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
-# define NUM_RAYS			60
+# define NUM_RAYS			WIN_LEN
+# define TILE_SIZE			64
 
-typedef	struct s_cast
+typedef struct s_cast
 {
 	float	dx;
 	float	dy;
@@ -83,12 +86,23 @@ typedef struct s_position
 	float	fov; // Pour la norme
 }	t_position;
 
+typedef struct s_rc
+{
+	float	distance;
+	float	pr_hght;
+	float	impact_x;
+	int		top_pixel;
+	int		bttm_pixel;
+	int		constante;
+	int		w_or;
+}	t_rc;
+
 typedef struct s_image
 {
 	void	*xpm_ptr;
 	int		or;
-	float	x;
-	float	y;
+	int		x;
+	int		y;
 }	t_image;
 
 typedef struct s_textures
@@ -101,23 +115,23 @@ typedef struct s_textures
 	t_image	so;
 	t_image	ea;
 	t_image	we;
-	int no_check;
-    int so_check;
-    int we_check;
-    int ea_check;
+	int		no_check;
+	int		so_check;
+	int		we_check;
+	int		ea_check;
 }	t_textures;
 
 typedef struct s_map
 {
-    int 		north;
-    int 		south;
-    int 		west;
-    int 		east;
-    int 		height;
-    int 		width;
-    char    	**map;
+	int			north;
+	int			south;
+	int			west;
+	int			east;
+	int			height;
+	int			width;
+	char		**map;
 	t_position	*play;
-}   t_map;
+}	t_map;
 
 typedef struct s_data
 {
@@ -127,8 +141,8 @@ typedef struct s_data
 	t_textures	textures;
 	t_color		floor;
 	t_color		ceiling;
-	int 	check_f;
-    int 	check_c;
+	int			check_f;
+	int			check_c;
 }	t_data;
 
 
@@ -137,22 +151,30 @@ void	init_data(t_data *data);
 void	ft_init_mlx(t_data *data);
 void	init_hook_loop(t_data *data);
 
-int     is_param_line(char *line, t_data *data);
-int	    is_param_map(char *line);
+int		is_param_line(char *line, t_data *data);
+int		is_param_map(char *line);
 
 // CHECK
-int     check_map(t_map *map);
+int		check_map(t_map *map);
 int		check_param(t_data *data);
 int		check_all(t_data *data, t_map *map);
 
-// PARSING
-char	**load_map(int fd, t_map *map, char *first_line);
-char	*load_param(int fd, t_data *data);
+// PARSING MAP
 int		load_map_and_param(char **av, t_data *data, t_map *map);
-char    **add_line_to_map(t_map *map, char *line);
-int     is_param_map(char *line);
-int     parse_color(char *line, t_color *color);
-int     parse_texture(char *line, char **texture);
+char	**load_map(char **av, t_data *data, t_map *map);
+char	**add_line_to_map(t_map *map, char *line);
+int		is_param_map(char *line);
+void	parse_player(t_map *map);
+
+// PARSING TEXTURES AND COLOR
+char	*load_param(int fd, t_data *data);
+int		parse_color(char *line, t_color *color);
+int		parse_texture(char *line, char **texture);
+
+// RAYCASTING ET 3D
+void	render_game(t_data *data);
+int		get_w_or(float dx, float dy);
+float	get_impact_x(float rayx, float rayy, int w_or);
 
 
 // DRAW MAP

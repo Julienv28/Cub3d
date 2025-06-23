@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
 /*   Updated: 2025/06/23 15:02:56 by opique           ###   ########.fr       */
@@ -60,7 +60,7 @@ int	cub_extansion(char *filename)
 
 void	print_map(char **map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!map)
@@ -68,6 +68,6 @@ void	print_map(char **map)
 	while (map[i] != NULL)
 	{
 		printf("%s\n", map[i]);
-        i++;
+		i++;
 	}
 }

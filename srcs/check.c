@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
 /*   Updated: 2025/06/23 11:57:02 by opique           ###   ########.fr       */
@@ -93,13 +93,13 @@ void	replace_spaces_by_walls(t_map *map)
 {
 	int	y;
 	int	x;
-	int line_len;
+	int	line_len;
 
 	y = 0;
 	while (y < map->height)
 	{
-        line_len = ft_strlen(map->map[y]);
-        x = 0;
+		line_len = ft_strlen(map->map[y]);
+		x = 0;
 		while (x < line_len)
 		{
 			if (map->map[y][x] == ' ' || map->map[y][x] == '\t')

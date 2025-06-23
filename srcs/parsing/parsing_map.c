@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:36:07 by opique            #+#    #+#             */
 /*   Updated: 2025/06/23 10:12:10 by opique           ###   ########.fr       */
@@ -37,17 +37,17 @@ char	**add_line_to_map(t_map *map, char *line)
 	char	**new_map;
 	int		line_len;
 
-    line_len = ft_strlen(line);
+	line_len = ft_strlen(line);
 	if (map->width < line_len)
-        map->width = line_len;
+		map->width = line_len;
 	new_map = realloc(map->map, sizeof(char *) * (map->height + 2));
 	if (!new_map)
 		return (free(map->map), NULL);
-    map->map = new_map;
-    map->map[map->height] = ft_strdup(line);
+	map->map = new_map;
+	map->map[map->height] = ft_strdup(line);
 	if (!map->map[map->height])
 		return (free(map->map), NULL);
-    map->height++;
-    map->map[map->height] = NULL;
+	map->height++;
+	map->map[map->height] = NULL;
 	return (map->map);
 }

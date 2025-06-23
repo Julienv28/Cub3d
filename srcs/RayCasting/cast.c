@@ -20,11 +20,13 @@ static t_cast	*init_val_cast(t_cast *cast, t_map *map, float rayAngle)
 	cast->dx = cosf(rayAngle);
 	cast->dy = sinf(rayAngle);
 	cast->rayx = map->play->x;
+	cast->distance = 0.0f;
 	cast->rayy = map->play->y;
 	cast->stepsize = 0.05f;
+	return (cast);
 }
 
-float	get_dist_from_player(t_map *map, float rayAngle)
+float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 {
 	t_cast	*cast;
 	int		mapx;
@@ -34,7 +36,6 @@ float	get_dist_from_player(t_map *map, float rayAngle)
 	cast = init_val_cast(cast, map, rayAngle);
 	if (cast == NULL)
 		return (0);
-	distance = 0.0f;
 	while (cast->distance < 20.0f)
 	{
 		cast->rayx += cast->dx * cast->stepsize;
@@ -44,29 +45,45 @@ float	get_dist_from_player(t_map *map, float rayAngle)
 		mapy = (int)cast->rayy;
 		if (mapx < 0 || mapx >= map->width || mapy < 0 || mapy >= map->height)
 			return (free(cast), FLT_MAX);
-		if (map->map[mapy][mapx] == 1)
+		if (map->map[mapy][mapx] == '1')
+		{
+			distance = cast->distance;
+			rc->w_or = get_w_or(cast->dx, cast->dy);
+			rc->impact_x = get_impact_x(cast->rayx, cast->rayy, rc->w_or);
 			return (free(cast), distance);
+		}
 	}
 	return (free(cast), FLT_MAX);
 }
 
-float	*init_distaces(t_map *map)
+void	render_game(t_data *data)
 {
 	float	playerangle;
 	float	rayangle;
-	float	*distances;
-	int		i;
+	t_rc	*rc;
+	int		ray;
 
-	i = 0;
-	distances = ft_calloc(sizeof(float), NUM_RAYS); // ATTENTION IL EST PAS FREE !
-	playerangle = M_PI / 2;
-	while (i < NUM_RAYS)
+	rc = malloc(sizeof(t_rc));
+	if (!rc)
+		return ;
+	ray = 0;
+	playerangle = data->map.play->angle;
+	rc->constante = WIN_HEIGHT * TILE_SIZE;
+	while (ray < NUM_RAYS)
 	{
-		rayangle = playerangle - (map->play->fov / 2)
-			+ (map->play->fov / NUM_RAYS) * i;
-		distances[i] = get_dist_from_player(map, rayangle);
-		distances[i] *= cosf(rayangle - playerangle); //correctif de vision et eviter l'effet fish-eye
-		i++;
+		rayangle = playerangle - (data->map.play->fov / 2)
+			+ (data->map.play->fov / NUM_RAYS) * ray;
+		rc->distance = get_dist_from_player(&data->map, rayangle, rc);
+		rc->distance *= cosf(rayangle - playerangle);
+		if (rc->distance == 0)
+			rc->distance = 0.0001;
+		rc->pr_hght = rc->constante / rc->distance;
+		rc->top_pixel = (WIN_HEIGHT / 2) - (rc->pr_hght / 2);
+		rc->bttm_pixel = (WIN_HEIGHT / 2) + (rc->pr_hght / 2);
+		if (rc->top_pixel < 0)
+			rc->top_pixel = 0;
+		if (rc->bttm_pixel > WIN_HEIGHT)
+			rc->bttm_pixel = WIN_HEIGHT;
+		ray++;
 	}
-	return (distances);
 }
