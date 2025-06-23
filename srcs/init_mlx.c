@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 07:57:51 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/23 14:43:22 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,16 @@ void	ft_init_mlx(t_data *data)
 		ft_error_close("Couldn't create the Window.", data);
 	}
 }
-/*
+
+void	init_hook_loop(t_data *data)
+{
+	load_textures(data);
+	draw_map(data);
+	//mlx_hook(data->mlx_ptr, KeyPress, KeyPressMask, handle_keypress, data); // pour le clavier
+	//mlx_hook(data->mlx_ptr, DestroyNotify, StructureNotifyMask, on_destroy, data); // pour le clic
+	mlx_loop(data->mlx_ptr);
+}
+
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or)
 {
 	t_image	img;
@@ -37,14 +46,3 @@ t_image	ft_new_img(void *mlx, char *path, t_data *data, int or)
 	img.or = or;
 	return (img);
 }
-
-void	ft_init_textures(t_data *data)
-{
-	void	*mlx;
-
-	mlx = data->mlx_ptr;
-	data->textures.no = ft_new_img(mlx, data->textures.no_xpm, data, NORTH);
-	data->textures.so = ft_new_img(mlx, data->textures.so_xpm, data, SOUTH);
-	data->textures.ea = ft_new_img(mlx, data->textures.ea_xpm, data, EAST);
-	data->textures.we = ft_new_img(mlx, data->textures.we_xpm, data, WEST);
-}*/

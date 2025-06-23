@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/23 12:37:27 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/23 15:02:38 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,20 +103,6 @@ char	**load_map(int fd, t_map *map, char *first_line)
 	}
 	return (map->map);
 }
-int	cub_extansion(char *filename)
-{
-	int		len;
-	int		res;
-
-	len = ft_strlen(filename);
-	if (len < 4)
-		return (0);
-	res = ft_strcmp(filename + len - 4, ".cub");
-	if (res == 0)
-		return (1);
-	else
-		return (0);
-}	
 
 int	load_map_and_param(char **av, t_data *data, t_map *map)
 {
