@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 13:48:51 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/23 15:03:04 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-//# include <mlx.h>
-//# include <X11/X.h>
-//# include <X11/keysym.h>
+# include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -48,6 +48,8 @@
 
 # define WIN_LEN			1500
 # define WIN_HEIGHT			1000
+
+#define TILE_SIZE			64
 
 # define NORTH				1
 # define SOUTH              2
@@ -145,8 +147,9 @@ typedef struct s_data
 
 
 // INITIALISATION
-char	**init_map(int fd, t_data *data, t_map *map);
 void	init_data(t_data *data);
+void	ft_init_mlx(t_data *data);
+void	init_hook_loop(t_data *data);
 
 int		is_param_line(char *line, t_data *data);
 int		is_param_map(char *line);
@@ -154,14 +157,17 @@ int		is_param_map(char *line);
 // CHECK
 int		check_map(t_map *map);
 int		check_param(t_data *data);
+int		check_all(t_data *data, t_map *map);
 
 // PARSING MAP
+int		load_map_and_param(char **av, t_data *data, t_map *map);
 char	**load_map(char **av, t_data *data, t_map *map);
 char	**add_line_to_map(t_map *map, char *line);
 int		is_param_map(char *line);
 void	parse_player(t_map *map);
 
 // PARSING TEXTURES AND COLOR
+char	*load_param(int fd, t_data *data);
 int		parse_color(char *line, t_color *color);
 int		parse_texture(char *line, char **texture);
 
@@ -170,11 +176,22 @@ void	render_game(t_data *data);
 int		get_w_or(float dx, float dy);
 float	get_impact_x(float rayx, float rayy, int w_or);
 
+
+// DRAW MAP
+void	load_textures(t_data *data);
+void    draw_map(t_data *data);
+t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
+void print_textures_for_player(t_data *data, char c, int x, int y);
+
 //CLOSING MAPS
-int		ft_error_close(char *message, t_data *data);
+int     ft_error_close(char *message, t_data *data);
+int		on_destroy(t_data *data);
+
 
 // UTILS
 void	count_elements(t_map *map);
+void	replace_spaces_by_walls(t_map *map);
 void	print_map(char **map);
+int		cub_extansion(char *filename);
 
 #endif

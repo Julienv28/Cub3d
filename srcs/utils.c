@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/20 15:18:48 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/23 15:02:56 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,21 @@ void	count_elements(t_map *map)
         y++;
 	}
 }
+
+int	cub_extansion(char *filename)
+{
+	int		len;
+	int		res;
+
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	res = ft_strcmp(filename + len - 4, ".cub");
+	if (res == 0)
+		return (1);
+	else
+		return (0);
+}	
 
 void	print_map(char **map)
 {
