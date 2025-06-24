@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 15:38:03 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:15:31 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,22 @@
 # define EAST               2
 # define WEST               3
 
+# define MINIMAP_SCALE		10 // Taille case pixel
+# define MINIMAP_SIZE		200 // Taille minimap
+
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
 # define TILE_SIZE			7
+
+typedef struct s_minimap
+{
+	void    *img_ptr;
+    char    *addr;
+    int     bits_per_pixel;
+    int     line_length;
+    int     endian;
+}	t_minimap;
+
 
 typedef struct s_cast
 {
@@ -148,6 +161,7 @@ typedef struct s_data
 	int			check_f;
 	int			check_c;
 	int			last_mouse_x;
+	t_minimap	minimap;
 	t_image		screen;
 }	t_data;
 
