@@ -6,8 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:19:45 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 15:55:50 by juvitry          ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2025/06/24 15:55:50 by juvitry          ###   ########.fr       */                                                                 */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
@@ -59,6 +58,24 @@ static void	handle_player(int keysum, t_map *map)
 		player->y = new_y;
 	}
 	printf("Pos joueur : x = %.2f, y = %.2f\n", player->x, player->y);
+}
+
+int	handle_mouse(int x, int y, t_data *data)
+{
+	int		delta_x;
+	float	sensibility;
+	(void) y;
+
+	sensibility = 0.003; // ajuster si besoin
+	delta_x = x - data->last_mouse_x;
+	if (delta_x > 0) // droite -> angle augmente
+		data->map.play.angle += delta_x * sensibility;
+	else if (delta_x < 0) // gauche -> angle diminue
+		data->map.play.angle -= delta_x * sensibility;
+	data->last_mouse_x = x;
+	printf("Pos souris : x = %d\n", x);
+	render_game(data);
+	return (0);
 }
 
 int	handle_keypress(int keysum, t_data *data)
