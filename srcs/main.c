@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 15:14:17 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:11:13 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	is_texture_line(char *line, t_data *data)
 	{
 		if (parse_texture(line, &data->textures.no_xpm))
 		{
-            data->textures.no_check++;
+			data->textures.no_check++;
 			return (1);
 		}
 		return (0);
@@ -27,7 +27,7 @@ int	is_texture_line(char *line, t_data *data)
 	{
 		if (parse_texture(line, &data->textures.so_xpm))
 		{
-            data->textures.so_check++;
+			data->textures.so_check++;
 			return (1);
 		}
 		return (0);
@@ -36,7 +36,7 @@ int	is_texture_line(char *line, t_data *data)
 	{
 		if (parse_texture(line, &data->textures.we_xpm))
 		{
-            data->textures.we_check++;
+			data->textures.we_check++;
 			return (1);
 		}
 		return (0);
@@ -45,7 +45,7 @@ int	is_texture_line(char *line, t_data *data)
 	{
 		if (parse_texture(line, &data->textures.ea_xpm))
 		{
-            data->textures.ea_check++;
+			data->textures.ea_check++;
 			return (1);
 		}
 		return (0);
@@ -59,7 +59,7 @@ int	is_color_line(char *line, t_data *data)
 	{
 		if (parse_color(line, &data->floor))
 		{
-            data->check_f++;
+			data->check_f++;
 			return (1);
 		}
 		return (0);
@@ -68,7 +68,7 @@ int	is_color_line(char *line, t_data *data)
 	{
 		if (parse_color(line, &data->ceiling))
 		{
-            data->check_c++;
+			data->check_c++;
 			return (1);
 		}
 		return (0);
@@ -81,7 +81,7 @@ int	is_param_line(char *line, t_data *data)
 	if (!line)
 		return (0);
 	while (*line == ' ')
-        line++;
+		line++;
 	if (is_texture_line(line, data))
 		return (1);
 	if (is_color_line(line, data))
@@ -99,6 +99,7 @@ int	main(int ac, char **av)
 	if (!load_map_and_param(av, &data, &data.map))
 		return (1);
 	print_map(data.map.map);
+	parse_player(&data.map);
 	ft_init_mlx(&data);
 	init_hook_loop(&data);
 	return (0);

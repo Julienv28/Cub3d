@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 12:55:06 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:48:35 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static t_cast	*init_val_cast(t_cast *cast, t_map *map, float rayAngle)
 		return (NULL);
 	cast->dx = cosf(rayAngle);
 	cast->dy = sinf(rayAngle);
-	cast->rayx = map->play->x;
+	cast->rayx = map->play.x;
 	cast->distance = 0.0f;
-	cast->rayy = map->play->y;
+	cast->rayy = map->play.y;
 	cast->stepsize = 0.05f;
 	return (cast);
 }
@@ -33,6 +33,7 @@ float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 	int		mapy;
 	float	distance;
 
+	cast = NULL;
 	cast = init_val_cast(cast, map, rayAngle);
 	if (cast == NULL)
 		return (0);
@@ -67,12 +68,12 @@ void	render_game(t_data *data)
 	if (!rc)
 		return ;
 	ray = 0;
-	playerangle = data->map.play->angle;
+	playerangle = data->map.play.angle;
 	rc->constante = WIN_HEIGHT * TILE_SIZE;
 	while (ray < NUM_RAYS)
 	{
-		rayangle = playerangle - (data->map.play->fov / 2)
-			+ (data->map.play->fov / NUM_RAYS) * ray;
+		rayangle = playerangle - (data->map.play.fov / 2)
+			+ (data->map.play.fov / NUM_RAYS) * ray;
 		rc->distance = get_dist_from_player(&data->map, rayangle, rc);
 		rc->distance *= cosf(rayangle - playerangle);
 		if (rc->distance == 0)

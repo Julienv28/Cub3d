@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 14:43:22 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 10:18:24 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	init_hook_loop(t_data *data)
 {
 	load_textures(data);
 	draw_map(data);
-	//mlx_hook(data->mlx_ptr, KeyPress, KeyPressMask, handle_keypress, data); // pour le clavier
-	//mlx_hook(data->mlx_ptr, DestroyNotify, StructureNotifyMask, on_destroy, data); // pour le clic
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data); // pour le clavier
+	mlx_hook(data->win_ptr, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 }
 

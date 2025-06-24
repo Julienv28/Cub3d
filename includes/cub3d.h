@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 15:03:04 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:30:24 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ typedef struct s_map
 	int			height;
 	int			width;
 	char		**map;
-	t_position	*play;
+	t_position	play;
 }	t_map;
 
 typedef struct s_data
@@ -152,7 +152,7 @@ void	ft_init_mlx(t_data *data);
 void	init_hook_loop(t_data *data);
 
 int		is_param_line(char *line, t_data *data);
-int		is_param_map(char *line);
+int		check_char_map(t_map *map);
 
 // CHECK
 int		check_map(t_map *map);
@@ -160,10 +160,10 @@ int		check_param(t_data *data);
 int		check_all(t_data *data, t_map *map);
 
 // PARSING MAP
+char	**load_map(int fd, t_map *map, char *first_line);
 int		load_map_and_param(char **av, t_data *data, t_map *map);
-char	**load_map(char **av, t_data *data, t_map *map);
 char	**add_line_to_map(t_map *map, char *line);
-int		is_param_map(char *line);
+int		check_char_map(t_map *map);
 void	parse_player(t_map *map);
 
 // PARSING TEXTURES AND COLOR
@@ -176,17 +176,18 @@ void	render_game(t_data *data);
 int		get_w_or(float dx, float dy);
 float	get_impact_x(float rayx, float rayy, int w_or);
 
-
 // DRAW MAP
 void	load_textures(t_data *data);
-void    draw_map(t_data *data);
+void	draw_map(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
-void print_textures_for_player(t_data *data, char c, int x, int y);
+void	print_textures_for_player(t_data *data, char c, int x, int y);
 
 //CLOSING MAPS
-int     ft_error_close(char *message, t_data *data);
+int		ft_error_close(char *message, t_data *data);
 int		on_destroy(t_data *data);
 
+// MOUVEMENT JOUEUR (CLAVIER)
+int		handle_keypress(int keysum, t_data *data);
 
 // UTILS
 void	count_elements(t_map *map);

@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/23 11:55:36 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:31:01 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	parse_number(char *line, int *i)
 {
 	int	num;
 
-    num = 0;
+	num = 0;
 	while (line[*i] == ' ' || line[*i] == '\t')
 		(*i)++;
 	if (!ft_isdigit(line[*i]))
@@ -34,17 +34,21 @@ int	print_color_error(char *msg)
 	ft_putstr_fd(msg, STDERR_FILENO);
 	exit(1);
 }
-// Coueur au format RGB
+
 int	parse_color(char *line, t_color *color)
 {
-	int	r = 0;
-	int	g = 0;
-	int	b = 0;
-	int	i = 1;
+	int	r;
+	int	g;
+	int	b;
+	int	i;
 
+	r = 0;
+	g = 0;
+	b = 0;
+	i = 1;
 	while (line[i] == ' ')
 		i++;
-    r = parse_number(line, &i);
+	r = parse_number(line, &i);
 	if (line[i++] != ',' || r < 0 || r > 255)
 		return (print_color_error("Error: red color invalid\n"), 0);
 	g = parse_number(line, &i);
@@ -55,9 +59,9 @@ int	parse_color(char *line, t_color *color)
 		return (print_color_error("Error: blue color invalid\n"), 0);
 	if (b < 0 || b > 255)
 		return (print_color_error("Error: RGB invalid format\n"), 0);
-    color->r = r;
-    color->g = g;
-    color->b = b;
+	color->r = r;
+	color->g = g;
+	color->b = b;
 	return (1);
 }
 
