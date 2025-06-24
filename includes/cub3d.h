@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 13:48:51 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/24 14:18:11 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
-# define TILE_SIZE			64
+# define TILE_SIZE			7
 
 typedef struct s_cast
 {
@@ -81,7 +81,8 @@ typedef struct s_position
 	float	y;
 	int		orientation; // cardinal
 	float	angle; // radians
-	float	fov; // Pour la norme
+	float	fov;
+	float	fov_rad; // Pour la norme
 }	t_position;
 
 typedef struct s_rc
@@ -89,15 +90,19 @@ typedef struct s_rc
 	float	distance;
 	float	pr_hght;
 	float	impact_x;
+	float	dis_proj_plane;
 	int		top_pixel;
 	int		bttm_pixel;
-	int		constante;
 	int		w_or;
 }	t_rc;
 
 typedef struct s_image
 {
 	void	*xpm_ptr;
+	char	*data_addr;
+	int		bpp;
+	int		line_len;
+	int		endian;
 	int		or;
 	int		x;
 	int		y;
@@ -113,6 +118,7 @@ typedef struct s_textures
 	t_image	so;
 	t_image	ea;
 	t_image	we;
+	t_image	*all[4];
 	int		no_check;
 	int		so_check;
 	int		we_check;
@@ -141,6 +147,7 @@ typedef struct s_data
 	t_color		ceiling;
 	int			check_f;
 	int			check_c;
+	t_image		screen;
 }	t_data;
 
 
@@ -150,16 +157,20 @@ void	init_data(t_data *data);
 
 int		is_param_line(char *line, t_data *data);
 int		is_param_map(char *line);
+void	ft_init_mlx(t_data *data);
+t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
+void	ft_init_textures(t_data *data);
 
 // CHECK
 int		check_map(t_map *map);
 int		check_param(t_data *data);
 
 // PARSING MAP
-char	**load_map(char **av, t_data *data, t_map *map);
+char    **load_map(int fd, t_map map, char *first_line);
 char	**add_line_to_map(t_map *map, char *line);
 int		is_param_map(char *line);
 void	parse_player(t_map *map);
+int     load_map_and_param(char av, t_data data, t_map *map);
 
 // PARSING TEXTURES AND COLOR
 int		parse_color(char *line, t_color *color);
@@ -169,6 +180,7 @@ int		parse_texture(char *line, char **texture);
 void	render_game(t_data *data);
 int		get_w_or(float dx, float dy);
 float	get_impact_x(float rayx, float rayy, int w_or);
+void	draw_column(t_data *data, t_rc *rc, int ray);
 
 //CLOSING MAPS
 int		ft_error_close(char *message, t_data *data);
@@ -176,5 +188,17 @@ int		ft_error_close(char *message, t_data *data);
 // UTILS
 void	count_elements(t_map *map);
 void	print_map(char **map);
+
+/*
+Récapitulatif des directions :
+Est	= 0° =	0
+Nord-Est =	45° =	π/4
+Nord = 90° = π/2
+Nord-Ouest = 135° = 3π/4
+Ouest = 180° = π
+Sud-Ouest = 225° = 5π/4
+Sud = 270° = 3π/2
+Sud-Est = 315° = 7π/4
+*/
 
 #endif

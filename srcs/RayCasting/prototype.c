@@ -1,69 +1,85 @@
-#include <stdio.h>
-#include <math.h>
+// #include "../../includes/cub3d.h"
+// #include <stdlib.h>
+// #include <math.h>
+// #include <stdio.h>
 
-// #define MAP_WIDTH 8
-// #define MAP_HEIGHT 8
-// #define NUM_RAYS 60
-// #define FOV (M_PI / 3) // 60 degrés
+// #define MAP_SIZE 50
 
-// Carte de test (1 = mur, 0 = vide)
-int map[MAP_HEIGHT][MAP_WIDTH] = {
-    {1, 1, 1, 1, 1, 1, 1, 1},
-    {1, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 0, 0, 1, 0, 1},
-    {1, 0, 0, 0, 0, 1, 0, 1},
-    {1, 0, 0, 0, 0, 1, 0, 1},
-    {1, 0, 0, 0, 0, 0, 0, 1},
-    {1, 0, 0, 1, 0, 0, 0, 1},
-    {1, 1, 1, 1, 1, 1, 1, 1},
-};
 
-// Position du joueur
-float playerX = 3.5f;
-float playerY = 3.5f;
-float playerAngle = M_PI / 2; // angle en radians (vers le haut)
+// int	close_win(t_data *data)
+// {
+// 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+// 	exit(EXIT_SUCCESS);
+// 	return (0);
+// }
 
-// Prototype à implémenter
-float cast_ray(float rayAngle, float px, float py, int map[MAP_HEIGHT][MAP_WIDTH]) {
-    // Direction du rayon (vecteur unitaire)
-    float dx = cosf(rayAngle);
-    float dy = sinf(rayAngle);
+// char **generate_large_map(void)
+// {
+//     char **map = malloc(sizeof(char*) * (MAP_SIZE + 1));
+//     if (!map)
+//         return NULL;
 
-    // Position courante du rayon (en float)
-    float rayX = px;
-    float rayY = py;
+//     for (int i = 0; i < MAP_SIZE; i++)
+//     {
+//         map[i] = malloc(MAP_SIZE + 1);
+//         if (!map[i])
+//         {
+//             // libérer tout en cas d'erreur
+//             for (int j = 0; j < i; j++)
+//                 free(map[j]);
+//             free(map);
+//             return NULL;
+//         }
+//         for (int j = 0; j < MAP_SIZE; j++)
+//         {
+//             if (i == 0 || i == MAP_SIZE - 1 || j == 0 || j == MAP_SIZE - 1)
+//                 map[i][j] = '1'; // mur autour
+//             else
+//                 map[i][j] = '0'; // espace vide
+//         }
+//         map[i][MAP_SIZE] = '\0';
+//     }
+//     map[MAP_SIZE] = NULL;
+//     return map;
+// }
 
-    // Pas de déplacement
-    float stepSize = 0.05f; // plus petit = plus précis
-    float distance = 0.0f;
+// int main(void)
+// {
+//     t_data data;
 
-    while (distance < 20.0f) { // on limite la distance max à 20 cases
-        rayX += dx * stepSize;
-        rayY += dy * stepSize;
-        distance += stepSize;
+//     ft_init_mlx(&data);
 
-        int mapX = (int)rayX;
-        int mapY = (int)rayY;
+//     data.ceiling = (t_color){100, 100, 255};
+//     data.floor = (t_color){80, 50, 30};
 
-        // Vérifie qu'on ne sort pas de la map
-        if (mapX < 0 || mapX >= MAP_WIDTH || mapY < 0 || mapY >= MAP_HEIGHT)
-            return FLT_MAX; // infini : pas de mur trouvé dans la map
+//     data.map.width = MAP_SIZE;
+//     data.map.height = MAP_SIZE;
+//     data.map.map = generate_large_map();
 
-        // Collision avec un mur
-        if (map[mapY][mapX] == 1)
-            return distance;
-    }
+//     static t_position player = {
+//         .x = MAP_SIZE / 2.0f,
+//         .y = MAP_SIZE / 2.0f,
+//         .angle = M_PI * 3 / 4,
+//         .fov = M_PI / 3
+//     };
+//     data.map.play = &player;
 
-    return FLT_MAX; // rien trouvé
-}
+//     data.textures.no_xpm = "./textures_test/wall.xpm";
+//     data.textures.so_xpm = "./textures_test/blue_wall.xpm";
+//     data.textures.ea_xpm = "./textures_test/green_wall.xpm";
+//     data.textures.we_xpm = "./textures_test/red_wall.xpm";
+//     ft_init_textures(&data);
 
-int main(void) {
-    printf("Ray Casting Test:\n");
-    for (int i = 0; i < NUM_RAYS; ++i) {
-        float rayAngle = playerAngle - (FOV / 2) + (FOV / NUM_RAYS) * i;
-        float distance = cast_ray(rayAngle, playerX, playerY, map);
-        printf("Ray %2d | Angle: %.2f | Distance: %.2f\n", i, rayAngle, distance);
-    }
-    return 0;
-}
+//     // Hook pour le rendu (rafraîchissement)
+//     mlx_loop_hook(data.mlx_ptr, (int (*)())render_game, &data);
+
+//     mlx_hook(data.win_ptr, 17, 0, close_win, &data);
+//     mlx_loop(data.mlx_ptr);
+
+//     for (int i = 0; i < MAP_SIZE; i++)
+//         free(data.map.map[i]);
+//     free(data.map.map);
+
+//     return 0;
+// }
 

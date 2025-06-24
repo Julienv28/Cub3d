@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 15:49:42 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/24 14:34:08 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,14 @@ unsigned int	get_text_pixel_color(t_image *img, int x, int y)
 	return (color);
 }
 
-int	rgb_to_int(t_color color)
+void	put_pixel_to_image(t_image *img, int x, int y, unsigned int color)
 {
-	int	r;
-	int	g;
-	int	b;
+	char	*dst;
 
-	r = color.r;
-	g = color.g;
-	b = color.b;
-	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
+	if (x < 0 || x >= img->x || y < 0 || y >= img->y)
+		return ;
+	dst = img->data_addr + (y * img->line_len + x * (img->bpp / 8));
+	*(unsigned int *)dst = color;
 }
 
 void	draw_column(t_data *data, t_rc *rc, int ray)
@@ -70,24 +68,22 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 
 	text_x = init_text_x(rc);
 	y = rc->top_pixel;
+	if (rc->w_or < 1 || rc->w_or > 4)
+		return ;
 	texture = data->textures.all[rc->w_or];
+	if (texture == NULL)
+		return ;
 	while (y < rc->bttm_pixel)
 	{
 		text_y = set_text_y(rc, y);
 		color = get_text_pixel_color(texture, text_x, text_y);
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, ray, y, color);
+		put_pixel_to_image(&data->screen, ray, y, color);
 		y++;
 	}
 	y = 0;
 	while (y < rc->top_pixel)
-	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, ray, y, rgb_to_int(data->ceiling));
-		y++;
-	}
+		put_pixel_to_image(&data->screen, ray, y, rgb_to_int(data->ceiling));
 	y = rc->bttm_pixel;
 	while (y < WIN_HEIGHT)
-	{
-		mlx_pixel_put(data->mlx_ptr, data->win_ptr, ray, y, rgb_to_int(data->floor));
-		y++;
-	}
+		put_pixel_to_image(&data->screen, ray, y++, rgb_to_int(data->floor));
 }
