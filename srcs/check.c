@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
-/*   Updated: 2025/06/20 14:51:09 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/24 14:31:57 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	check_param(t_data *data)
 {
-	printf("EA check: %d, NO check: %d, SO check: %d, WE check: %d, F check: %d, C check: %d\n",
-           data->textures.ea_check, data->textures.no_check, data->textures.so_check, 
-           data->textures.we_check, data->check_f, data->check_c);
 	if (data->textures.ea_check > 1)
 		return (ft_putstr_fd("Error: doublon EA\n", STDERR_FILENO), 0);
 	if (data->textures.no_check > 1)
@@ -30,7 +27,8 @@ int	check_param(t_data *data)
 	if (data->check_c > 1)
 		return (ft_putstr_fd("Error: doublon C\n", STDERR_FILENO), 0);
 	if (data->textures.ea_check == 0 || data->textures.no_check == 0
-		|| data->textures.so_check == 0 || data->textures.we_check == 0)
+		|| data->textures.so_check == 0 || data->textures.we_check == 0
+		|| data->check_c == 0 || data->check_f == 0)
 		return (ft_putstr_fd("Missing param\n", STDERR_FILENO), 0);
 	return (1);
 }
@@ -79,6 +77,18 @@ int	check_wall(t_map *map)
 	return (1);
 }
 
+int	check_all(t_data *data, t_map *map)
+{
+	if (!check_param(data))
+		return (0);
+	replace_spaces_by_walls(map);
+	if (!check_wall(map))
+		return (0);
+	if (!check_map(map))
+		return (0);
+	return (1);
+}
+
 void	replace_spaces_by_walls(t_map *map)
 {
 	int	y;
@@ -94,9 +104,9 @@ void	replace_spaces_by_walls(t_map *map)
 		{
 			if (map->map[y][x] == ' ' || map->map[y][x] == '\t')
 				map->map[y][x] = '1';
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 }
 
@@ -112,8 +122,10 @@ int	check_map(t_map *map)
 			STDERR_FILENO);
 		return (0);
 	}
-	replace_spaces_by_walls(map);
-	if (!check_wall(map))
-		return (0);
+	// if (check_char_map(map))
+	// {
+	// 	ft_putstr_fd("Error: invalid charactere\n", STDERR_FILENO);
+	// 	return (0);
+	// }
 	return (1);
 }

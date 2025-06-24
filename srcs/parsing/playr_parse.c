@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   playr_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:31:36 by juvitry           #+#    #+#             */
 /*   Updated: 2025/06/24 14:34:02 by juvitry          ###   ########.fr       */
@@ -11,20 +11,19 @@
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-#include <math.h>
 
 //fonction d'initialisation, il faudra ensuite faire un update au fur et a
 // mesure du jeu aavec la fonction mlx_loop(); on verra ca apres.
 static void	init_player_pos(char c, t_map *map)
 {
 	if (c == 'N')
-		map->play->orientation = NORTH;
+		map->play.orientation = NORTH;
 	else if (c == 'S')
-		map->play->orientation = SOUTH;
+		map->play.orientation = SOUTH;
 	else if (c == 'E')
-		map->play->orientation = EAST;
+		map->play.orientation = EAST;
 	else if (c == 'W')
-		map->play->orientation = WEST;
+		map->play.orientation = WEST;
 }
 
 void	set_player_angle(t_position *play)
@@ -55,10 +54,10 @@ void	parse_player(t_map *map)
 			if (maps[y][x] == 'N' || maps[y][x] == 'S' || maps[y][x] == 'E'
 				|| maps[y][x] == 'W')
 			{
-				map->play->x = (float)x;
-				map->play->y = (float)y;
-				init_player_pos(maps[x][y], map);
-				map->play->fov = M_PI / 3;
+				map->play.x = (float)x;
+				map->play.y = (float)y;
+				init_player_pos(maps[y][x], map);
+				map->play.fov = M_PI / 3;
 				break ;
 			}
 			x++;

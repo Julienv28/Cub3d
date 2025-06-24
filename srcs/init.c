@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/19 16:29:22 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:58:53 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	init_data(t_data *data)
 	data->textures.we_check = 0;
 	data->check_c = 0;
 	data->check_f = 0;
+	data->map.play.x = 0;
+	data->map.play.y = 0;
+	data->map.play.angle = 0;
+	data->map.play.fov = 0;
+	data->map.play.orientation = 0;
 }
 
 int	is_empty_line(char *line)
@@ -36,45 +41,94 @@ int	is_empty_line(char *line)
 	return (1);
 }
 
-char	**init_map(int fd, t_data *data, t_map *map)
+char	*load_param(int fd, t_data *data)
 {
 	char	*line;
 	int		len;
 
-	map->height = 0;
-	map->width = 0;
 	line = get_next_line(fd);
 	while (line != NULL)
 	{
-		printf("Ligne lue: '%s'\n", line);
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
+			line[len - 1] = '\0';
 		if (is_empty_line(line))
 		{
 			free(line);
 			line = get_next_line(fd);
 			continue ;
 		}
+		printf("line rr = %s\n", line);
 		if (is_param_line(line, data))
 		{
-			printf("Ligne de paramètre traitée\n");
+			free(line);
+			line = get_next_line(fd);
+			continue ;
 		}
-		else if (is_param_map(line))
+		return (line);
+	}
+	return (NULL);
+}
+
+char	**load_map(int fd, t_map *map, char *first_line)
+{
+	char	*line;
+	int		len;
+	int		map_start;
+
+	map->height = 0;
+	map->width = 0;
+	line = first_line;
+	map_start = 0;
+	while (line != NULL)
+	{
+		len = ft_strlen(line);
+		if (len > 0 && line[len - 1] == '\n')
+			line[len - 1] = '\0';
+		if (is_empty_line(line))
+		{
+			free(line);
+			line = get_next_line(fd);
+			continue ;
+		}
+		if (check_char_map(map))
 		{
 			if (!add_line_to_map(map, line))
 				return (free(line), NULL);
+			map_start = 1;
 		}
 		else
 		{
-			ft_putstr_fd("Error: caractere non valide map\n", STDERR_FILENO);
 			free(line);
+			ft_putstr_fd("Error: map mal placee\n", STDERR_FILENO);
 			return (NULL);
 		}
 		free(line);
 		line = get_next_line(fd);
 	}
-	if (!check_param(data))
-        return (NULL);
 	return (map->map);
+}
+
+int	load_map_and_param(char **av, t_data *data, t_map *map)
+{
+	int		fd;
+	char	*first_line;
+
+	fd = open(av[1], O_RDONLY);
+	if (!cub_extansion(av[1]))
+		return (ft_putstr_fd("Error: bad extansion\n", STDERR_FILENO), 0);
+	if (fd < 0)
+		return (perror("Error: ouverture map"), 0);
+	first_line = load_param(fd, data);
+	if (!first_line)
+	{
+		ft_putstr_fd("Error: missing map\n", STDERR_FILENO);
+		return (close(fd), 0);
+	}
+	if (!load_map(fd, map, first_line))
+		return (close(fd), 0);
+	close(fd);
+	if (!check_all(data, map))
+		return (0);
+	return (1);
 }

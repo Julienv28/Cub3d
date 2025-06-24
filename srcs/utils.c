@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/20 15:18:48 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/24 14:24:27 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,28 @@ void	count_elements(t_map *map)
 		}
         y++;
 	}
+}
+
+int	cub_extansion(char *filename)
+{
+	int		len;
+	int		res;
+
+	len = ft_strlen(filename);
+	if (len < 4)
+		return (0);
+	res = ft_strcmp(filename + len - 4, ".cub");
+	if (res == 0)
+		return (1);
+	else
+		return (0);
+}	
+
+int	on_destroy(t_data *data)
+{
+	printf("Fenêtre fermée (event 17)\n");
+	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	exit(0);
 }
 
 void	print_map(char **map)
