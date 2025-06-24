@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 14:30:24 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 15:38:03 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,7 @@ typedef struct s_data
 	t_color		ceiling;
 	int			check_f;
 	int			check_c;
+	int			last_mouse_x;
 	t_image		screen;
 }	t_data;
 
@@ -201,6 +202,7 @@ int		on_destroy(t_data *data);
 
 // MOUVEMENT JOUEUR (CLAVIER)
 int		handle_keypress(int keysum, t_data *data);
+int		handle_mouse(int x, int y, t_data *data);
 
 // UTILS
 void	count_elements(t_map *map);
