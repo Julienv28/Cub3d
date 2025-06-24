@@ -7,11 +7,23 @@ MLX_DIR     = ./mlx
 MLX_LIB     = 	$(MLX_DIR)/libmlx_$(UNAME).a
 
 LIB			= 	$(LIB_DIR)/libft.a
-SRC         =	$(SRC_DIR)/main.c $(SRC_DIR)/init.c $(SRC_DIR)/check.c $(SRC_DIR)/utils.c \
-				$(SRC_DIR)/init_mlx.c $(SRC_DIR)/exit_prog/exit_error.c $(SRC_DIR)/draw_map.c \
-				$(SRC_DIR)/parsing/parsing_color_and_textures.c $(SRC_DIR)/parsing/parsing_map.c \
+
+#=== SOURCES ===
+SRC         =	$(SRC_DIR)/main.c \
+				$(SRC_DIR)/init.c \
+				$(SRC_DIR)/check.c \
+				$(SRC_DIR)/utils.c \
+				$(SRC_DIR)/init_mlx.c \
+				$(SRC_DIR)/exit_prog/exit_error.c \
+				$(SRC_DIR)/draw_map.c \
+				$(SRC_DIR)/parsing/parsing_color_and_textures.c \
+				$(SRC_DIR)/parsing/parsing_map.c \
 				$(SRC_DIR)/parsing/playr_parse.c \
-				$(SRC_DIR)/movement/handle_keypress.c $(SRC_DIR)/RayCasting/cast.c $(SRC_DIR)/RayCasting/utils.c 
+				$(SRC_DIR)/movement/handle_keypress.c \
+				$(SRC_DIR)/RayCasting/cast.c \
+				$(SRC_DIR)/RayCasting/draw_columns.c \
+				$(SRC_DIR)/RayCasting/utils.c 
+
 OBJ         = 	${SRC:.c=.o}
 
 # Détection du système d'exploitation

@@ -68,7 +68,7 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 
 	text_x = init_text_x(rc);
 	y = rc->top_pixel;
-	if (rc->w_or < 1 || rc->w_or > 4)
+	if (rc->w_or < 0 || rc->w_or > 3)
 		return ;
 	texture = data->textures.all[rc->w_or];
 	if (texture == NULL)

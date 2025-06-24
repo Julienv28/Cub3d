@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 14:34:12 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/24 15:48:36 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ float get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 	int stepX, stepY;
 	float deltaDistX, deltaDistY;
 	float sideDistX, sideDistY;
-	float posX = map->play->x;
-	float posY = map->play->y;
+	float posX = map->play.x;
+	float posY = map->play.y;
 
 	// Direction du rayon
 	cast.dx = cosf(rayAngle);
@@ -109,11 +109,11 @@ void	render_game(t_data *data)
 	int		ray;
 
 	ray = 0;
-	playerangle = data->map.play->angle;
+	playerangle = data->map.play.angle;
 	while (ray < NUM_RAYS)
 	{
-		rayangle = playerangle - (data->map.play->fov / 2)
-			+ (data->map.play->fov / NUM_RAYS) * ray;
+		rayangle = playerangle - (data->map.play.fov / 2)
+			+ (data->map.play.fov / NUM_RAYS) * ray;
         rayangle = normalize_angle(rayangle);
 		rc.distance = get_dist_from_player(&data->map, rayangle, &rc);
         if (rc.distance == FLT_MAX)
@@ -121,7 +121,7 @@ void	render_game(t_data *data)
 		rc.distance *= cosf(rayangle - playerangle);
 		if (rc.distance < 0.0001f)
 			rc.distance = 0.0001f;
-        rc.dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play->fov / 2);
+        rc.dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play.fov / 2);
 		rc.pr_hght = (rc.dis_proj_plane * TILE_SIZE) / rc.distance;
         if (rc.pr_hght > WIN_HEIGHT)
             rc.pr_hght = WIN_HEIGHT;

@@ -3,11 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keypress.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/24 10:19:45 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 15:40:31 by opique           ###   ########.fr       */
-/*                                                                            */
+/*   Updated: 2025/06/24 15:55:50 by juvitry          ###   ########.fr       */                                                                 */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
@@ -83,7 +82,8 @@ int	handle_keypress(int keysum, t_data *data)
 {
 	if (keysum == XK_Escape)
 		on_destroy(data);
-	if (keysum == 119 || keysum == 115 || keysum == 97 || keysum == 100)
+	if (keysum == KEY_W || keysum == KEY_S || keysum == KEY_A
+		|| keysum == KEY_D)
 	{
 		handle_player(keysum, &data->map);
 		render_game(data);
