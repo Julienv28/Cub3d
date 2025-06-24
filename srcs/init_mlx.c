@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 14:30:47 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/24 16:04:14 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_init_mlx(t_data *data)
 void	init_hook_loop(t_data *data)
 {
 	load_textures(data);
-	draw_map(data);
+	render_game(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data); // pour le clavier
 	mlx_hook(data->win_ptr, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx_ptr);

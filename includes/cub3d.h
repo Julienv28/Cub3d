@@ -49,12 +49,10 @@
 # define WIN_LEN			1500
 # define WIN_HEIGHT			1000
 
-#define TILE_SIZE			64
-
-# define NORTH				1
-# define SOUTH              2
-# define EAST               3
-# define WEST               4
+# define NORTH				0
+# define SOUTH              1
+# define EAST               2
+# define WEST               3
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
@@ -163,7 +161,6 @@ int		is_param_map(char *line);
 void	ft_init_mlx(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	ft_init_textures(t_data *data);
-int		check_char_map(t_map *map);
 
 // CHECK
 int		check_map(t_map *map);
@@ -176,7 +173,6 @@ int		load_map_and_param(char **av, t_data *data, t_map *map);
 char	**add_line_to_map(t_map *map, char *line);
 int		check_char_map(t_map *map);
 void	parse_player(t_map *map);
-int     load_map_and_param(char av, t_data data, t_map *map);
 
 // PARSING TEXTURES AND COLOR
 char	*load_param(int fd, t_data *data);
@@ -207,6 +203,7 @@ void	count_elements(t_map *map);
 void	replace_spaces_by_walls(t_map *map);
 void	print_map(char **map);
 int		cub_extansion(char *filename);
+int		rgb_to_int(t_color color);
 
 /*
 Récapitulatif des directions :
