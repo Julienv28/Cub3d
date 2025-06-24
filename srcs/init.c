@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/23 15:02:38 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 13:58:53 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	init_data(t_data *data)
 	data->textures.we_check = 0;
 	data->check_c = 0;
 	data->check_f = 0;
+	data->map.play.x = 0;
+	data->map.play.y = 0;
+	data->map.play.angle = 0;
+	data->map.play.fov = 0;
+	data->map.play.orientation = 0;
 }
 
 int	is_empty_line(char *line)
@@ -46,7 +51,7 @@ char	*load_param(int fd, t_data *data)
 	{
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
+			line[len - 1] = '\0';
 		if (is_empty_line(line))
 		{
 			free(line);
@@ -79,14 +84,14 @@ char	**load_map(int fd, t_map *map, char *first_line)
 	{
 		len = ft_strlen(line);
 		if (len > 0 && line[len - 1] == '\n')
-            line[len - 1] = '\0';
+			line[len - 1] = '\0';
 		if (is_empty_line(line))
 		{
 			free(line);
 			line = get_next_line(fd);
 			continue ;
 		}
-		if (is_param_map(line))
+		if (check_char_map(map))
 		{
 			if (!add_line_to_map(map, line))
 				return (free(line), NULL);

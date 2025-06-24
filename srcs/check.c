@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
-/*   Updated: 2025/06/23 11:57:02 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:31:57 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,9 +104,9 @@ void	replace_spaces_by_walls(t_map *map)
 		{
 			if (map->map[y][x] == ' ' || map->map[y][x] == '\t')
 				map->map[y][x] = '1';
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 }
 
@@ -122,5 +122,10 @@ int	check_map(t_map *map)
 			STDERR_FILENO);
 		return (0);
 	}
+	// if (check_char_map(map))
+	// {
+	// 	ft_putstr_fd("Error: invalid charactere\n", STDERR_FILENO);
+	// 	return (0);
+	// }
 	return (1);
 }

@@ -3,34 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:36:07 by opique            #+#    #+#             */
-/*   Updated: 2025/06/23 10:12:10 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:23:08 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-int	is_param_map(char *line)
+int	check_char_map(t_map *map)
 {
-	int	i;
+	int		x;
+	int		y;
+	char	c;
+	int		line_len;
 
-	i = 0;
-	if (!line)
-		return (0);
-	while (line[i])
+	y = 0;
+	while (y < map->height)
 	{
-		if (line[i] != '0' && line[i] != '1' && line[i] != 'N'
-			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W'
-			&& line[i] != ' ')
+		x = 0;
+		line_len = ft_strlen(map->map[y]);
+		while (x < line_len)
 		{
-			return (0);
+			c = map->map[y][x];
+			if (c != 'N' && c != 'S' && c != 'W' && c != 'E' &&
+				c != '0' && c != '1' && c != ' ')
+				return (0);
+			x++;
 		}
-		i++;
+		y++;
 	}
 	return (1);
 }
+
 
 char	**add_line_to_map(t_map *map, char *line)
 {

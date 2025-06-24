@@ -9,7 +9,9 @@ MLX_LIB     = 	$(MLX_DIR)/libmlx_$(UNAME).a
 LIB			= 	$(LIB_DIR)/libft.a
 SRC         =	$(SRC_DIR)/main.c $(SRC_DIR)/init.c $(SRC_DIR)/check.c $(SRC_DIR)/utils.c \
 				$(SRC_DIR)/init_mlx.c $(SRC_DIR)/exit_prog/exit_error.c $(SRC_DIR)/draw_map.c \
-				$(SRC_DIR)/parsing/parsing_color_and_textures.c $(SRC_DIR)/parsing/parsing_map.c 
+				$(SRC_DIR)/parsing/parsing_color_and_textures.c $(SRC_DIR)/parsing/parsing_map.c \
+				$(SRC_DIR)/parsing/playr_parse.c \
+				$(SRC_DIR)/movement/handle_keypress.c $(SRC_DIR)/RayCasting/cast.c $(SRC_DIR)/RayCasting/utils.c 
 OBJ         = 	${SRC:.c=.o}
 
 # Détection du système d'exploitation
@@ -17,10 +19,10 @@ UNAME := $(shell uname)
 
 ifeq ($(UNAME), Linux)
     INCLUDES    = -I/usr/include -I$(MLX_DIR)
-    MLXFLAGS    = -L$(MLX_DIR) -lmlx -lX11 -lXext
+    MLXFLAGS    = -L$(MLX_DIR) -lmlx -lX11 -lXext -lm
 else ifeq ($(UNAME), Darwin) # macOS
     INCLUDES    = -I/opt/X11/include -I/opt/X11/include/X11 -I$(MLX_DIR)
-    MLXFLAGS    = -L$(MLX_DIR) -lmlx -L/opt/X11/lib -lX11 -lXext
+    MLXFLAGS    = -L$(MLX_DIR) -lmlx -L/opt/X11/lib -lX11 -lXext -lm
 else
     $(error Unsupported OS: $(UNAME))
 endif

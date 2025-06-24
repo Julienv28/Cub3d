@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:14:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/23 13:45:08 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/24 11:49:35 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ ray_dir_y < 0	Sud (mur en dessous)
 */
 int	get_w_or(float dx, float dy)
 {
-	if (fabsf(dx > fabsf(dy)))
+	if (fabsf(dx) > fabsf(dy))
 	{
 		if (dx < 0)
 			return (EAST);

@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:00:19 by opique            #+#    #+#             */
-/*   Updated: 2025/06/23 15:10:44 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:24:04 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,17 +25,17 @@ void	load_textures(t_data *data)
 
 void	print_textures_for_player(t_data *data, char c, int x, int y)
 {
-	void *img_ptr;
+	void	*img_ptr;
 
 	img_ptr = NULL;
 	if (c == 'N')
-        img_ptr = data->textures.no.xpm_ptr;
+		img_ptr = data->textures.no.xpm_ptr;
 	else if (c == 'S')
-        img_ptr = data->textures.so.xpm_ptr;
+		img_ptr = data->textures.so.xpm_ptr;
 	else if (c == 'E')
-        img_ptr = data->textures.ea.xpm_ptr;
+		img_ptr = data->textures.ea.xpm_ptr;
 	else if (c == 'W')
-        img_ptr = data->textures.we.xpm_ptr;
+		img_ptr = data->textures.we.xpm_ptr;
 	if (img_ptr)
 		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr, x * TILE_SIZE, y * TILE_SIZE);
 }
@@ -47,18 +47,18 @@ void	draw_map(t_data *data)
 	t_map	*map;
 	char	c;
 
-    map = &data->map;
-    y = 0;
+	map = &data->map;
+	y = 0;
 	while (y < map->height)
 	{
-        x = 0;
+		x = 0;
 		while (x < map->width)
 		{
-            c = map->map[y][x];
+			c = map->map[y][x];
 			if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
 				print_textures_for_player(data, c, x, y);
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 }
