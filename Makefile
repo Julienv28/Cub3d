@@ -39,7 +39,7 @@ $(LIB):
 # Compiler MinilibX (attention à la version)
 $(NAME): $(OBJ) $(LIB)
 	make -C $(MLX_DIR)
-	$(CC) $(CFLAGS) $(OBJ) $(MFLAGS) -L$(LIB_DIR) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) $(MFLAGS) -L$(LIB_DIR) -lft -lm -o $(NAME)
 
 .c.o:
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDES)

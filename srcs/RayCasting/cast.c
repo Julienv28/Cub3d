@@ -6,85 +6,133 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 13:48:35 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 14:34:12 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static t_cast	*init_val_cast(t_cast *cast, t_map *map, float rayAngle)
+static float	normalize_angle(float angle)
 {
-	cast = malloc(sizeof(t_cast));
-	if (!cast)
-		return (NULL);
-	cast->dx = cosf(rayAngle);
-	cast->dy = sinf(rayAngle);
-	cast->rayx = map->play.x;
-	cast->distance = 0.0f;
-	cast->rayy = map->play.y;
-	cast->stepsize = 0.05f;
-	return (cast);
+	while (angle < 0)
+		angle += 2 * M_PI;
+	while (angle >= 2 * M_PI)
+		angle -= 2 * M_PI;
+	return (angle);
 }
 
-float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
+float get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 {
-	t_cast	*cast;
-	int		mapx;
-	int		mapy;
-	float	distance;
+	t_cast cast;
+	int hit = 0;
+	int mapX, mapY;
+	int stepX, stepY;
+	float deltaDistX, deltaDistY;
+	float sideDistX, sideDistY;
+	float posX = map->play->x;
+	float posY = map->play->y;
 
-	cast = NULL;
-	cast = init_val_cast(cast, map, rayAngle);
-	if (cast == NULL)
-		return (0);
-	while (cast->distance < 20.0f)
+	// Direction du rayon
+	cast.dx = cosf(rayAngle);
+	cast.dy = sinf(rayAngle);
+	// Case actuelle
+	mapX = (int)posX;
+	mapY = (int)posY;
+	// Delta distances
+	deltaDistX = fabsf(1 / cast.dx);
+	deltaDistY = fabsf(1 / cast.dy);
+	// Init des pas & sideDist
+	if (cast.dx < 0)
 	{
-		cast->rayx += cast->dx * cast->stepsize;
-		cast->rayy += cast->dy * cast->stepsize;
-		cast->distance += cast->stepsize;
-		mapx = (int)cast->rayx;
-		mapy = (int)cast->rayy;
-		if (mapx < 0 || mapx >= map->width || mapy < 0 || mapy >= map->height)
-			return (free(cast), FLT_MAX);
-		if (map->map[mapy][mapx] == '1')
-		{
-			distance = cast->distance;
-			rc->w_or = get_w_or(cast->dx, cast->dy);
-			rc->impact_x = get_impact_x(cast->rayx, cast->rayy, rc->w_or);
-			return (free(cast), distance);
-		}
+		stepX = -1;
+		sideDistX = (posX - mapX) * deltaDistX;
 	}
-	return (free(cast), FLT_MAX);
+	else
+	{
+		stepX = 1;
+		sideDistX = (mapX + 1.0f - posX) * deltaDistX;
+	}
+	if (cast.dy < 0)
+	{
+		stepY = -1;
+		sideDistY = (posY - mapY) * deltaDistY;
+	}
+	else
+	{
+		stepY = 1;
+		sideDistY = (mapY + 1.0f - posY) * deltaDistY;
+	}
+	int side; // 0 = x, 1 = y
+	while (!hit)
+	{
+		if (sideDistX < sideDistY)
+		{
+			sideDistX += deltaDistX;
+			mapX += stepX;
+			side = 0;
+		}
+		else
+		{
+			sideDistY += deltaDistY;
+			mapY += stepY;
+			side = 1;
+		}
+		if (mapX < 0 || mapX >= map->width || mapY < 0 || mapY >= map->height)
+			return FLT_MAX;
+		if (map->map[mapY][mapX] == '1')
+			hit = 1;
+	}
+	// Distance exacte
+	if (side == 0)
+		cast.distance = (sideDistX - deltaDistX);
+	else
+		cast.distance = (sideDistY - deltaDistY);
+	// Orientation (NORD, SUD, EST, OUEST)
+	if (side == 0)
+		rc->w_or = (stepX > 0) ? WEST : EAST;
+	else
+		rc->w_or = (stepY > 0) ? NORTH : SOUTH;
+	// Impact X
+	if (side == 0)
+		rc->impact_x = posY + cast.distance * cast.dy;
+	else
+		rc->impact_x = posX + cast.distance * cast.dx;
+	rc->impact_x -= floorf(rc->impact_x);
+	return cast.distance;
 }
 
 void	render_game(t_data *data)
 {
 	float	playerangle;
 	float	rayangle;
-	t_rc	*rc;
+	t_rc	rc;
 	int		ray;
 
-	rc = malloc(sizeof(t_rc));
-	if (!rc)
-		return ;
 	ray = 0;
-	playerangle = data->map.play.angle;
-	rc->constante = WIN_HEIGHT * TILE_SIZE;
+	playerangle = data->map.play->angle;
 	while (ray < NUM_RAYS)
 	{
-		rayangle = playerangle - (data->map.play.fov / 2)
-			+ (data->map.play.fov / NUM_RAYS) * ray;
-		rc->distance = get_dist_from_player(&data->map, rayangle, rc);
-		rc->distance *= cosf(rayangle - playerangle);
-		if (rc->distance == 0)
-			rc->distance = 0.0001;
-		rc->pr_hght = rc->constante / rc->distance;
-		rc->top_pixel = (WIN_HEIGHT / 2) - (rc->pr_hght / 2);
-		rc->bttm_pixel = (WIN_HEIGHT / 2) + (rc->pr_hght / 2);
-		if (rc->top_pixel < 0)
-			rc->top_pixel = 0;
-		if (rc->bttm_pixel > WIN_HEIGHT)
-			rc->bttm_pixel = WIN_HEIGHT;
+		rayangle = playerangle - (data->map.play->fov / 2)
+			+ (data->map.play->fov / NUM_RAYS) * ray;
+        rayangle = normalize_angle(rayangle);
+		rc.distance = get_dist_from_player(&data->map, rayangle, &rc);
+        if (rc.distance == FLT_MAX)
+             rc.distance = 20.0f;
+		rc.distance *= cosf(rayangle - playerangle);
+		if (rc.distance < 0.0001f)
+			rc.distance = 0.0001f;
+        rc.dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play->fov / 2);
+		rc.pr_hght = (rc.dis_proj_plane * TILE_SIZE) / rc.distance;
+        if (rc.pr_hght > WIN_HEIGHT)
+            rc.pr_hght = WIN_HEIGHT;
+		rc.top_pixel = (WIN_HEIGHT / 2) - (rc.pr_hght / 2);
+		rc.bttm_pixel = (WIN_HEIGHT / 2) + (rc.pr_hght / 2);
+		if (rc.top_pixel < 0)
+			rc.top_pixel = 0;
+		if (rc.bttm_pixel > WIN_HEIGHT)
+			rc.bttm_pixel = WIN_HEIGHT;
+		draw_column(data, &rc, ray);
 		ray++;
 	}
+    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->screen.xpm_ptr, 0, 0);
 }
