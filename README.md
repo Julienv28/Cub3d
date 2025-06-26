@@ -3,6 +3,8 @@ A 42 Version of Wolfenstein, a bit less interactive and constructed, but aimed t
 
 ## What is RayCasting ?
 
+First, let's go on definitions. RayCastinng is a calculation technique applied on pictures for 3D rendering ((Wikipedia)[https://fr.wikipedia.org/wiki/Raycasting] defines it better). 
+
 ## Sources Used for this project
 - 42 Subject
 - The original Game : http://users.atw.hu/wolf3d/
