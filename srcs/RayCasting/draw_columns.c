@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   draw_columns.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
 /*   Updated: 2025/06/26 14:28:00 by juvitry          ###   ########.fr       */
@@ -75,6 +75,8 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 	texture = data->textures.all[rc->w_or];
 	if (texture == NULL)
 		return ;
+	text_x = init_text_x(rc);
+	y = rc->top_pixel;
 	while (y < rc->bttm_pixel)
 	{
 		text_y = set_text_y(rc, y);

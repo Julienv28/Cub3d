@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
 /*   Updated: 2025/06/26 13:10:46 by juvitry          ###   ########.fr       */
@@ -34,9 +34,25 @@ void	ft_init_mlx(t_data *data)
        data->screen.data_addr, data->screen.bpp, data->screen.line_len, data->screen.endian);
 }
 
+void	init_minimap(t_data *data)
+{
+	data->minimap.img_ptr = mlx_new_image(data->mlx_ptr,
+			data->map.width * MINMAP_BOX,
+			data->map.height * MINMAP_BOX);
+	if (!data->minimap.img_ptr)
+		ft_error_close("minimap image alloc failed", data);
+	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr,
+			&data->minimap.bits_per_pixel,
+			&data->minimap.line_length,
+			&data->minimap.endian);
+	if (!data->minimap.addr)
+		ft_error_close("minimap addr setup failed", data);
+}
+
 void	init_hook_loop(t_data *data)
 {
 	load_textures(data);
+	init_minimap(data);
 	render_game(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data); // pour le clavier
 	// mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask, handle_mouse, data); // pour souris

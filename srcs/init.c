@@ -21,10 +21,10 @@ void	init_data(t_data *data)
 	data->textures.no_check = 0;
 	data->textures.so_check = 0;
 	data->textures.we_check = 0;
-	data->textures.ea_xpm = NULL;
-	data->textures.we_xpm = NULL;
 	data->textures.no_xpm = NULL;
 	data->textures.so_xpm = NULL;
+	data->textures.we_xpm = NULL;
+	data->textures.ea_xpm = NULL;
 	data->check_c = 0;
 	data->check_f = 0;
 	data->last_mouse_x = 0;
@@ -33,6 +33,11 @@ void	init_data(t_data *data)
 	data->map.play.angle = 0;
 	data->map.play.fov = 0;
 	data->map.play.orientation = 0;
+	data->minimap.addr = NULL;
+	data->minimap.bits_per_pixel = 0;
+	data->minimap.endian = 0;
+	data->minimap.img_ptr = NULL;
+	data->minimap.line_length = 0;
 }
 
 int	is_empty_line(char *line)
@@ -119,9 +124,9 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 	int		fd;
 	char	*first_line;
 
-	fd = open(av[1], O_RDONLY);
 	if (!cub_extansion(av[1]))
 		return (ft_putstr_fd("Error: bad extansion\n", STDERR_FILENO), 0);
+	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		return (perror("Error: ouverture map"), 0);
 	first_line = load_param(fd, data);
@@ -134,6 +139,6 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 		return (close(fd), 0);
 	close(fd);
 	if (!check_all(data, map))
-		return (0);
+		fprintf(stderr, "check_all failed\n");
 	return (1);
 }

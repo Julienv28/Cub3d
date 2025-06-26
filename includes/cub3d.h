@@ -56,6 +56,9 @@
 # define EAST               2
 # define WEST               3
 
+# define MINMAP_BOX			10 // Taille case pixel
+# define MINMAP_SIZE		200 // Taille minimap
+
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
 # define TILE_SIZE			5
@@ -67,7 +70,7 @@ void	ft_init_mlx(t_data *data);
 void	init_hook_loop(t_data *data);
 
 int		is_param_line(char *line, t_data *data);
-int		is_param_map(char *line);
+int		is_param_map(char *line); // ne pas retirer
 void	ft_init_mlx(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	ft_init_textures(t_data *data);
@@ -102,6 +105,9 @@ void	draw_map(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	print_textures_for_player(t_data *data, char c, int x, int y);
 void	put_pixel_to_image(t_image *img, int x, int y, unsigned int color);
+
+// MINIMAP
+int	draw_minimap(t_data *data);
 
 //CLOSING MAPS
 int		ft_error_close(char *message, t_data *data);

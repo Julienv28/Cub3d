@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:41:20 by juvitry           #+#    #+#             */
 /*   Updated: 2025/06/26 12:05:20 by juvitry          ###   ########.fr       */
@@ -12,6 +12,16 @@
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+typedef struct s_minimap
+{
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		color;
+}	t_minimap;
 
 typedef struct s_cast
 {
@@ -110,6 +120,7 @@ typedef struct s_data
 	int			check_c;
 	int			last_mouse_x;
 	t_image		screen;
+	t_minimap	minimap;
 }	t_data;
 
 /*
