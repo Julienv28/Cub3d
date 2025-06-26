@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 14:34:08 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/26 10:46:24 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,14 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 	}
 	y = 0;
 	while (y < rc->top_pixel)
+	{
 		put_pixel_to_image(&data->screen, ray, y, rgb_to_int(data->ceiling));
+		y++;
+	}
 	y = rc->bttm_pixel;
 	while (y < WIN_HEIGHT)
-		put_pixel_to_image(&data->screen, ray, y++, rgb_to_int(data->floor));
+	{
+		put_pixel_to_image(&data->screen, ray, y, rgb_to_int(data->floor));
+		y++;
+	}
 }

@@ -68,7 +68,7 @@ t_image	ft_new_img(void *mlx, char *path, t_data *data, int or)
 			&img.endian);
 	if (img.data_addr == NULL)
 		ft_error_close("mlx_get_data_adr failed", data);
-	img.or = or;
+	img.ori = or;
 	return (img);
 }
 
