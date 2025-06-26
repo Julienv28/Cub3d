@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 13:03:28 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/26 18:07:09 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ int		get_w_or(float dx, float dy);
 float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc);
 float	get_impact_x(float rayx, float rayy, int w_or);
 void	draw_column(t_data *data, t_rc *rc, int ray);
+float	normalize_angle(float angle);
 
 // DRAW MAP
 void	load_textures(t_data *data);
