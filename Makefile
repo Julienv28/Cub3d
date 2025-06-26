@@ -22,7 +22,8 @@ SRC         =	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/movement/handle_keypress.c \
 				$(SRC_DIR)/RayCasting/cast.c \
 				$(SRC_DIR)/RayCasting/draw_columns.c \
-				$(SRC_DIR)/RayCasting/utils.c 
+				$(SRC_DIR)/RayCasting/utils.c \
+				$(SRC_DIR)/RayCasting/get_dist_from_player.c
 
 OBJ         = 	${SRC:.c=.o}
 

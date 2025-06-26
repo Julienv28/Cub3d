@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 15:20:47 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/26 12:59:01 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	init_data(t_data *data)
 	data->textures.no_check = 0;
 	data->textures.so_check = 0;
 	data->textures.we_check = 0;
+	data->textures.ea_xpm = NULL;
+	data->textures.we_xpm = NULL;
+	data->textures.no_xpm = NULL;
+	data->textures.so_xpm = NULL;
 	data->check_c = 0;
 	data->check_f = 0;
 	data->last_mouse_x = 0;

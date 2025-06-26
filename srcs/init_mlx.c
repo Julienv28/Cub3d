@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 10:43:38 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/26 13:10:46 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,11 @@ void	ft_init_mlx(t_data *data)
 	data->screen.y = WIN_HEIGHT;
 	data->screen.data_addr = mlx_get_data_addr(data->screen.xpm_ptr,
 			&data->screen.bpp, &data->screen.line_len, &data->screen.endian);
+	if (data->screen.data_addr == NULL)
+		ft_error_close("Bad creation of screen addr", data);
+	printf("Screen image ptr: %p\n", data->screen.xpm_ptr);
+	printf("Screen addr: %p, bpp: %d, line_len: %d, endian: %d\n",
+       data->screen.data_addr, data->screen.bpp, data->screen.line_len, data->screen.endian);
 }
 
 void	init_hook_loop(t_data *data)
@@ -34,7 +39,7 @@ void	init_hook_loop(t_data *data)
 	load_textures(data);
 	render_game(data);
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data); // pour le clavier
-	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask, handle_mouse, data); // pour souris
+	// mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask, handle_mouse, data); // pour souris
 	mlx_hook(data->win_ptr, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 }

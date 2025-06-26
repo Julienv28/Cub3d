@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 10:46:24 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/26 14:28:00 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,10 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 
 	text_x = init_text_x(rc);
 	y = rc->top_pixel;
-	if (rc->w_or < 0 || rc->w_or > 3)
+	if (rc->w_or < 0 || rc->w_or > 3){
+		printf("Wall orientation invalide: %d\n", rc->w_or);
 		return ;
+	}
 	texture = data->textures.all[rc->w_or];
 	if (texture == NULL)
 		return ;
@@ -77,7 +79,7 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 	{
 		text_y = set_text_y(rc, y);
 		color = get_text_pixel_color(texture, text_x, text_y);
-		put_pixel_to_image(&data->screen, ray, y, color);
+		put_pixel_to_image(&data->screen, ray, y, 0x0000FF00);
 		y++;
 	}
 	y = 0;
