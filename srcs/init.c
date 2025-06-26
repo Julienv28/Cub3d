@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/26 12:59:01 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/26 18:26:11 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ void	init_data(t_data *data)
 	data->textures.ea_xpm = NULL;
 	data->check_c = 0;
 	data->check_f = 0;
-	data->last_mouse_x = 0;
+	data->mouse_locked = false;
+	data->ignore_mouse_event = false;
+	data->last_mouse_x = WIN_LEN / 2;
 	data->map.play.x = 0;
 	data->map.play.y = 0;
 	data->map.play.angle = 0;

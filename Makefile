@@ -21,6 +21,7 @@ SRC         =	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/parsing/parsing_map.c \
 				$(SRC_DIR)/parsing/playr_parse.c \
 				$(SRC_DIR)/movement/handle_keypress.c \
+				$(SRC_DIR)/movement/handle_mouse.c \
 				$(SRC_DIR)/RayCasting/cast.c \
 				$(SRC_DIR)/RayCasting/draw_columns.c \
 				$(SRC_DIR)/RayCasting/utils.c \
