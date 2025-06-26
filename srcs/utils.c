@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 14:24:27 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:23:11 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	count_elements(t_map *map)
 	int		x;
 	char	cell;
 
-    map->east = 0;
+	map->east = 0;
 	map->north = 0;
 	map->south = 0;
 	map->west = 0;
-    y = 0;
+	y = 0;
 	while (y < map->height)
 	{
-        x = 0;
+		x = 0;
 		while (x < map->width)
 		{
-            cell = map->map[y][x];
+			cell = map->map[y][x];
 			if (cell == 'N')
 				map->north++;
 			else if (cell == 'S')
@@ -37,9 +37,9 @@ void	count_elements(t_map *map)
 				map->east++;
 			else if (cell == 'W')
 				map->west++;
-            x++;
+			x++;
 		}
-        y++;
+		y++;
 	}
 }
 

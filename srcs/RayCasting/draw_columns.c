@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_columns.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 10:46:24 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/26 12:51:52 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,13 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 	unsigned int	color;
 	t_image			*texture;
 
-	text_x = init_text_x(rc);
-	y = rc->top_pixel;
 	if (rc->w_or < 0 || rc->w_or > 3)
 		return ;
 	texture = data->textures.all[rc->w_or];
 	if (texture == NULL)
 		return ;
+	text_x = init_text_x(rc);
+	y = rc->top_pixel;
 	while (y < rc->bttm_pixel)
 	{
 		text_y = set_text_y(rc, y);
