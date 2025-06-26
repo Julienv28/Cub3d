@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 15:20:47 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/24 17:16:57 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@ void	init_data(t_data *data)
 	data->map.play.angle = 0;
 	data->map.play.fov = 0;
 	data->map.play.orientation = 0;
+	data->minimap.addr = NULL;
+	data->minimap.bits_per_pixel = 0;
+	data->minimap.endian = 0;
+	data->minimap.img_ptr = NULL;
+	data->minimap.line_length = 0;
 }
 
 int	is_empty_line(char *line)
