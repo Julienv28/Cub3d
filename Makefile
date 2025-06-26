@@ -14,6 +14,7 @@ SRC         =	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/check.c \
 				$(SRC_DIR)/utils.c \
 				$(SRC_DIR)/init_mlx.c \
+				$(SRC_DIR)/draw_minimap.c \
 				$(SRC_DIR)/exit_prog/exit_error.c \
 				$(SRC_DIR)/draw_map.c \
 				$(SRC_DIR)/parsing/parsing_color_and_textures.c \

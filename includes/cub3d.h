@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 17:15:31 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/26 11:07:31 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@
 # define EAST               2
 # define WEST               3
 
-# define MINIMAP_SCALE		10 // Taille case pixel
-# define MINIMAP_SIZE		200 // Taille minimap
+# define MINMAP_BOX			10 // Taille case pixel
+# define MINMAP_SIZE		200 // Taille minimap
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
@@ -63,11 +63,12 @@
 
 typedef struct s_minimap
 {
-	void    *img_ptr;
-    char    *addr;
-    int     bits_per_pixel;
-    int     line_length;
-    int     endian;
+	void	*img_ptr;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+	int		color;
 }	t_minimap;
 
 
@@ -172,7 +173,7 @@ void	ft_init_mlx(t_data *data);
 void	init_hook_loop(t_data *data);
 
 int		is_param_line(char *line, t_data *data);
-int		is_param_map(char *line);
+int		is_param_map(char *line); // ne pas retirer
 void	ft_init_mlx(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	ft_init_textures(t_data *data);
@@ -205,6 +206,9 @@ void	load_textures(t_data *data);
 void	draw_map(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	print_textures_for_player(t_data *data, char c, int x, int y);
+
+// MINIMAP
+int	draw_minimap(t_data *data);
 
 //CLOSING MAPS
 int		ft_error_close(char *message, t_data *data);

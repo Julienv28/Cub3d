@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:00:19 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 17:19:49 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/26 10:59:46 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,75 +61,4 @@ void	draw_map(t_data *data)
 		}
 		y++;
 	}
-}
-
-void put_pixel(t_data *data, int x, int y, int color)
-{
-    char *dst;
-
-    if (x < 0 || x >= WIN_LEN || y < 0 || y >= WIN_HEIGHT)
-        return;
-
-    dst = data->minimap.addr + (y * data->minimap.line_length + x * (data->minimap.bits_per_pixel / 8));
-    *(unsigned int*)dst = color;
-}
-
-
-void	draw_rect(t_data *data, int start_x, int start_y, int size)
-{
-	int	x;
-	int	y;
-
-	y = 0;
-	while (y < size)
-	{
-		x = 0;
-		while (x < size)
-		{
-			put_pixel(data, start_x + x, start_y + y, 0x00FFFF);
-			x++;
-		}
-		y++;
-	}
-}
-
-
-int	draw_minimap(t_data *data)
-{
-	int	x;
-	int	y;
-	int	px;
-	int	py;
-	int	dy;
-	int	dx;
-	int	color;
-
-	y = 0;
-	data->minimap.img_ptr = mlx_new_image(data->mlx_ptr, data->map.width * MINIMAP_SCALE, data->map.height * MINIMAP_SCALE);
-	data->minimap.addr = mlx_get_data_addr(data->minimap.img_ptr, &data->minimap.bits_per_pixel,
-                                      &data->minimap.line_length, &data->minimap.endian);
-	while (y < data->map.height)
-	{
-		x = 0;
-		while (x < data->map.width)
-		{
-			if (data->map.map[y][x] == '1')
-				color = 0x000000;
-			else
-				color = 0xFFFFFF;
-			draw_rect(data, x * MINIMAP_SCALE, y * MINIMAP_SCALE, MINIMAP_SCALE);
-			x++;
-		}
-		y++;
-	}
-	// Dessiner le joueur sur la minimap
-	px = (int)(data->map.play.x * MINIMAP_SCALE);
-	py = (int)(data->map.play.y * MINIMAP_SCALE);
-	//draw_circle(data, px, py, 5, 0xFF0000);
-	// Dessiner direction joueur (ligne devant joueur)
-	dx = (int)(cosf(data->map.play.angle) * 15);
-	dy = (int)(-sinf(data->map.play.angle) * 15);
-	//draw_line(data, px, py, px + dx, py + dy, 0xFF0000);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->minimap.img_ptr, 0, 0);
-	return (0);
 }
