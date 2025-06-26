@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 16:04:14 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/26 10:43:38 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_image	ft_new_img(void *mlx, char *path, t_data *data, int or)
 			&img.endian);
 	if (img.data_addr == NULL)
 		ft_error_close("mlx_get_data_adr failed", data);
-	img.or = or;
+	img.ori = or;
 	return (img);
 }
 
