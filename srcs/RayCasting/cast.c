@@ -5,8 +5,9 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 10:26:31 by opique           ###   ########.fr       */                                                                */
+/*   Created: 2025/06/26 11:40:51 by opique            #+#    #+#             */
+/*   Updated: 2025/06/26 13:14:00 by opique           ###   ########.fr       */
+/*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
@@ -77,7 +78,7 @@ float get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 			side = 1;
 		}
 		if (mapX < 0 || mapX >= map->width || mapY < 0 || mapY >= map->height)
-			return FLT_MAX;
+            return FLT_MAX;
 		if (map->map[mapY][mapX] == '1')
 			hit = 1;
 	}
@@ -113,10 +114,10 @@ void	render_game(t_data *data)
 	{
 		rayangle = playerangle - (data->map.play.fov / 2)
 			+ (data->map.play.fov / NUM_RAYS) * ray;
-        rayangle = normalize_angle(rayangle);
+		rayangle = normalize_angle(rayangle);
 		rc.distance = get_dist_from_player(&data->map, rayangle, &rc);
-        if (rc.distance == FLT_MAX)
-             rc.distance = 20.0f;
+		if (rc.distance == FLT_MAX)
+			rc.distance = 20.0f;
 		rc.distance *= cosf(rayangle - playerangle);
 		if (rc.distance < 0.0001f)
 			rc.distance = 0.0001f;
@@ -133,6 +134,6 @@ void	render_game(t_data *data)
 		draw_column(data, &rc, ray);
 		ray++;
 	}
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->screen.xpm_ptr, 0, 0);
-    draw_minimap(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->screen.xpm_ptr, 0, 0);
+	draw_minimap(data);
 }

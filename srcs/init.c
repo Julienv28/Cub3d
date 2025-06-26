@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 17:16:57 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/26 12:09:39 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ void	init_data(t_data *data)
 	data->textures.no_check = 0;
 	data->textures.so_check = 0;
 	data->textures.we_check = 0;
+	data->textures.no_xpm = NULL;
+	data->textures.so_xpm = NULL;
+	data->textures.we_xpm = NULL;
+	data->textures.ea_xpm = NULL;
 	data->check_c = 0;
 	data->check_f = 0;
 	data->last_mouse_x = 0;
@@ -120,9 +124,9 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 	int		fd;
 	char	*first_line;
 
-	fd = open(av[1], O_RDONLY);
 	if (!cub_extansion(av[1]))
 		return (ft_putstr_fd("Error: bad extansion\n", STDERR_FILENO), 0);
+	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
 		return (perror("Error: ouverture map"), 0);
 	first_line = load_param(fd, data);
@@ -135,6 +139,6 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 		return (close(fd), 0);
 	close(fd);
 	if (!check_all(data, map))
-		return (0);
+		fprintf(stderr, "check_all failed\n");
 	return (1);
 }
