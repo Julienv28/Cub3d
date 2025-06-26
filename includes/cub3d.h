@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 11:07:31 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/26 13:03:28 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ int		parse_texture(char *line, char **texture);
 // RAYCASTING ET 3D
 void	render_game(t_data *data);
 int		get_w_or(float dx, float dy);
+float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc);
 float	get_impact_x(float rayx, float rayy, int w_or);
 void	draw_column(t_data *data, t_rc *rc, int ray);
 
@@ -103,6 +104,7 @@ void	load_textures(t_data *data);
 void	draw_map(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	print_textures_for_player(t_data *data, char c, int x, int y);
+void	put_pixel_to_image(t_image *img, int x, int y, unsigned int color);
 
 // MINIMAP
 int	draw_minimap(t_data *data);

@@ -25,7 +25,7 @@ int	handle_mouse(int x, int y, t_data *data)
 	else if (delta_x < 0)
 		data->map.play.angle -= delta_x * sensibility;
 	data->last_mouse_x = x;
-	printf("Pos souris : x = %d\n", x);
+	// printf("Pos souris : x = %d\n", x);
 	render_game(data);
 	return (0);
 }
@@ -87,5 +87,6 @@ int	handle_keypress(int keysum, t_data *data)
 	else
 		return (0);
 	render_game(data);
+	// printf("Pos joueur : x = %.2f, y = %.2f\n", data->map.play.x, data->map.play.y);
 	return (0);
 }

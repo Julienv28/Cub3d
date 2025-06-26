@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:41:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 11:40:35 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/26 12:05:20 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef struct s_cast
 	float	rayy;
 	float	distance;
 	float	stepsize;
+    int		mapX;
+    int		mapY;
+    int		stepX;
+    int		stepY;
+    float	deltaX;
+    float	deltaY;
 }	t_cast;
 
 typedef struct s_color
