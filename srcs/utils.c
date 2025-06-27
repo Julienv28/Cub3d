@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/27 11:12:45 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:42:16 by oceanepique      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,45 @@ int	cub_extansion(char *filename)
 		return (0);
 }	
 
+void	free_map(char **map, int height)
+{
+	int	i;
+
+	if (map == NULL || height <= 0)
+		return ;
+	i = 0;
+	while (i < height)
+	{
+		if (map[i])
+			free(map[i]);
+		i++;
+	}
+	free(map);
+}
+
 int	on_destroy(t_data *data)
 {
-	printf("Fenêtre fermée (event 17)\n");
-	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+	printf("Fenêtre fermée (event 17)\n"); 
+    if (data->win_ptr != NULL)
+		mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+    if (data->textures.ea.xpm_ptr)
+        mlx_destroy_image(data->mlx_ptr, data->textures.ea.xpm_ptr);
+    if (data->textures.no.xpm_ptr)
+        mlx_destroy_image(data->mlx_ptr, data->textures.no.xpm_ptr);
+    if (data->textures.so.xpm_ptr)
+        mlx_destroy_image(data->mlx_ptr, data->textures.so.xpm_ptr);
+    if (data->textures.we.xpm_ptr)
+        mlx_destroy_image(data->mlx_ptr, data->textures.we.xpm_ptr);
+    if (data->screen.xpm_ptr)
+        mlx_destroy_image(data->mlx_ptr, data->screen.xpm_ptr);
+    if (data->minimap.img_ptr)
+        mlx_destroy_image(data->mlx_ptr, data->minimap.img_ptr);
+	if (data->mlx_ptr != NULL)
+	{
+		mlx_destroy_display(data->mlx_ptr);
+		free(data->mlx_ptr);
+	}
+    free_map(data->map.map, data->map.height);
 	exit(0);
 }
 
