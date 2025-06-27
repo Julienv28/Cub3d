@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/26 13:23:11 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/27 11:12:45 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	count_elements(t_map *map)
 	int		y;
 	int		x;
 	char	cell;
+	int		len;
 
 	map->east = 0;
 	map->north = 0;
@@ -26,7 +27,8 @@ void	count_elements(t_map *map)
 	while (y < map->height)
 	{
 		x = 0;
-		while (x < map->width)
+		len = ft_strlen(map->map[y]);
+		while (x < len)
 		{
 			cell = map->map[y][x];
 			if (cell == 'N')

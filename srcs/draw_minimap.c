@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:59:53 by opique            #+#    #+#             */
-/*   Updated: 2025/06/26 11:09:10 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/27 11:01:27 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	put_pixel(t_data *data, int x, int y)
 		return ;
 	dst = data->minimap.addr + (y * data->minimap.line_length
 			+ x * (data->minimap.bits_per_pixel / 8));
-	*(unsigned int*)dst = data->minimap.color;
+	*(unsigned int *)dst = data->minimap.color;
 }
 
 void	draw_player_minimap(t_data *data, int px, int py, int radius)
@@ -79,7 +79,8 @@ int	draw_minimap(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			if (data->map.map[y][x] == '1')
+			if (x < (int)ft_strlen(data->map.map[y])
+				&& data->map.map[y][x] == '1')
 				data->minimap.color = 0x000000;
 			else
 				data->minimap.color = 0xFFFFFF;

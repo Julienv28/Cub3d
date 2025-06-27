@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 18:37:15 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/27 13:33:22 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	render_game(t_data *data)
 	{
 		rayangle = playerangle - (data->map.play.fov / 2)
 			+ (data->map.play.fov / NUM_RAYS) * ray;
-        rayangle = normalize_angle(rayangle);
+		rayangle = normalize_angle(rayangle);
 		rc.distance = get_dist_from_player(&data->map, rayangle, &rc);
-        if (rc.distance == FLT_MAX)
-             rc.distance = 20.0f;
+		if (rc.distance == FLT_MAX)
+			rc.distance = 20.0f;
 		rc.distance *= cosf(rayangle - playerangle);
 		if (rc.distance < 0.0001f)
 			rc.distance = 0.0001f;
@@ -72,12 +72,11 @@ void	render_game(t_data *data)
 			rc.top_pixel = 0;
 		if (rc.bttm_pixel > WIN_HEIGHT)
 			rc.bttm_pixel = WIN_HEIGHT;
-		for (int y = rc.top_pixel; y < rc.bttm_pixel; y++)
-			put_pixel_to_image(&data->screen, ray, y, 0x0000FF00); // VERT
-		// draw_column(data, &rc, ray);
+		draw_column(data, &rc, ray);
 		ray++;
 	}
     mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->screen.xpm_ptr, 0, 0);
+	draw_minimap(data);
 }
 
 // void	render_game(t_data *data)
