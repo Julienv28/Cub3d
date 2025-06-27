@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 15:00:19 by opique            #+#    #+#             */
-/*   Updated: 2025/06/26 10:59:46 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/27 13:31:14 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	print_textures_for_player(t_data *data, char c, int x, int y)
 	else if (c == 'W')
 		img_ptr = data->textures.we.xpm_ptr;
 	if (img_ptr)
-		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr, x * TILE_SIZE, y * TILE_SIZE);
+		mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, img_ptr,
+			x * TILE_SIZE, y * TILE_SIZE);
 }
 
 void	draw_map(t_data *data)

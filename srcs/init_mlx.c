@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 18:01:58 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/27 13:50:57 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ void	ft_init_mlx(t_data *data)
 		ft_error_close("Bad creation of screen addr", data);
 	printf("Screen image ptr: %p\n", data->screen.xpm_ptr);
 	printf("Screen addr: %p, bpp: %d, line_len: %d, endian: %d\n",
-       data->screen.data_addr, data->screen.bpp, data->screen.line_len, data->screen.endian);
+		data->screen.data_addr, data->screen.bpp, data->screen.line_len,
+		data->screen.endian);
 }
 
 void	init_minimap(t_data *data)
@@ -51,11 +52,12 @@ void	init_minimap(t_data *data)
 
 void	init_hook_loop(t_data *data)
 {
-	load_textures(data);
+	ft_init_textures(data);
 	init_minimap(data);
 	render_game(data);
-	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data); // pour le clavier
-	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask, handle_mouse, data); // pour souris
+	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
+	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
+		handle_mouse, data);
 	mlx_hook(data->win_ptr, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 }
@@ -69,6 +71,8 @@ t_image	ft_new_img(void *mlx, char *path, t_data *data, int or)
 	img.xpm_ptr = mlx_xpm_file_to_image(mlx, path, &width, &height);
 	if (img.xpm_ptr == NULL)
 		ft_error_close("Couldn't find the img file. Does it exist ?", data);
+	img.x = width;
+	img.y = height;
 	img.data_addr = mlx_get_data_addr(img.xpm_ptr, &img.bpp, &img.line_len,
 			&img.endian);
 	if (img.data_addr == NULL)
@@ -91,4 +95,10 @@ void	ft_init_textures(t_data *data)
 	data->textures.all[SOUTH] = &data->textures.so;
 	data->textures.all[EAST] = &data->textures.ea;
 	data->textures.all[WEST] = &data->textures.we;
+	printf("NO = %p, SO = %p, WE = %p, EA = %p\n",
+		data->textures.all[NORTH],
+		data->textures.all[SOUTH],
+		data->textures.all[WEST],
+		data->textures.all[EAST]);
+
 }
