@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/26 18:26:11 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:44:10 by oceanepique      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,10 @@ char	**load_map(int fd, t_map *map, char *first_line)
 {
 	char	*line;
 	int		len;
-	int		map_start;
 
 	map->height = 0;
 	map->width = 0;
 	line = first_line;
-	map_start = 0;
 	while (line != NULL)
 	{
 		len = ft_strlen(line);
@@ -106,8 +104,10 @@ char	**load_map(int fd, t_map *map, char *first_line)
 		if (check_char_map(map))
 		{
 			if (!add_line_to_map(map, line))
+            {
+                free_map(map->map, map->height);
 				return (free(line), NULL);
-			map_start = 1;
+            }
 		}
 		else
 		{
@@ -141,6 +141,6 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 		return (close(fd), 0);
 	close(fd);
 	if (!check_all(data, map))
-		fprintf(stderr, "check_all failed\n");
+		on_destroy(data);
 	return (1);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 18:07:09 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:44:27 by oceanepique      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +124,6 @@ void	replace_spaces_by_walls(t_map *map);
 void	print_map(char **map);
 int		cub_extansion(char *filename);
 int		rgb_to_int(t_color color);
+void	free_map(char **map, int height);
 
 #endif

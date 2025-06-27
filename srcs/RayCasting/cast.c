@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/27 13:33:22 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/27 15:14:11 by oceanepique      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	clear_screen(t_image *screen, int color)
 		y++;
 	}
 }
-
 
 void	render_game(t_data *data)
 {
