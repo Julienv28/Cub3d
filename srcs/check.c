@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 14:31:57 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 11:23:26 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	check_wall(t_map *map)
 	{
 		if (line[x] != '1')
 		{
-			ft_putstr_fd("Error: map non fermer.\n", STDERR_FILENO);
+			ft_putstr_fd("Error: map not closed.\n", STDERR_FILENO);
 			return (0);
 		}
 		x++;
@@ -69,7 +69,7 @@ int	check_wall(t_map *map)
 		line = map->map[y];
 		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
 		{
-			ft_putstr_fd("Error: map non fermer.\n", STDERR_FILENO);
+			ft_putstr_fd("Error: map not closed.\n", STDERR_FILENO);
 			return (0);
 		}
 		y++;
