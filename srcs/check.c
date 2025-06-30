@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 14:31:57 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 11:14:19 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,10 +122,5 @@ int	check_map(t_map *map)
 			STDERR_FILENO);
 		return (0);
 	}
-	// if (check_char_map(map))
-	// {
-	// 	ft_putstr_fd("Error: invalid charactere\n", STDERR_FILENO);
-	// 	return (0);
-	// }
 	return (1);
 }
