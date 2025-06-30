@@ -6,17 +6,28 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 14:21:35 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 15:13:51 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+static void	count_cell(char cell, t_map *map)
+{
+	if (cell == 'N')
+		map->north++;
+	else if (cell == 'S')
+		map->south++;
+	else if (cell == 'E')
+		map->east++;
+	else if (cell == 'W')
+		map->west++;
+}
+
 void	count_elements(t_map *map)
 {
 	int		y;
 	int		x;
-	char	cell;
 	int		len;
 
 	map->east = 0;
@@ -30,15 +41,7 @@ void	count_elements(t_map *map)
 		len = ft_strlen(map->map[y]);
 		while (x < len)
 		{
-			cell = map->map[y][x];
-			if (cell == 'N')
-				map->north++;
-			else if (cell == 'S')
-				map->south++;
-			else if (cell == 'E')
-				map->east++;
-			else if (cell == 'W')
-				map->west++;
+			count_cell(map->map[y][x], map);
 			x++;
 		}
 		y++;
@@ -60,43 +63,23 @@ int	cub_extansion(char *filename)
 		return (0);
 }	
 
-void	free_map(char **map, int height)
+void	replace_spaces_by_walls(t_map *map)
 {
-	int	i;
+	int	y;
+	int	x;
+	int	line_len;
 
-	if (map == NULL || height <= 0)
-		return ;
-	i = 0;
-	while (i < height)
+	y = 0;
+	while (y < map->height)
 	{
-		if (map[i])
-			free(map[i]);
-		i++;
+		line_len = ft_strlen(map->map[y]);
+		x = 0;
+		while (x < line_len)
+		{
+			if (map->map[y][x] == ' ' || map->map[y][x] == '\t')
+				map->map[y][x] = '1';
+			x++;
+		}
+		y++;
 	}
-	free(map);
-}
-int on_destroy(t_data *data)
-{
-    printf("Fenêtre fermée (event 17)\n");
-    if (data->mlx_ptr)
-    {
-        if (data->win_ptr)
-            mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-        if (data->textures.no.xpm_ptr)
-            mlx_destroy_image(data->mlx_ptr, data->textures.no.xpm_ptr);
-        if (data->textures.so.xpm_ptr)
-            mlx_destroy_image(data->mlx_ptr, data->textures.so.xpm_ptr);
-        if (data->textures.we.xpm_ptr)
-            mlx_destroy_image(data->mlx_ptr, data->textures.we.xpm_ptr);
-        if (data->textures.ea.xpm_ptr)
-            mlx_destroy_image(data->mlx_ptr, data->textures.ea.xpm_ptr);
-        if (data->screen.xpm_ptr)
-            mlx_destroy_image(data->mlx_ptr, data->screen.xpm_ptr);
-        if (data->minimap.img_ptr)
-            mlx_destroy_image(data->mlx_ptr, data->minimap.img_ptr);
-        mlx_destroy_display(data->mlx_ptr);
-        free(data->mlx_ptr);
-    }
-    free_map(data->map.map, data->map.height);
-    exit(0);
 }

@@ -6,14 +6,12 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:31:36 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 14:34:02 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 14:38:47 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-//fonction d'initialisation, il faudra ensuite faire un update au fur et a
-// mesure du jeu aavec la fonction mlx_loop(); on verra ca apres.
 static void	init_player_pos(char c, t_map *map)
 {
 	if (c == 'N')

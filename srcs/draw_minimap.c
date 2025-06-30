@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_minimap.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:59:53 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 10:59:00 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 16:22:33 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,13 @@ int	draw_minimap(t_data *data)
 {
 	int	x;
 	int	y;
-	int	px;
-	int	py;
+	int	tab_p[2];
 
 	y = 0;
-	while (y < data->map.height)
+	while (++y < data->map.height)
 	{
 		x = 0;
-		while (x < data->map.width)
+		while (++x < data->map.width)
 		{
 			if (x >= (int)ft_strlen(data->map.map[y])
 				|| data->map.map[y][x] == '1')
@@ -85,14 +84,13 @@ int	draw_minimap(t_data *data)
 			else
 				data->minimap.color = 0xFFFFFF;
 			draw_map_minimap(data, x * MINMAP_BOX, y * MINMAP_BOX, MINMAP_BOX);
-			x++;
 		}
-		y++;
 	}
 	data->minimap.color = 0xFF0000;
-	px = (int)(data->map.play.x * MINMAP_BOX);
-	py = (int)(data->map.play.y * MINMAP_BOX);
-	draw_player_minimap(data, px, py, 5);
-	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->minimap.img_ptr, 0, 0);
+	tab_p[0] = (int)(data->map.play.x * MINMAP_BOX);
+	tab_p[1] = (int)(data->map.play.y * MINMAP_BOX);
+	draw_player_minimap(data, tab_p[0], tab_p[1], 5);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->minimap.img_ptr, 0, 0);
 	return (0);
 }

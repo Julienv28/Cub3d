@@ -3,55 +3,41 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 14:21:09 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 15:24:04 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+static int	parse_and_check(char *line, char *id, char **texture, int *check)
+{
+	if (ft_strncmp(line, id, 2) == 0)
+	{
+		if (parse_texture(line, texture))
+		{
+			(*check)++;
+			return (1);
+		}
+		return (0);
+	}
+	return (0);
+}
+
 int	is_texture_line(char *line, t_data *data)
 {
 	if (!data)
 		return (0);
-	if (ft_strncmp(line, "NO", 2) == 0)
-	{
-		if (parse_texture(line, &data->textures.no_xpm))
-		{
-			data->textures.no_check++;
-			return (1);
-		}
-		return (0);
-	}
-	if (ft_strncmp(line, "SO", 2) == 0)
-	{
-		if (parse_texture(line, &data->textures.so_xpm))
-		{
-			data->textures.so_check++;
-			return (1);
-		}
-		return (0);
-	}
-	if (ft_strncmp(line, "WE", 2) == 0)
-	{
-		if (parse_texture(line, &data->textures.we_xpm))
-		{
-			data->textures.we_check++;
-			return (1);
-		}
-		return (0);
-	}
-	if (ft_strncmp(line, "EA", 2) == 0)
-	{
-		if (parse_texture(line, &data->textures.ea_xpm))
-		{
-			data->textures.ea_check++;
-			return (1);
-		}
-		return (0);
-	}
+	if (parse_and_check(line, "NO", &data->textures.no_xpm, &data->textures.no_check))
+		return (1);
+	if (parse_and_check(line, "SO", &data->textures.so_xpm, &data->textures.so_check))
+		return (1);
+	if (parse_and_check(line, "WE", &data->textures.we_xpm, &data->textures.we_check))
+		return (1);
+	if (parse_and_check(line, "EA", &data->textures.ea_xpm, &data->textures.ea_check))
+		return (1);
 	return (0);
 }
 
@@ -121,6 +107,7 @@ int	main(int ac, char **av)
 	if (ac != 2)
 		return (ft_putstr_fd("Usage: ./cub3D map.cub\n", STDERR_FILENO), 1);
 	init_data(&data);
+	init_texture(&data);
 	if (!load_map_and_param(av, &data, &data.map))
 		return (1);
 	parse_player(&data.map);
