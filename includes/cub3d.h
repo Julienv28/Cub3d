@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 16:52:59 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 17:05:28 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	ft_init_textures(t_data *data);
 int		check_map(t_map *map, t_data *data);
 int		check_param(t_data *data);
 int		check_all(t_data *data, t_map *map);
-int	    check_wall(t_map *map);
+int	    check_wall(t_map *map, t_data *data);
 
 // PARSING MAP
 char	**load_map(int fd, t_map *map, char *first_line, t_data *data);
