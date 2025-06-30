@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_keypress.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:39:24 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/27 14:38:55 by oceanepique      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:47:58 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ static void	strafe_player(t_map *map, float dir)
 		map->play.y = new_y;
 }
 
-static void rotate_player(float direction, t_data *data)
+static void	rotate_player(float direction, t_data *data)
 {
 	float rotation_speed = 0.05f; // Angle fixe, à ajuster comme tu veux
 
@@ -130,9 +130,9 @@ int	handle_keypress(int keysum, t_data *data)
 	if (keysum == KEY_ESC)
 		on_destroy(data);
     else if (keysum == KEY_RIGHT)
-		rotate_player(1.0f, data); // vers la droite
+		rotate_player(1.0f, data);
 	else if (keysum == KEY_LEFT)
-		rotate_player(-1.0f, data); // vers la gauche
+		rotate_player(-1.0f, data);
 	else if (keysum == KEY_W)
 		move_player(&data->map, 1.0f);
 	else if (keysum == KEY_S)
@@ -143,7 +143,6 @@ int	handle_keypress(int keysum, t_data *data)
 		strafe_player(&data->map, -1.0f);
 	else
 		return (0);
-	render_game(data);
-	// printf("Pos joueur : x = %.2f, y = %.2f\n", data->map.play.x, data->map.play.y);
+	data->need_redraw = true;
 	return (0);
 }

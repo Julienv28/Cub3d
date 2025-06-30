@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:41:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 18:25:48 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 10:34:04 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ typedef struct s_data
 	int			last_mouse_x;
 	bool		mouse_locked;
 	bool		ignore_mouse_event;
+	bool		need_redraw;
 	t_image		screen;
 	t_minimap	minimap;
 }	t_data;

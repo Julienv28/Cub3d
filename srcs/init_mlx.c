@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/27 14:37:21 by oceanepique      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:40:30 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ void	init_hook_loop(t_data *data)
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
 	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
 		handle_mouse, data);
+	mlx_loop_hook(data->mlx_ptr, loop_handler, data);
 	mlx_hook(data->win_ptr, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 }

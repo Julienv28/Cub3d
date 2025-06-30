@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/27 15:44:10 by oceanepique      ###   ########.fr       */
+/*   Updated: 2025/06/30 10:35:14 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	init_data(t_data *data)
 	data->check_f = 0;
 	data->mouse_locked = false;
 	data->ignore_mouse_event = false;
+	data->need_redraw = true;
 	data->last_mouse_x = WIN_LEN / 2;
 	data->map.play.x = 0;
 	data->map.play.y = 0;

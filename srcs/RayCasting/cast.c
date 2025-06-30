@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/27 15:14:11 by oceanepique      ###   ########.fr       */
+/*   Updated: 2025/06/30 11:00:26 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	render_game(t_data *data)
 		rc.distance *= cosf(rayangle - playerangle);
 		if (rc.distance < 0.0001f)
 			rc.distance = 0.0001f;
-		// printf("Ray %d -> distance = %f\n", ray, rc.distance);
 		rc.dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play.fov / 2);
 		rc.pr_hght = (rc.dis_proj_plane * TILE_SIZE) / rc.distance;
 		if (rc.pr_hght >= WIN_HEIGHT)
