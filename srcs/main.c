@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/26 11:55:49 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 11:43:09 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_texture_line(char *line, t_data *data)
 {
+	if (!data)
+		return (0);
 	if (ft_strncmp(line, "NO", 2) == 0)
 	{
 		if (parse_texture(line, &data->textures.no_xpm))
@@ -55,6 +57,8 @@ int	is_texture_line(char *line, t_data *data)
 
 int	is_color_line(char *line, t_data *data)
 {
+	if (!data)
+		return (0);
 	if (ft_strncmp(line, "F", 1) == 0)
 	{
 		if (parse_color(line, &data->floor))
@@ -73,6 +77,28 @@ int	is_color_line(char *line, t_data *data)
 		}
 		return (0);
 	}
+	return (0);
+}
+
+int	is_param_prefix_only(char *line)
+{
+	if (!line)
+		return (0);
+	while (*line == ' ')
+		line++;
+	// Vérifie les préfixes valides pour les paramètres
+	if (ft_strncmp(line, "NO", 2) == 0)
+		return (1);
+	if (ft_strncmp(line, "SO", 2) == 0)
+		return (1);
+	if (ft_strncmp(line, "WE", 2) == 0)
+		return (1);
+	if (ft_strncmp(line, "EA", 2) == 0)
+		return (1);
+	if (line[0] == 'F' && (line[1] == ' ' || line[1] == '\0'))
+		return (1);
+	if (line[0] == 'C' && (line[1] == ' ' || line[1] == '\0'))
+		return (1);
 	return (0);
 }
 

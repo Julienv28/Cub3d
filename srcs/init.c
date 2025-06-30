@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 10:35:14 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 11:43:34 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ void	init_data(t_data *data)
 	data->textures.so_xpm = NULL;
 	data->textures.we_xpm = NULL;
 	data->textures.ea_xpm = NULL;
+	data->textures.no.xpm_ptr = NULL;
+	data->textures.so.xpm_ptr = NULL;
+	data->textures.we.xpm_ptr = NULL;
+	data->textures.ea.xpm_ptr = NULL;
+	data->textures.no.data_addr = NULL;
+	data->textures.so.data_addr = NULL;
+	data->textures.we.data_addr = NULL;
+	data->textures.ea.data_addr = NULL;
 	data->check_c = 0;
 	data->check_f = 0;
 	data->mouse_locked = false;
@@ -71,7 +79,7 @@ char	*load_param(int fd, t_data *data)
 			line = get_next_line(fd);
 			continue ;
 		}
-		printf("line rr = %s\n", line);
+		//printf("line rr = %s\n", line);
 		if (is_param_line(line, data))
 		{
 			free(line);
@@ -102,19 +110,19 @@ char	**load_map(int fd, t_map *map, char *first_line)
 			line = get_next_line(fd);
 			continue ;
 		}
-		if (check_char_map(map))
+		if (!is_param_map(line))
 		{
-			if (!add_line_to_map(map, line))
-            {
-                free_map(map->map, map->height);
-				return (free(line), NULL);
-            }
-		}
-		else
-		{
+			if (is_param_prefix_only(line))
+				ft_putstr_fd("Error: map mal placee\n", STDERR_FILENO);
+			else
+				ft_putstr_fd("Error: car non valid\n", STDERR_FILENO);
 			free(line);
-			ft_putstr_fd("Error: map mal placee\n", STDERR_FILENO);
 			return (NULL);
+		}
+		if (!add_line_to_map(map, line))
+		{
+			free_map(map->map, map->height);
+			return (free(line), NULL);
 		}
 		free(line);
 		line = get_next_line(fd);

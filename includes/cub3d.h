@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 11:14:29 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 11:40:37 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	ft_init_mlx(t_data *data);
 void	init_hook_loop(t_data *data);
 
 int		is_param_line(char *line, t_data *data);
+int	    is_param_prefix_only(char *line);
 int		is_param_map(char *line); // ne pas retirer
 void	ft_init_mlx(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);

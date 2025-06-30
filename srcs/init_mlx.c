@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 10:40:30 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 10:37:57 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ void	ft_init_mlx(t_data *data)
 			&data->screen.bpp, &data->screen.line_len, &data->screen.endian);
 	if (data->screen.data_addr == NULL)
 		ft_error_close("Bad creation of screen addr", data);
-	printf("Screen image ptr: %p\n", data->screen.xpm_ptr);
-	printf("Screen addr: %p, bpp: %d, line_len: %d, endian: %d\n",
-		data->screen.data_addr, data->screen.bpp, data->screen.line_len,
-		data->screen.endian);
 }
 
 void	init_minimap(t_data *data)
@@ -96,10 +92,9 @@ void	ft_init_textures(t_data *data)
 	data->textures.all[SOUTH] = &data->textures.so;
 	data->textures.all[EAST] = &data->textures.ea;
 	data->textures.all[WEST] = &data->textures.we;
-	printf("NO = %p, SO = %p, WE = %p, EA = %p\n",
-		data->textures.all[NORTH],
-		data->textures.all[SOUTH],
-		data->textures.all[WEST],
-		data->textures.all[EAST]);
-
+	// printf("NO = %p, SO = %p, WE = %p, EA = %p\n",
+	// 	data->textures.all[NORTH],
+	// 	data->textures.all[SOUTH],
+	// 	data->textures.all[WEST],
+	// 	data->textures.all[EAST]);
 }
