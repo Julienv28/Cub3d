@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 09:41:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 15:52:41 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 17:26:48 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,10 @@ void	free_map(char **map, int height)
 	free(map);
 }
 
-int on_destroy(t_data *data)
+int	on_destroy(t_data *data)
 {
-    printf("Fenêtre fermée (event 17)\n");
-    if (data->mlx_ptr)
-    {
+	if (data->mlx_ptr)
+	{
 		if (data->win_ptr)
 			mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 		if (data->textures.no.xpm_ptr)
@@ -51,12 +50,17 @@ int on_destroy(t_data *data)
 		free(data->mlx_ptr);
 	}
 	free_map(data->map.map, data->map.height);
-    exit(0);
+	exit(0);
 }
 
-int	print_color_error(char *msg)
+int	print_color_error(char *msg, t_data *data, char *line)
 {
 	ft_putstr_fd(msg, STDERR_FILENO);
+	if (line)
+		free(line);
+	if (data->buffer)
+		free(data->buffer);
+	ft_free_paths_textures(data);
 	exit(1);
 }
 
