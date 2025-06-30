@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
 /*   Updated: 2025/06/30 13:21:15 by opique           ###   ########.fr       */
@@ -55,6 +55,7 @@ void	init_hook_loop(t_data *data)
 	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
 		handle_mouse, data);
 	mlx_loop_hook(data->mlx_ptr, loop_handler, data);
+	mlx_mouse_hook(data->win_ptr, handle_mouse_click, data);
 	mlx_hook(data->win_ptr, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 }
@@ -92,9 +93,4 @@ void	ft_init_textures(t_data *data)
 	data->textures.all[SOUTH] = &data->textures.so;
 	data->textures.all[EAST] = &data->textures.ea;
 	data->textures.all[WEST] = &data->textures.we;
-	// printf("NO = %p, SO = %p, WE = %p, EA = %p\n",
-	// 	data->textures.all[NORTH],
-	// 	data->textures.all[SOUTH],
-	// 	data->textures.all[WEST],
-	// 	data->textures.all[EAST]);
 }

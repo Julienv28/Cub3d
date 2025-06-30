@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:39:24 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 11:35:55 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 13:43:32 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	move_player(t_map *map, float dir)
 	new_y = map->play.y + sinf(angle) * SPEED * dir;
 	if (!is_wall(new_x, map->play.y, map->map))
 		map->play.x = new_x;
-	if (is_wall(map->play.x, new_y, map->map))
+	if (!is_wall(map->play.x, new_y, map->map))
 		map->play.y = new_y;
 }
 

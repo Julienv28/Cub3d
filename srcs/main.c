@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
 /*   Updated: 2025/06/30 14:21:09 by opique           ###   ########.fr       */
@@ -86,7 +86,6 @@ int	is_param_prefix_only(char *line)
 		return (0);
 	while (*line == ' ')
 		line++;
-	// Vérifie les préfixes valides pour les paramètres
 	if (ft_strncmp(line, "NO", 2) == 0)
 		return (1);
 	if (ft_strncmp(line, "SO", 2) == 0)

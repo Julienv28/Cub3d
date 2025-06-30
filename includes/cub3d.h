@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
 /*   Updated: 2025/06/30 14:15:36 by opique           ###   ########.fr       */
@@ -23,6 +23,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <float.h>
+# include <sys/time.h>
 # include "../libft/libft.h"
 # include "../mlx/mlx.h"
 # include "structures.h"
@@ -119,6 +120,7 @@ int		on_destroy(t_data *data);
 // MOUVEMENT JOUEUR (CLAVIER)
 int		handle_keypress(int keysum, t_data *data);
 int		handle_mouse(int x, int y, t_data *data);
+int	    handle_mouse_click(int but, int x, int y, t_data *data);
 
 // UTILS
 void	count_elements(t_map *map);
