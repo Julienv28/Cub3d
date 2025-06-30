@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 14:21:09 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 15:24:47 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	is_color_line(char *line, t_data *data)
 		return (0);
 	if (ft_strncmp(line, "F", 1) == 0)
 	{
-		if (parse_color(line, &data->floor))
+		if (parse_color(line, &data->floor, data))
 		{
 			data->check_f++;
 			return (1);
@@ -70,7 +70,7 @@ int	is_color_line(char *line, t_data *data)
 	}
 	if (ft_strncmp(line, "C", 1) == 0)
 	{
-		if (parse_color(line, &data->ceiling))
+		if (parse_color(line, &data->ceiling, data))
 		{
 			data->check_c++;
 			return (1);

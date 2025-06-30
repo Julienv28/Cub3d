@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 13:21:15 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:22:00 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,10 @@ t_image	ft_new_img(void *mlx, char *path, t_data *data, int or)
 
 	img.xpm_ptr = mlx_xpm_file_to_image(mlx, path, &width, &height);
 	if (img.xpm_ptr == NULL)
+	{
+		ft_free_paths_textures(data);
 		ft_error_close("Couldn't find the img file. Does it exist ?", data);
+	}
 	img.x = width;
 	img.y = height;
 	img.data_addr = mlx_get_data_addr(img.xpm_ptr, &img.bpp, &img.line_len,
@@ -93,4 +96,5 @@ void	ft_init_textures(t_data *data)
 	data->textures.all[SOUTH] = &data->textures.so;
 	data->textures.all[EAST] = &data->textures.ea;
 	data->textures.all[WEST] = &data->textures.we;
+	ft_free_paths_textures(data);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:41:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 13:21:25 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:45:01 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ typedef struct s_data
 	int			check_f;
 	int			check_c;
 	int			last_mouse_x;
+	char		*buffer;
 	bool		mouse_locked;
 	bool		ignore_mouse_event;
 	bool		need_redraw;
