@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/24 14:31:01 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 13:31:50 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ int	parse_texture(char *line, char **texture)
 	while (line[i] && line[i] == ' ')
 		i++;
 	path = &line[i];
+	if (*texture)
+		free(*texture);
 	*texture = malloc((sizeof(char) * ft_strlen(path) + 1));
 	if (*texture == NULL)
 		return (0);
 	ft_strcpy(*texture, path);
 	return (1);
 }
+ 

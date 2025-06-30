@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 11:37:49 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 11:43:34 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 14:24:33 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,10 +144,11 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 	if (!first_line)
 	{
 		ft_putstr_fd("Error: missing map\n", STDERR_FILENO);
+		on_destroy(data);
 		return (close(fd), 0);
 	}
 	if (!load_map(fd, map, first_line))
-		return (close(fd), 0);
+		return (close(fd), on_destroy(data), 0);
 	close(fd);
 	if (!check_all(data, map))
 		on_destroy(data);
