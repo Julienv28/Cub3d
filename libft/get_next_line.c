@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:18:50 by juvitry           #+#    #+#             */
-/*   Updated: 2025/01/14 15:59:07 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 15:52:06 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,25 +113,24 @@ static char	*ft_read_file(int fd, char *res)
 }
 
 //Lis une ligne, maj le buffer et retourne la ligne
-char	*get_next_line(int fd)
+char	*get_next_line(int fd, char **buffer)
 {
-	static char	*buffer;
 	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		if (buffer)
+		if (*buffer)
 		{
-			free (buffer);
+			free (*buffer);
 			buffer = NULL;
 		}
 		return (NULL);
 	}
-	buffer = ft_read_file(fd, buffer);
-	if (!buffer)
+	*buffer = ft_read_file(fd, *buffer);
+	if (!*buffer)
 		return (NULL);
-	line = ft_ligne(buffer);
-	buffer = ft_suite(buffer);
+	line = ft_ligne(*buffer);
+	*buffer = ft_suite(*buffer);
 	return (line);
 }
 

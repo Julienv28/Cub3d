@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 16:08:56 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:52:59 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	ft_init_textures(t_data *data);
 
 // CHECK
-int		check_map(t_map *map);
+int		check_map(t_map *map, t_data *data);
 int		check_param(t_data *data);
 int		check_all(t_data *data, t_map *map);
 int	    check_wall(t_map *map);
 
 // PARSING MAP
-char	**load_map(int fd, t_map *map, char *first_line);
+char	**load_map(int fd, t_map *map, char *first_line, t_data *data);
 int		load_map_and_param(char **av, t_data *data, t_map *map);
 char	**add_line_to_map(t_map *map, char *line);
 int		check_char_map(t_map *map);
@@ -94,7 +94,7 @@ void	parse_player(t_map *map);
 
 // PARSING TEXTURES AND COLOR
 char	*load_param(int fd, t_data *data);
-int		parse_color(char *line, t_color *color);
+int		parse_color(char *line, t_color *color, t_data *data);
 int		parse_texture(char *line, char **texture);
 
 // RAYCASTING ET 3D
@@ -133,7 +133,8 @@ void	replace_spaces_by_walls(t_map *map);
 int		cub_extansion(char *filename);
 int		rgb_to_int(t_color color);
 void	free_map(char **map, int height);
-int	    print_color_error(char *msg);
+void	ft_free_paths_textures(t_data *data);
+int     print_color_error(char *msg, t_data *data, char *line);
 
 #endif
  

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color_and_textures.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 14:51:53 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:52:35 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,18 @@ int	parse_number(char *line, int *i)
 	return (num);
 }
 
-int	parse_color(char *line, t_color *color)
+int	print_color_error(char *msg, t_data *data, char *line)
+{
+	ft_putstr_fd(msg, STDERR_FILENO);
+	if (line)
+		free(line);
+	if (data->buffer)
+		free(data->buffer);
+	ft_free_paths_textures(data);
+	exit(1);
+}
+
+int	parse_color(char *line, t_color *color, t_data *data)
 {
 	int	r;
 	int	g;
@@ -43,15 +54,19 @@ int	parse_color(char *line, t_color *color)
 	while (line[i] == ' ') i++;
 	r = parse_number(line, &i);
 	if (line[i++] != ',' || r < 0 || r > 255)
-		return (print_color_error("Error: red color invalid\n"), 0);
+		return (print_color_error("Error: red color invalid\n", data, line),
+			 0);
 	g = parse_number(line, &i);
 	if (line[i++] != ',' || g < 0 || g > 255)
-		return (print_color_error("Error: green color invalid\n"), 0);
+		return (print_color_error("Error: green color invalid\n", data, line),
+			 0);
 	b = parse_number(line, &i);
 	if (line[i] != '\0' && line[i] != '\n')
-		return (print_color_error("Error: blue color invalid\n"), 0);
+		return (print_color_error("Error: blue color invalid\n", data, line),
+			 0);
 	if (b < 0 || b > 255)
-		return (print_color_error("Error: RGB invalid format\n"), 0);
+		return (print_color_error("Error: RGB invalid format\n", data, line),
+			 0);
 	color->r = r;
 	color->g = g;
 	color->b = b;

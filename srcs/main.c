@@ -47,7 +47,7 @@ int	is_color_line(char *line, t_data *data)
 		return (0);
 	if (ft_strncmp(line, "F", 1) == 0)
 	{
-		if (parse_color(line, &data->floor))
+		if (parse_color(line, &data->floor, data))
 		{
 			data->check_f++;
 			return (1);
@@ -56,7 +56,7 @@ int	is_color_line(char *line, t_data *data)
 	}
 	if (ft_strncmp(line, "C", 1) == 0)
 	{
-		if (parse_color(line, &data->ceiling))
+		if (parse_color(line, &data->ceiling, data))
 		{
 			data->check_c++;
 			return (1);

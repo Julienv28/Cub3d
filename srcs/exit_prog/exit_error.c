@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/30 16:26:28 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 16:26:29 by opique           ###   ########.fr       */
+/*   Created: 2025/06/19 09:41:19 by juvitry           #+#    #+#             */
+/*   Updated: 2025/06/30 15:52:41 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,11 @@ int	ft_error_close(char *message, t_data *data)
 		on_destroy(data);
 	return (0);
 }
- 
+
+void	ft_free_paths_textures(t_data *data)
+{
+	free(data->textures.no_xpm);
+	free(data->textures.so_xpm);
+	free(data->textures.ea_xpm);
+	free(data->textures.we_xpm);
+}
