@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 11:40:37 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 14:15:36 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,3 +129,4 @@ int		rgb_to_int(t_color color);
 void	free_map(char **map, int height);
 
 #endif
+ 
