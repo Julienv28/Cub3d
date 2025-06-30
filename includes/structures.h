@@ -31,13 +31,19 @@ typedef struct s_cast
 	float	rayy;
 	float	distance;
 	float	stepsize;
-    int		mapX;
-    int		mapY;
-    int		stepX;
-    int		stepY;
-    float	deltaX;
-    float	deltaY;
 }	t_cast;
+
+typedef struct s_dda
+{
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	float	delta_d_x;
+	float	delta_d_y;
+	float	side_d_x;
+	float	side_d_y;
+}	t_dda;
 
 typedef struct s_color
 {
@@ -50,10 +56,10 @@ typedef struct s_position
 {
 	float	x;
 	float	y;
-	int		orientation; // cardinal
-	float	angle; // radians
+	int		orientation;
+	float	angle;
 	float	fov;
-	float	fov_rad; // Pour la norme
+	float	fov_rad;
 }	t_position;
 
 typedef struct s_rc

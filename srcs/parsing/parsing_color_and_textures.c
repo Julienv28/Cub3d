@@ -51,8 +51,7 @@ int	parse_color(char *line, t_color *color, t_data *data)
 	g = 0;
 	b = 0;
 	i = 1;
-	while (line[i] == ' ')
-		i++;
+	while (line[i] == ' ') i++;
 	r = parse_number(line, &i);
 	if (line[i++] != ',' || r < 0 || r > 255)
 		return (print_color_error("Error: red color invalid\n", data, line),

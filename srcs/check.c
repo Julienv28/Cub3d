@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
 /*   Updated: 2025/06/30 15:20:02 by juvitry          ###   ########.fr       */
@@ -55,7 +55,7 @@ int	check_wall(t_map *map, t_data *data)
 		if (line[x] != '1')
 		{
 			ft_putstr_fd("Error: map not closedr.\n", STDERR_FILENO);
-			ft_free_paths_textures(data);
+			ft_free_paths_textures(data); // J'ai ajoute ca
 			return (0);
 		}
 		x++;
@@ -67,7 +67,7 @@ int	check_wall(t_map *map, t_data *data)
 		if (line[x] != '1')
 		{
 			ft_putstr_fd("Error: map not closed.\n", STDERR_FILENO);
-			ft_free_paths_textures(data);
+			ft_free_paths_textures(data); // Ca aussi
 			return (0);
 		}
 		x++;
@@ -79,7 +79,7 @@ int	check_wall(t_map *map, t_data *data)
 		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
 		{
 			ft_putstr_fd("Error: map not closed.\n", STDERR_FILENO);
-			ft_free_paths_textures(data);
+			ft_free_paths_textures(data); // J'ai ajoute ca
 			return (0);
 		}
 		y++;
@@ -98,6 +98,7 @@ int	check_all(t_data *data, t_map *map)
 		return (0);
 	return (1);
 }
+
 
 void	replace_spaces_by_walls(t_map *map)
 {
@@ -122,15 +123,12 @@ void	replace_spaces_by_walls(t_map *map)
 
 int	check_map(t_map *map, t_data *data)
 {
-	int	total_positions;
-
-	count_elements(map);
-	total_positions = map->north + map->south + map->east + map->west;
+ // blabla
 	if (total_positions != 1)
 	{
 		ft_putstr_fd("Error: plus d'une position de joueur sur la carte\n", \
 			STDERR_FILENO);
-		ft_free_paths_textures(data);
+		ft_free_paths_textures(data); // J'ai ajoute
 		return (0);
 	}
 	return (1);

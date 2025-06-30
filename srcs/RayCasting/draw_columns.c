@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_columns.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 14:12:51 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 16:29:46 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,23 +74,16 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 		return ;
 	text_x = init_text_x(rc, texture);
 	y = rc->top_pixel;
-	while (y < rc->bttm_pixel)
+	while (++y < rc->bttm_pixel)
 	{
 		text_y = set_text_y(rc, y, texture);
 		color = get_text_pixel_color(texture, text_x, text_y);
 		put_pixel_to_image(&data->screen, ray, y, color);
-		y++;
 	}
 	y = 0;
-	while (y < rc->top_pixel)
-	{
+	while (++y < rc->top_pixel)
 		put_pixel_to_image(&data->screen, ray, y, rgb_to_int(data->ceiling));
-		y++;
-	}
 	y = rc->bttm_pixel;
-	while (y < WIN_HEIGHT)
-	{
+	while (++y < WIN_HEIGHT)
 		put_pixel_to_image(&data->screen, ray, y, rgb_to_int(data->floor));
-		y++;
-	}
 }

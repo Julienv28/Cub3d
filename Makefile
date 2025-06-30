@@ -12,6 +12,8 @@ LIB			= 	$(LIB_DIR)/libft.a
 SRC         =	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/init.c \
 				$(SRC_DIR)/check.c \
+				$(SRC_DIR)/load_map.c \
+				$(SRC_DIR)/check_map.c \
 				$(SRC_DIR)/utils.c \
 				$(SRC_DIR)/init_mlx.c \
 				$(SRC_DIR)/draw_minimap.c \
