@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 12:52:08 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 14:21:09 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,9 +123,9 @@ int	main(int ac, char **av)
 	init_data(&data);
 	if (!load_map_and_param(av, &data, &data.map))
 		return (1);
-	print_map(data.map.map);
 	parse_player(&data.map);
 	ft_init_mlx(&data);
 	init_hook_loop(&data);
 	return (0);
 }
+  

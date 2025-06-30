@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 16:33:44 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 10:26:02 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 14:21:35 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,44 +75,28 @@ void	free_map(char **map, int height)
 	}
 	free(map);
 }
-
-int	on_destroy(t_data *data)
+int on_destroy(t_data *data)
 {
-	printf("Fenêtre fermée (event 17)\n");
-	if (data->mlx_ptr)
-	{
-		if (data->win_ptr)
-			mlx_destroy_window(data->mlx_ptr, data->win_ptr);
-		if (data->textures.ea.xpm_ptr)
-			mlx_destroy_image(data->mlx_ptr, data->textures.ea.xpm_ptr);
-		if (data->textures.no.xpm_ptr)
-			mlx_destroy_image(data->mlx_ptr, data->textures.no.xpm_ptr);
-		if (data->textures.so.xpm_ptr)
-			mlx_destroy_image(data->mlx_ptr, data->textures.so.xpm_ptr);
-		if (data->textures.we.xpm_ptr)
-			mlx_destroy_image(data->mlx_ptr, data->textures.we.xpm_ptr);
-		if (data->screen.xpm_ptr)
-			mlx_destroy_image(data->mlx_ptr, data->screen.xpm_ptr);
-		if (data->minimap.img_ptr)
-			mlx_destroy_image(data->mlx_ptr, data->minimap.img_ptr);
-		mlx_destroy_display(data->mlx_ptr);
-		free(data->mlx_ptr);
-	}
-	free_map(data->map.map, data->map.height);
-	exit(0);
+    printf("Fenêtre fermée (event 17)\n");
+    if (data->mlx_ptr)
+    {
+        if (data->win_ptr)
+            mlx_destroy_window(data->mlx_ptr, data->win_ptr);
+        if (data->textures.no.xpm_ptr)
+            mlx_destroy_image(data->mlx_ptr, data->textures.no.xpm_ptr);
+        if (data->textures.so.xpm_ptr)
+            mlx_destroy_image(data->mlx_ptr, data->textures.so.xpm_ptr);
+        if (data->textures.we.xpm_ptr)
+            mlx_destroy_image(data->mlx_ptr, data->textures.we.xpm_ptr);
+        if (data->textures.ea.xpm_ptr)
+            mlx_destroy_image(data->mlx_ptr, data->textures.ea.xpm_ptr);
+        if (data->screen.xpm_ptr)
+            mlx_destroy_image(data->mlx_ptr, data->screen.xpm_ptr);
+        if (data->minimap.img_ptr)
+            mlx_destroy_image(data->mlx_ptr, data->minimap.img_ptr);
+        mlx_destroy_display(data->mlx_ptr);
+        free(data->mlx_ptr);
+    }
+    free_map(data->map.map, data->map.height);
+    exit(0);
 }
-
-void	print_map(char **map)
-{
-	int	i;
-
-	i = 0;
-	if (!map)
-		return ;
-	while (map[i] != NULL)
-	{
-		printf("%s\n", map[i]);
-		i++;
-	}
-}
- 

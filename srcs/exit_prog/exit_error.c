@@ -15,7 +15,7 @@
 int	ft_error_close(char *message, t_data *data)
 {
 	printf(ORANGE"ERROR\n"GREY"%s\n"RESET, message);
-	if (data)
+	if (data && data->mlx_ptr)
 		on_destroy(data);
 	return (0);
 }
