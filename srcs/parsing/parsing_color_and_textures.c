@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 13:31:50 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 14:51:53 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,6 @@ int	parse_number(char *line, int *i)
 	return (num);
 }
 
-int	print_color_error(char *msg)
-{
-	ft_putstr_fd(msg, STDERR_FILENO);
-	exit(1);
-}
-
 int	parse_color(char *line, t_color *color)
 {
 	int	r;
@@ -46,8 +40,7 @@ int	parse_color(char *line, t_color *color)
 	g = 0;
 	b = 0;
 	i = 1;
-	while (line[i] == ' ')
-		i++;
+	while (line[i] == ' ') i++;
 	r = parse_number(line, &i);
 	if (line[i++] != ',' || r < 0 || r > 255)
 		return (print_color_error("Error: red color invalid\n"), 0);

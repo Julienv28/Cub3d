@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 14:25:01 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 16:37:50 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,59 @@ void	clear_screen(t_image *screen, int color)
 	}
 }
 
+static void	count_ray(t_data *data, float playerangle, t_rc *rc, int ray)
+{
+	float	rayangle;
+
+	rayangle = playerangle - (data->map.play.fov / 2)
+		+ (data->map.play.fov / NUM_RAYS) * ray;
+	rayangle = normalize_angle(rayangle);
+	rc->distance = get_dist_from_player(&data->map, rayangle, rc);
+	if (rc->distance == FLT_MAX)
+		rc->distance = 20.0f;
+	rc->distance *= cosf(rayangle - playerangle);
+	if (rc->distance < 0.0001f)
+		rc->distance = 0.0001f;
+	rc->dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play.fov / 2);
+	rc->pr_hght = ((rc->dis_proj_plane * TILE_SIZE) / rc->distance)
+		* (float)WIN_LEN / NUM_RAYS;
+	if (rc->pr_hght >= WIN_HEIGHT)
+		rc->pr_hght = WIN_HEIGHT - 1;
+	rc->top_pixel = (WIN_HEIGHT / 2) - (rc->pr_hght / 2);
+	rc->bttm_pixel = (WIN_HEIGHT / 2) + (rc->pr_hght / 2);
+	if (rc->top_pixel < 0)
+		rc->top_pixel = 0;
+	if (rc->bttm_pixel > WIN_HEIGHT)
+		rc->bttm_pixel = WIN_HEIGHT;
+}
+
+static void	render_rays(t_data *data, float playerangle)
+{
+	t_rc	rc;
+	int		ray;
+
+	ray = 0;
+	while (ray < NUM_RAYS)
+	{
+		count_ray(data, playerangle, &rc, ray);
+		draw_column(data, &rc, ray);
+		ray++;
+	}
+}
+
+void	render_game(t_data *data)
+{
+	float	playerangle;
+
+	clear_screen(&data->screen, 0x000000);
+	playerangle = data->map.play.angle;
+	render_rays(data, playerangle);
+	mlx_put_image_to_window(data->mlx_ptr,
+		data->win_ptr, data->screen.xpm_ptr, 0, 0);
+	draw_minimap(data);
+}
+
+/*
 void	render_game(t_data *data)
 {
 	float	playerangle;
@@ -75,19 +128,4 @@ void	render_game(t_data *data)
 	}
     mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->screen.xpm_ptr, 0, 0);
 	draw_minimap(data);
-}
-
-// void	render_game(t_data *data)
-// {
-// 	for (int y = 0; y < WIN_HEIGHT; y++)
-// 	{
-// 		for (int x = 0; x < WIN_LEN; x++)
-// 		{
-// 			if (y < WIN_HEIGHT / 2)
-// 				put_pixel_to_image(&data->screen, x, y, rgb_to_int(data->ceiling)); // bleu ciel
-// 			else
-// 				put_pixel_to_image(&data->screen, x, y, rgb_to_int(data->floor)); // marron
-// 		}
-// 	}
-// 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->screen.xpm_ptr, 0, 0);
-// }
+}*/

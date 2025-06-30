@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 14:15:36 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 16:08:56 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,11 @@
 void	init_data(t_data *data);
 void	ft_init_mlx(t_data *data);
 void	init_hook_loop(t_data *data);
+void	init_texture(t_data *data);
 
 int		is_param_line(char *line, t_data *data);
 int	    is_param_prefix_only(char *line);
-int		is_param_map(char *line); // ne pas retirer
+int		is_param_map(char *line);
 void	ft_init_mlx(t_data *data);
 t_image	ft_new_img(void *mlx, char *path, t_data *data, int or);
 void	ft_init_textures(t_data *data);
@@ -82,6 +83,7 @@ void	ft_init_textures(t_data *data);
 int		check_map(t_map *map);
 int		check_param(t_data *data);
 int		check_all(t_data *data, t_map *map);
+int	    check_wall(t_map *map);
 
 // PARSING MAP
 char	**load_map(int fd, t_map *map, char *first_line);
@@ -122,14 +124,16 @@ int		on_destroy(t_data *data);
 int		handle_keypress(int keysum, t_data *data);
 int		handle_mouse(int x, int y, t_data *data);
 int	    handle_mouse_click(int but, int x, int y, t_data *data);
+void	double_c(struct timeval cur_click, t_data *data, struct timeval *last);
+int	    first_c(struct timeval *last, struct timeval current_click, int *first_c);
 
 // UTILS
 void	count_elements(t_map *map);
 void	replace_spaces_by_walls(t_map *map);
-void	print_map(char **map);
 int		cub_extansion(char *filename);
 int		rgb_to_int(t_color color);
 void	free_map(char **map, int height);
+int	    print_color_error(char *msg);
 
 #endif
  
