@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:59:53 by opique            #+#    #+#             */
-/*   Updated: 2025/06/27 11:01:27 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 10:59:00 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,8 @@ int	draw_minimap(t_data *data)
 		x = 0;
 		while (x < data->map.width)
 		{
-			if (x < (int)ft_strlen(data->map.map[y])
-				&& data->map.map[y][x] == '1')
+			if (x >= (int)ft_strlen(data->map.map[y])
+				|| data->map.map[y][x] == '1')
 				data->minimap.color = 0x000000;
 			else
 				data->minimap.color = 0xFFFFFF;

@@ -37,6 +37,7 @@ void	init_data(t_data *data)
 	data->check_f = 0;
 	data->mouse_locked = false;
 	data->ignore_mouse_event = false;
+	data->need_redraw = true;
 	data->last_mouse_x = WIN_LEN / 2;
 	data->map.play.x = 0;
 	data->map.play.y = 0;

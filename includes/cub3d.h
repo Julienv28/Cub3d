@@ -61,7 +61,7 @@
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
-# define TILE_SIZE			5
+# define TILE_SIZE			2
 # define SPEED				0.05f
 
 // INITIALISATION
@@ -100,6 +100,7 @@ float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc);
 float	get_impact_x(float rayx, float rayy, int w_or);
 void	draw_column(t_data *data, t_rc *rc, int ray);
 float	normalize_angle(float angle);
+int     loop_handler(t_data *data);
 
 // DRAW MAP
 void	load_textures(t_data *data);

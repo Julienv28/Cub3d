@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:14:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/24 14:34:11 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 10:38:33 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,14 @@ int	rgb_to_int(t_color color)
 	g = color.g;
 	b = color.b;
 	return (((r & 0xFF) << 16) | ((g & 0xFF) << 8) | (b & 0xFF));
+}
+
+int	loop_handler(t_data *data)
+{
+	if (data->need_redraw)
+	{
+		render_game(data);
+		data->need_redraw = false;
+	}
+	return (0);
 }

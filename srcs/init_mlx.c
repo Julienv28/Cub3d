@@ -54,6 +54,7 @@ void	init_hook_loop(t_data *data)
 	mlx_hook(data->win_ptr, KeyPress, KeyPressMask, handle_keypress, data);
 	mlx_hook(data->win_ptr, MotionNotify, PointerMotionMask,
 		handle_mouse, data);
+	mlx_loop_hook(data->mlx_ptr, loop_handler, data);
 	mlx_hook(data->win_ptr, 17, 0, on_destroy, data);
 	mlx_loop(data->mlx_ptr);
 }

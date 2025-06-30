@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_mouse.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: oceanepique <oceanepique@student.42.fr>    +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 18:10:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/27 14:22:34 by oceanepique      ###   ########.fr       */
+/*   Updated: 2025/06/30 11:36:05 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ int	handle_mouse(int x, int y, t_data *data)
 	data->ignore_mouse_event = true;
 	mlx_mouse_move(data->mlx_ptr, data->win_ptr, WIN_LEN / 2, WIN_HEIGHT / 2);
 	data->last_mouse_x = WIN_LEN / 2;
-	render_game(data);
+	data->need_redraw = true;
 	return (0);
 }
