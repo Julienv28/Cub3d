@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color_and_textures.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 16:52:35 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 17:17:20 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,6 @@ int	parse_number(char *line, int *i)
 		(*i)++;
 	}
 	return (num);
-}
-
-int	print_color_error(char *msg, t_data *data, char *line)
-{
-	ft_putstr_fd(msg, STDERR_FILENO);
-	if (line)
-		free(line);
-	if (data->buffer)
-		free(data->buffer);
-	ft_free_paths_textures(data);
-	exit(1);
 }
 
 int	parse_color(char *line, t_color *color, t_data *data)

@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 15:27:08 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 15:28:51 by opique           ###   ########.fr       */
+/*   Updated: 2025/06/30 17:35:56 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*load_param(int fd, t_data *data)
 	char	*line;
 	int		len;
 
-	line = get_next_line(fd);
+	line = get_next_line(fd, &data->buffer);
 	while (line != NULL)
 	{
 		len = ft_strlen(line);
@@ -37,13 +37,13 @@ char	*load_param(int fd, t_data *data)
 		if (is_empty_line(line))
 		{
 			free(line);
-			line = get_next_line(fd);
+			line = get_next_line(fd, &data->buffer);
 			continue ;
 		}
 		if (is_param_line(line, data))
 		{
 			free(line);
-			line = get_next_line(fd);
+			line = get_next_line(fd, &data->buffer);
 			continue ;
 		}
 		return (line);
@@ -51,37 +51,47 @@ char	*load_param(int fd, t_data *data)
 	return (NULL);
 }
 
-char	**load_map(int fd, t_map *map, char *first_line)
+static int	process_map_line(t_map *map, char *line, t_data *data)
+{
+	int	len;
+
+	len = ft_strlen(line);
+	if (len > 0 && line[len - 1] == '\n')
+		line[len - 1] = '\0';
+	if (is_empty_line(line))
+		return (free(line), 1);
+	if (!is_param_map(line))
+	{
+		if (is_param_prefix_only(line))
+			ft_putstr_fd("Error: map mal placee\n", STDERR_FILENO);
+		else
+			ft_putstr_fd("Error: car non valid\n", STDERR_FILENO);
+		free(line);
+		ft_free_paths_textures(data);
+		return (-1);
+	}
+	if (!add_line_to_map(map, line))
+		return (free(line), free_map(map->map, map->height), -1);
+	return (free(line), 0);
+}
+
+char	**load_map(int fd, t_map *map, char *first_line, t_data *data)
 {
 	char	*line;
-	int		len;
+	int		ret;
 
 	map->height = 0;
 	map->width = 0;
 	line = first_line;
 	while (line != NULL)
 	{
-		len = ft_strlen(line);
-		if (len > 0 && line[len - 1] == '\n')
-			line[len - 1] = '\0';
-		if (is_empty_line(line))
-		{
-			free(line);
-			line = get_next_line(fd);
-			continue ;
-		}
-		if (!is_param_map(line))
-		{
-			if (is_param_prefix_only(line))
-				ft_putstr_fd("Error: map mal placee\n", STDERR_FILENO);
-			else
-				ft_putstr_fd("Error: car non valid\n", STDERR_FILENO);
-			return (free(line), NULL);
-		}
-		if (!add_line_to_map(map, line))
-			return (free_map(map->map, map->height), free(line), NULL);
-		free(line);
-		line = get_next_line(fd);
+		ret = process_map_line(map, line, data);
+		if (ret == 1)
+			line = get_next_line(fd, &data->buffer);
+		else if (ret == -1)
+			return (NULL);
+		else
+			line = get_next_line(fd, &data->buffer);
 	}
 	return (map->map);
 }
@@ -91,6 +101,7 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 	int		fd;
 	char	*first_line;
 
+	data->buffer = NULL;
 	if (!cub_extansion(av[1]))
 		return (ft_putstr_fd("Error: bad extansion\n", STDERR_FILENO), 0);
 	fd = open(av[1], O_RDONLY);
@@ -101,11 +112,12 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 	{
 		ft_putstr_fd("Error: missing map\n", STDERR_FILENO);
 		on_destroy(data);
-		return (close(fd), 0);
+		return (free(data->buffer), close(fd), 0);
 	}
-	if (!load_map(fd, map, first_line))
+	if (!load_map(fd, map, first_line, data))
 		return (close(fd), on_destroy(data), 0);
 	close(fd);
+	free(data->buffer);
 	if (!check_all(data, map))
 		on_destroy(data);
 	return (1);
