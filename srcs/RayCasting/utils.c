@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:14:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 10:38:33 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 13:51:53 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ int	get_w_or(float dx, float dy)
 	else
 	{
 		if (dy < 0)
-			return (SOUTH);
-		else
 			return (NORTH);
+		else
+			return (SOUTH);
 	}
 }
 

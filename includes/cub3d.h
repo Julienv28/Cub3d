@@ -62,6 +62,7 @@
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
+# define GRAPH_SIZE         64
 # define TILE_SIZE			2
 # define SPEED				0.05f
 
