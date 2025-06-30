@@ -1,7 +1,7 @@
-NO textures/red_wall.xpm
-SO textures/green_wall.xpm
-WE textures/blue_wall.xpm
-EA textures/wall.xpm
+NO ./textures/no.xpm
+SO ./textures/so.xpm
+WE ./textures/we.xpm
+EA ./textures/ea.xpm
 
 C 17,213,236
 F 231,227,14

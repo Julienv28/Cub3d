@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 11:00:26 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 14:25:01 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	render_game(t_data *data)
 		if (rc.distance < 0.0001f)
 			rc.distance = 0.0001f;
 		rc.dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play.fov / 2);
-		rc.pr_hght = (rc.dis_proj_plane * TILE_SIZE) / rc.distance;
+		rc.pr_hght = ((rc.dis_proj_plane * TILE_SIZE) / rc.distance) * (float)WIN_LEN / NUM_RAYS;
 		if (rc.pr_hght >= WIN_HEIGHT)
 			rc.pr_hght = WIN_HEIGHT - 1;
 		rc.top_pixel = (WIN_HEIGHT / 2) - (rc.pr_hght / 2);

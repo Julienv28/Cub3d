@@ -6,34 +6,34 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/27 13:24:01 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/06/30 14:12:51 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static int	init_text_x(t_rc *rc)
+static int	init_text_x(t_rc *rc, t_image *texture)
 {
-	int	texture;
+	float	textures;
 
-	texture = (int)(rc->impact_x * TILE_SIZE);
-	if (texture < 0)
-		texture = 0;
-	if (texture >= TILE_SIZE)
-		texture = TILE_SIZE - 1;
-	return (texture);
+	textures = rc->impact_x - floorf(rc->impact_x);
+	if (textures < 0.0f)
+		textures = 0.0f;
+	if (textures > 1.0f)
+		textures = 1.0f;
+	return ((int)(textures * texture->x));
 }
 
-static int	set_text_y(t_rc *rc, int y)
+static int	set_text_y(t_rc *rc, int y, t_image *texture)
 {
-	int	texture;
+	int	textures;
 
-	texture = (int)(((float)(y - rc->top_pixel) / rc->pr_hght) * TILE_SIZE);
-	if (texture < 0)
-		texture = 0;
-	if (texture >= TILE_SIZE)
-		texture = TILE_SIZE - 1;
-	return (texture);
+	textures = (int)(((float)(y - rc->top_pixel) / rc->pr_hght) * texture->y);
+	if (textures < 0)
+		textures = 0;
+	if (textures >= texture->y)
+		textures = texture->y - 1;
+	return (textures);
 }
 
 unsigned int	get_text_pixel_color(t_image *img, int x, int y)
@@ -42,10 +42,7 @@ unsigned int	get_text_pixel_color(t_image *img, int x, int y)
 	unsigned int	color;
 
 	if (x < 0 || x >= img->x || y < 0 || y >= img->y)
-	{
-		fprintf(stderr, "Texture bounds exceeded: x=%d y=%d | img size=%d x %d\n", x, y, img->x, img->y);
 		return (0xFF00FF);
-	}
 	pixel = img->data_addr + (y * img->line_len + x * (img->bpp / 8));
 	color = *(unsigned int *)pixel;
 	return (color);
@@ -69,18 +66,17 @@ void	draw_column(t_data *data, t_rc *rc, int ray)
 	unsigned int	color;
 	t_image			*texture;
 
-	text_x = init_text_x(rc);
 	y = rc->top_pixel;
 	if (rc->w_or < 0 || rc->w_or > 3)
 		return ;
 	texture = data->textures.all[rc->w_or];
 	if (texture == NULL)
 		return ;
-	text_x = init_text_x(rc);
+	text_x = init_text_x(rc, texture);
 	y = rc->top_pixel;
 	while (y < rc->bttm_pixel)
 	{
-		text_y = set_text_y(rc, y);
+		text_y = set_text_y(rc, y, texture);
 		color = get_text_pixel_color(texture, text_x, text_y);
 		put_pixel_to_image(&data->screen, ray, y, color);
 		y++;
