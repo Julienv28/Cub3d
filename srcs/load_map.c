@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 15:27:08 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 17:35:56 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 11:41:24 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ static int	process_map_line(t_map *map, char *line, t_data *data)
 		if (is_param_prefix_only(line))
 			ft_putstr_fd("Error: map mal placee\n", STDERR_FILENO);
 		else
-			ft_putstr_fd("Error: car non valid\n", STDERR_FILENO);
+			ft_putstr_fd("Error: char non valid\n", STDERR_FILENO);
 		free(line);
+		free(data->buffer);
 		ft_free_paths_textures(data);
 		return (-1);
 	}
@@ -111,6 +112,7 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 	if (!first_line)
 	{
 		ft_putstr_fd("Error: missing map\n", STDERR_FILENO);
+		ft_free_paths_textures(data);
 		on_destroy(data);
 		return (free(data->buffer), close(fd), 0);
 	}
