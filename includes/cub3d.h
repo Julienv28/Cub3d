@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 17:46:03 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:58:04 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@
 
 //Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
+# define MIN_DISTANCE		0.5f
 # define GRAPH_SIZE         64
 # define TILE_SIZE			2
 # define SPEED				0.05f

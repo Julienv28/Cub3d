@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 17:40:57 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:58:41 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	count_ray(t_data *data, float playerangle, t_rc *rc, int ray)
 	if (fabsf(rc->correct) < 0.0001f)
 		rc->correct = 0.0001f;
 	rc->corrected_distance = rc->distance * rc->correct;
+	if (rc->corrected_distance < MIN_DISTANCE)
+		rc->corrected_distance = MIN_DISTANCE;
 	rc->dis_proj_plane = (float)(WIN_LEN / 2) / tanf(data->map.play.fov / 2.0f);
 	rc->pr_hght = ((rc->dis_proj_plane * TILE_SIZE) / rc->corrected_distance);
 	if (rc->pr_hght >= WIN_HEIGHT)
