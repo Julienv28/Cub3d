@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:04:04 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 10:21:45 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 11:22:06 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ static void	draw_floor(t_data *data, t_rc *rc, int ray)
 	int	y;
 	int	color;
 
-	y = 0;
+	y = rc->bttm_pixel;
 	color = rgb_to_int(data->floor);
-	while (++y < rc->top_pixel)
+	while (++y < WIN_HEIGHT)
 		put_pixel_to_image(&data->screen, ray, y, color);
 }
 
