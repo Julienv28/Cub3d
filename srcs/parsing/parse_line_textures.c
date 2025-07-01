@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 09:44:42 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 09:45:47 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 10:54:24 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,21 @@ int	is_color_line(char *line, t_data *data)
 		return (0);
 	}
 	return (0);
+}
+
+int	parse_number(char *line, int *i)
+{
+	int	num;
+
+	num = 0;
+	while (line[*i] == ' ' || line[*i] == '\t')
+		(*i)++;
+	if (!ft_isdigit(line[*i]))
+		return (-1);
+	while (ft_isdigit(line[*i]))
+	{
+		num = num * 10 + (line[*i] - '0');
+		(*i)++;
+	}
+	return (num);
 }

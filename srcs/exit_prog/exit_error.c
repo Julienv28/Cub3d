@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 09:41:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 17:26:48 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 11:00:10 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	on_destroy(t_data *data)
 	exit(0);
 }
 
-int	print_color_error(char *msg, t_data *data, char *line)
+int	print_col_error(char *msg, t_data *data, char *line)
 {
 	ft_putstr_fd(msg, STDERR_FILENO);
 	if (line)
