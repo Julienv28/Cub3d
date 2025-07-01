@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 11:00:19 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:26:36 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,6 @@ void			run_dda(t_map *map, t_dda *dda, int *side);
 void			init_ray_data(t_map *map, float ray_angle, t_cast *cast,
 					t_dda *dda);
 
-
 // DRAW MAP
 void			load_textures(t_data *data);
 void			draw_map(t_data *data);
@@ -123,6 +122,7 @@ void			print_textures_for_player(t_data *data, char c, int x, int y);
 void			put_pixel_to_image(t_image *img, int x, int y,
 					unsigned int color);
 unsigned int	get_text_pixel_color(t_image *img, int x, int y);
+void			clear_screen(t_image *screen, int color);
 
 // MINIMAP
 int				draw_minimap(t_data *data);

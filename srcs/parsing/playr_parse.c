@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   playr_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:31:36 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 14:38:47 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:33:46 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ static void	init_player_pos(char c, t_map *map)
 void	set_player_angle(t_position *play)
 {
 	if (play->orientation == NORTH)
-		play->angle = M_PI_2;
-	else if (play->orientation == SOUTH)
 		play->angle = 3 * M_PI_2;
+	else if (play->orientation == SOUTH)
+		play->angle = M_PI_2;
 	else if (play->orientation == EAST)
 		play->angle = 0;
 	else if (play->orientation == WEST)
@@ -55,6 +55,7 @@ void	parse_player(t_map *map)
 				map->play.x = (float)x;
 				map->play.y = (float)y;
 				init_player_pos(maps[y][x], map);
+				set_player_angle(&map->play);
 				map->play.fov = M_PI / 3;
 				break ;
 			}

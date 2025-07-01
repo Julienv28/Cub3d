@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 09:52:12 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:26:53 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,22 @@ float	normalize_angle(float angle)
 	return (angle);
 }
 
-void	clear_screen(t_image *screen, int color)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_LEN)
-		{
-			put_pixel_to_image(screen, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
 static void	count_ray(t_data *data, float playerangle, t_rc *rc, int ray)
 {
 	float	rayangle;
+	float	camera_x;
 
-	rayangle = playerangle - (data->map.play.fov / 2)
-		+ (data->map.play.fov / NUM_RAYS) * ray;
-	rayangle = normalize_angle(rayangle);
+	camera_x = ((float)ray / NUM_RAYS) - 0.5f;
+	rayangle = normalize_angle(playerangle + camera_x * data->map.play.fov);
 	rc->distance = get_dist_from_player(&data->map, rayangle, rc);
 	if (rc->distance == FLT_MAX)
 		rc->distance = 20.0f;
-	rc->distance *= cosf(rayangle - playerangle);
-	if (rc->distance < 0.0001f)
-		rc->distance = 0.0001f;
-	rc->dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play.fov / 2);
-	rc->pr_hght = ((rc->dis_proj_plane * TILE_SIZE) / rc->distance)
-		* (float)WIN_LEN / NUM_RAYS;
+	rc->correct = cosf(rayangle - playerangle);
+	if (fabsf(rc->correct) < 0.0001f)
+		rc->correct = 0.0001f;
+	rc->corrected_distance = rc->distance * rc->correct;
+	rc->dis_proj_plane = (float)(WIN_LEN / 2) / tanf(data->map.play.fov / 2.0f);
+	rc->pr_hght = ((rc->dis_proj_plane * TILE_SIZE) / rc->corrected_distance);
 	if (rc->pr_hght >= WIN_HEIGHT)
 		rc->pr_hght = WIN_HEIGHT - 1;
 	rc->top_pixel = (WIN_HEIGHT / 2) - (rc->pr_hght / 2);
@@ -91,43 +73,3 @@ void	render_game(t_data *data)
 	draw_minimap(data);
 }
 
-/*
-void	render_game(t_data *data)
-{
-	float	playerangle;
-	float	rayangle;
-	t_rc	rc;
-	int		ray;
-
-	clear_screen(&data->screen, 0x000000);
-	ray = 0;
-	playerangle = data->map.play.angle;
-	while (ray < NUM_RAYS)
-	{
-		rayangle = playerangle - (data->map.play.fov / 2)
-			+ (data->map.play.fov / NUM_RAYS) * ray;
-		rayangle = normalize_angle(rayangle);
-		rc.distance = get_dist_from_player(&data->map, rayangle, &rc);
-		if (rc.distance == FLT_MAX)
-			rc.distance = 20.0f;
-		rc.distance *= cosf(rayangle - playerangle);
-		if (rc.distance < 0.0001f)
-			rc.distance = 0.0001f;
-		rc.dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play.fov / 2);
-		rc.pr_hght = ((rc.dis_proj_plane * TILE_SIZE) / rc.distance) * 
-		(float)WIN_LEN / NUM_RAYS;
-		if (rc.pr_hght >= WIN_HEIGHT)
-			rc.pr_hght = WIN_HEIGHT - 1;
-		rc.top_pixel = (WIN_HEIGHT / 2) - (rc.pr_hght / 2);
-		rc.bttm_pixel = (WIN_HEIGHT / 2) + (rc.pr_hght / 2);
-		if (rc.top_pixel < 0)
-			rc.top_pixel = 0;
-		if (rc.bttm_pixel > WIN_HEIGHT)
-			rc.bttm_pixel = WIN_HEIGHT;
-		draw_column(data, &rc, ray);
-		ray++;
-	}
-    mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, 
-	data->screen.xpm_ptr, 0, 0);
-	draw_minimap(data);
-}*/

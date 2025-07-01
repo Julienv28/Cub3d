@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:41:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 16:45:01 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:06:57 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ typedef struct s_rc
 	float	distance;
 	float	pr_hght;
 	float	impact_x;
+	float	correct;
 	float	dis_proj_plane;
+	float	corrected_distance;
 	int		top_pixel;
 	int		bttm_pixel;
 	int		w_or;
+	int		num_rays;
 }	t_rc;
 
 typedef struct s_image
