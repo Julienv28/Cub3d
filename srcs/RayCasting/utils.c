@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:14:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 13:34:52 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:42:21 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,19 @@ float	get_impact_x(float rayx, float rayy, int w_or)
 	float	impact;
 
 	if (w_or == NORTH || w_or == SOUTH)
+	{
 		impact = rayx - floorf(rayx);
+		if (w_or == NORTH)
+			impact = 1.0f - impact;
+	}
 	else
+	{
 		impact = rayy - floorf(rayy);
+		if (w_or == EAST)
+			impact = 1.0f - impact;
+	}
+	if (impact < 0.0f)
+		impact += 1.0f;
 	return (impact);
 }
 

@@ -6,7 +6,11 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
+<<<<<<< HEAD
+/*   Updated: 2025/07/01 17:26:36 by juvitry          ###   ########.fr       */
+=======
 /*   Updated: 2025/07/01 13:35:31 by opique           ###   ########.fr       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +126,7 @@ void			print_textures_for_player(t_data *data, char c, int x, int y);
 void			put_pixel_to_image(t_image *img, int x, int y,
 					unsigned int color);
 unsigned int	get_text_pixel_color(t_image *img, int x, int y);
+void			clear_screen(t_image *screen, int color);
 
 // MINIMAP
 int				draw_minimap(t_data *data);

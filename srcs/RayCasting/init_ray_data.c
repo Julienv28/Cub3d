@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:26:24 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 10:48:48 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 15:34:49 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ static void	init_dda_base(t_map *map, t_cast *cast, t_dda *dda)
 {
 	dda->map_x = (int)map->play.x;
 	dda->map_y = (int)map->play.y;
+	if (cast->dx == 0 || cast->dy == 0)
+		return ;
 	dda->delta_d_x = fabsf(1.0f / cast->dx);
 	dda->delta_d_y = fabsf(1.0f / cast->dy);
 }

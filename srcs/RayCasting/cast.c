@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cast.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 13:34:11 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 17:40:57 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,40 +21,22 @@ float	normalize_angle(float angle)
 	return (angle);
 }
 
-void	clear_screen(t_image *screen, int color)
-{
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y < WIN_HEIGHT)
-	{
-		x = 0;
-		while (x < WIN_LEN)
-		{
-			put_pixel_to_image(screen, x, y, color);
-			x++;
-		}
-		y++;
-	}
-}
-
 static void	count_ray(t_data *data, float playerangle, t_rc *rc, int ray)
 {
 	float	rayangle;
+	float	camera_x;
 
-	rayangle = playerangle - (data->map.play.fov / 2)
-		+ (data->map.play.fov / NUM_RAYS) * ray;
-	rayangle = normalize_angle(rayangle);
+	camera_x = ((float)ray / NUM_RAYS) - 0.5f;
+	rayangle = normalize_angle(playerangle + camera_x * data->map.play.fov);
 	rc->distance = get_dist_from_player(&data->map, rayangle, rc);
 	if (rc->distance == FLT_MAX)
 		rc->distance = 20.0f;
-	rc->distance *= cosf(rayangle - playerangle);
-	if (rc->distance < 0.0001f)
-		rc->distance = 0.0001f;
-	rc->dis_proj_plane = (WIN_LEN / 2) / tan(data->map.play.fov / 2);
-	rc->pr_hght = ((rc->dis_proj_plane * TILE_SIZE) / rc->distance)
-		* (float)WIN_LEN / NUM_RAYS;
+	rc->correct = cosf(rayangle - playerangle);
+	if (fabsf(rc->correct) < 0.0001f)
+		rc->correct = 0.0001f;
+	rc->corrected_distance = rc->distance * rc->correct;
+	rc->dis_proj_plane = (float)(WIN_LEN / 2) / tanf(data->map.play.fov / 2.0f);
+	rc->pr_hght = ((rc->dis_proj_plane * TILE_SIZE) / rc->corrected_distance);
 	if (rc->pr_hght >= WIN_HEIGHT)
 		rc->pr_hght = WIN_HEIGHT - 1;
 	rc->top_pixel = (WIN_HEIGHT / 2) - (rc->pr_hght / 2);
