@@ -6,31 +6,11 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/01 10:04:04 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 17:24:56 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:42:01 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-// static void	draw_wall_strip(t_data *data, t_rc *rc, int ray, int text_x)
-// {
-// 	int		y;
-// 	int		text_y;
-// 	int		color;
-// 	t_image	*texture;
-// 	float	step;
-// 	float	tex_pos;
-
-// 	texture = data->textures.all[rc->w_or];
-// 	y = rc->top_pixel;
-// 	while (y < rc->bttm_pixel)
-// 	{
-// 		text_y = set_text_y(rc, y, texture);
-// 		color = get_text_pixel_color(texture, text_x, text_y);
-// 		put_pixel_to_image(&data->screen, ray, y, color);
-// 		y++;
-// 	}
-// }
 
 static void	draw_wall_strip(t_data *data, t_rc *rc, int ray, int text_x)
 {

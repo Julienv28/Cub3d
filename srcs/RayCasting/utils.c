@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:14:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 15:06:17 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:42:21 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,6 @@ float	get_impact_x(float rayx, float rayy, int w_or)
 	return (impact);
 }
 
-/*
-Lorsque l'on exprime une couleur avec un code RGB, on renvoit en realite un
-entier. Il est donc necessaire de convertir ces valeur rgb pour ensuite etre
-en capacite d'afficher le bon set de couleurs.
-*/
 int	rgb_to_int(t_color color)
 {
 	int	r;

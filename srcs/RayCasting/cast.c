@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/19 14:06:25 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 17:26:53 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 17:40:57 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,3 @@ void	render_game(t_data *data)
 		data->win_ptr, data->screen.xpm_ptr, 0, 0);
 	draw_minimap(data);
 }
-
