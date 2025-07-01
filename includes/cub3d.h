@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 11:00:19 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/01 13:35:31 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,6 @@ int				set_text_y(t_rc *rc, int y, t_image *texture);
 void			run_dda(t_map *map, t_dda *dda, int *side);
 void			init_ray_data(t_map *map, float ray_angle, t_cast *cast,
 					t_dda *dda);
-
 
 // DRAW MAP
 void			load_textures(t_data *data);

@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 18:10:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 16:08:27 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 13:33:43 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ int	first_c(struct timeval *last, struct timeval current_click, int *first_c)
 	return (1);
 }
 
-// Fonction pour gérer le double clic
 void	double_c(struct timeval cur_click, t_data *data, struct timeval *last)
 {
 	long	elapsed;
@@ -82,7 +81,6 @@ void	double_c(struct timeval cur_click, t_data *data, struct timeval *last)
 	*last = cur_click;
 }
 
-// Fonction principale qui gère le clic de la souris
 int	handle_mouse_click(int but, int x, int y, t_data *data)
 {
 	static struct timeval	last_click;
@@ -100,40 +98,3 @@ int	handle_mouse_click(int but, int x, int y, t_data *data)
 	}
 	return (0);
 }
-
-/*
-int	handle_mouse_click(int but, int x, int y, t_data *data)
-{
-	static struct timeval	last_click;
-	static int				first_click;
-	struct timeval			current_click;
-	long					elapsed;
-
-	(void)x;
-	(void)y;
-	if (but == 1)
-	{
-		gettimeofday(&current_click, NULL);
-		if (first_click == 0)
-		{
-			last_click = current_click;
-			first_click = 1;
-			return (0);
-		}
-		elapsed = (current_click.tv_sec - last_click.tv_sec) * 1000
-			+ (current_click.tv_usec - last_click.tv_usec) / 1000;
- 		if (elapsed < 300)
-		{
-			data->mouse_locked = !data->mouse_locked;
-			if (data->mouse_locked)
-			{
-				mlx_mouse_move(data->mlx_ptr, data->win_ptr, WIN_LEN / 2,
-					WIN_HEIGHT / 2);
-				data->last_mouse_x = WIN_LEN / 2;
-				data->ignore_mouse_event = true;
-			}
-		}
-		last_click = current_click;
-	}
-	return (0);
-}*/
