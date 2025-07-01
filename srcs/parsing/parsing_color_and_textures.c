@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color_and_textures.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 17:17:20 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 09:43:05 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,3 @@ int	parse_texture(char *line, char **texture)
 	ft_strcpy(*texture, path);
 	return (1);
 }
- 

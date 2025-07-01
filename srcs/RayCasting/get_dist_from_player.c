@@ -3,74 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_dist_from_player.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:58:36 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 15:55:15 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 10:38:01 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-static void	run_dda(t_map *map, t_dda *dda, int *side)
-{
-	int	hit;
-
-	hit = 0;
-	while (!hit)
-	{
-		if (dda->side_d_x < dda->side_d_y)
-		{
-			dda->side_d_x += dda->delta_d_x;
-			dda->map_x += dda->step_x;
-			*side = 0;
-		}
-		else
-		{
-			dda->side_d_y += dda->delta_d_y;
-			dda->map_y += dda->step_y;
-			*side = 1;
-		}
-		if (dda->map_x < 0 || dda->map_x >= map->width
-			|| dda->map_y < 0 || dda->map_y >= map->height)
-		{
-			*side = -1;
-			return ;
-		}
-		if (map->map[dda->map_y][dda->map_x] == '1')
-			hit = 1;
-	}
-}
-
-static void	init_ray_data(t_map *map, float rayAngle, t_cast *cast, t_dda *dda)
-{
-	cast->dx = cosf(rayAngle);
-	cast->dy = sinf(rayAngle);
-	dda->map_x = (int)map->play.x;
-	dda->map_y = (int)map->play.y;
-	dda->delta_d_x = fabsf(1 / cast->dx);
-	dda->delta_d_y = fabsf(1 / cast->dy);
-	if (cast->dx < 0)
-	{
-		dda->step_x = -1;
-		dda->side_d_x = (map->play.x - dda->map_x) * dda->delta_d_x;
-	}
-	else
-	{
-		dda->step_x = 1;
-		dda->side_d_x = (dda->map_x + 1.0f - map->play.x) * dda->delta_d_x;
-	}
-	if (cast->dy < 0)
-	{
-		dda->step_y = -1;
-		dda->side_d_y = (map->play.y - dda->map_y) * dda->delta_d_y;
-	}
-	else
-	{
-		dda->step_y = 1;
-		dda->side_d_y = (dda->map_y + 1.0f - map->play.y) * dda->delta_d_y;
-	}
-}
 
 float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 {

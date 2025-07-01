@@ -22,12 +22,16 @@ SRC         =	$(SRC_DIR)/main.c \
 				$(SRC_DIR)/parsing/parsing_color_and_textures.c \
 				$(SRC_DIR)/parsing/parsing_map.c \
 				$(SRC_DIR)/parsing/playr_parse.c \
+				$(SRC_DIR)/parsing/parse_line_textures.c \
 				$(SRC_DIR)/movement/handle_keypress.c \
 				$(SRC_DIR)/movement/handle_mouse_bonus.c \
 				$(SRC_DIR)/RayCasting/cast.c \
 				$(SRC_DIR)/RayCasting/draw_columns.c \
+				$(SRC_DIR)/RayCasting/draw_columns_utils.c \
 				$(SRC_DIR)/RayCasting/utils.c \
-				$(SRC_DIR)/RayCasting/get_dist_from_player.c
+				$(SRC_DIR)/RayCasting/get_dist_from_player.c \
+				$(SRC_DIR)/RayCasting/run_dda.c \
+				$(SRC_DIR)/RayCasting/init_ray_data.c
 
 OBJ         = 	${SRC:.c=.o}
 
