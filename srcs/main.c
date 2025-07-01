@@ -3,62 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:52:27 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 15:24:04 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/01 09:54:08 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
-static int	parse_and_check(char *line, char *id, char **texture, int *check)
+int	parse_and_check(char *line, char *id, char **texture, int *check)
 {
 	if (ft_strncmp(line, id, 2) == 0)
 	{
 		if (parse_texture(line, texture))
 		{
 			(*check)++;
-			return (1);
-		}
-		return (0);
-	}
-	return (0);
-}
-
-int	is_texture_line(char *line, t_data *data)
-{
-	if (!data)
-		return (0);
-	if (parse_and_check(line, "NO", &data->textures.no_xpm, &data->textures.no_check))
-		return (1);
-	if (parse_and_check(line, "SO", &data->textures.so_xpm, &data->textures.so_check))
-		return (1);
-	if (parse_and_check(line, "WE", &data->textures.we_xpm, &data->textures.we_check))
-		return (1);
-	if (parse_and_check(line, "EA", &data->textures.ea_xpm, &data->textures.ea_check))
-		return (1);
-	return (0);
-}
-
-int	is_color_line(char *line, t_data *data)
-{
-	if (!data)
-		return (0);
-	if (ft_strncmp(line, "F", 1) == 0)
-	{
-		if (parse_color(line, &data->floor, data))
-		{
-			data->check_f++;
-			return (1);
-		}
-		return (0);
-	}
-	if (ft_strncmp(line, "C", 1) == 0)
-	{
-		if (parse_color(line, &data->ceiling, data))
-		{
-			data->check_c++;
 			return (1);
 		}
 		return (0);
@@ -115,4 +75,3 @@ int	main(int ac, char **av)
 	init_hook_loop(&data);
 	return (0);
 }
-  
