@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
+/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 15:31:40 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 17:30:47 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/02 11:39:45 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	check_param(t_data *data)
 	if (data->textures.ea_check == 0 || data->textures.no_check == 0
 		|| data->textures.so_check == 0 || data->textures.we_check == 0
 		|| data->check_c == 0 || data->check_f == 0)
-		return (ft_putstr_fd("Missing param\n", STDERR_FILENO),
+		return (ft_putstr_fd("Error: Missing param\n", STDERR_FILENO),
 			ft_free_paths_textures(data), 0);
 	return (1);
 }
