@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 13:14:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/02 11:00:27 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:29:00 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,54 +50,33 @@ pour savoir quel pixel exploiter.
 - collision horizontale = on récupère la coordonnée X à l'intérieur de la case
 - collision verticale = on récupère la coordonnée Y à l'intérieur de la case
 */
-// float	get_impact_x(float rayx, float rayy, int w_or)
-// {
-// 	float	impact;
 
-// 	if (w_or == NORTH || w_or == SOUTH)
-// 	{
-// 		impact = rayx - floorf(rayx);
-// 		if (w_or == NORTH)
-// 			impact = 1.0f - impact;
-// 	}
-// 	else
-// 	{
-// 		impact = rayy - floorf(rayy);
-// 		if (w_or == EAST)
-// 			impact = 1.0f - impact;
-// 	}
-// 	if (impact < 0.0f)
-// 		impact += 1.0f;
-// 	return (impact);
-// }
-
-void get_impacts(float rayx, float rayy, int w_or, float *impact_x, float *impact_y)
+void	get_impacts(float rayx, float rayy, int w_or, t_vec2f *impact)
 {
-    float local_x;
-    float local_y;
+	float	local_x;
+	float	local_y;
 
 	local_x = rayx - floorf(rayx);
 	local_y = rayy - floorf(rayy);
-    if (w_or == NORTH || w_or == SOUTH)
-    {
-        *impact_x = local_x;
-        *impact_y = local_y;
-        if (w_or == NORTH)
-            *impact_x = 1.0f - *impact_x;
-    }
-    else
-    {
-        *impact_x = local_x;
-        *impact_y = local_y;
-        if (w_or == EAST)
-            *impact_y = 1.0f - *impact_y;
-    }
-    if (*impact_x < 0.0f)
-        *impact_x += 1.0f;
-    if (*impact_y < 0.0f)
-        *impact_y += 1.0f;
+	if (w_or == NORTH || w_or == SOUTH)
+	{
+		impact->x = local_x;
+		impact->y = local_y;
+		if (w_or == NORTH)
+			impact->x = 1.0f - impact->x;
+	}
+	else
+	{
+		impact->x = local_x;
+		impact->y = local_y;
+		if (w_or == EAST)
+			impact->y = 1.0f - impact->y;
+	}
+	if (impact->x < 0.0f)
+		impact->x += 1.0f;
+	if (impact->y < 0.0f)
+		impact->y += 1.0f;
 }
-
 
 int	rgb_to_int(t_color color)
 {

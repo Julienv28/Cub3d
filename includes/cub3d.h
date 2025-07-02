@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 09:07:19 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/02 09:51:54 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:28:30 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@
 # define EAST               2
 # define WEST               3
 
-# define MINMAP_BOX			10 // Taille case pixel
-# define MINMAP_SIZE		200 // Taille minimap
+# define MINMAP_BOX			10
+# define MINMAP_SIZE		200
 
-//Angle de vision a 60 degres pour reproduire la vision comme Wolfenstein
+//Angle de vision a 60 degres vision comme Wolfenstein
 # define NUM_RAYS			WIN_LEN
 # define MIN_DISTANCE		0.5f
 # define MIN_HEIGHT			60
@@ -106,8 +106,7 @@ int				parse_texture(char *line, char **texture);
 void			render_game(t_data *data);
 int				get_w_or(float dx, float dy);
 float			get_dist_from_player(t_map *map, float rayAngle, t_rc *rc);
-// float			get_impact_x(float rayx, float rayy, int w_or);
-void get_impacts(float rayx, float rayy, int w_or, float *impact_x, float *impact_y);
+void			get_impacts(float rayx, float rayy, int w_or, t_vec2f *impact);
 void			draw_column(t_data *data, t_rc *rc, int ray);
 float			normalize_angle(float angle);
 int				loop_handler(t_data *data);

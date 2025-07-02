@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_dist_from_player.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:58:36 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/02 11:04:12 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:26:58 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 {
 	t_cast	cast;
 	t_dda	dda;
+	t_vec2f	impact;
 	int		side;
 
 	init_ray_data(map, rayAngle, &cast, &dda);
@@ -32,6 +33,8 @@ float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 		rc->w_or = get_w_or(0, cast.dy);
 	get_impacts(map->play.x + cast.distance * cast.dx,
 		map->play.y + cast.distance * cast.dy,
-		rc->w_or, &rc->impact_x, &rc->impact_y);
+		rc->w_or, &impact);
+	rc->impact_x = impact.x;
+	rc->impact_y = impact.y;
 	return (cast.distance);
 }

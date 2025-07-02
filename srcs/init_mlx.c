@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:17 by juvitry           #+#    #+#             */
-/*   Updated: 2025/06/30 16:22:00 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:31:36 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ t_image	ft_new_img(void *mlx, char *path, t_data *data, int or)
 	return (img);
 }
 
-//2e partie d'initialisation = tableau pour le rendu avec RayCast
 void	ft_init_textures(t_data *data)
 {
 	void	*mlx;

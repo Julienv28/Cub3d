@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 18:10:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 13:33:43 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/02 11:29:58 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ carte pour compléter la partie bonus tant que leur utilisation est
 justifiée lors de votre évaluation."
 */
 
-// Fonction pour traiter le premier clic
 int	first_c(struct timeval *last, struct timeval current_click, int *first_c)
 {
 	if (*first_c == 0)

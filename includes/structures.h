@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:41:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/02 09:48:16 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:24:43 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,23 @@ typedef struct s_rc
 	int		w_or;
 	int		num_rays;
 }	t_rc;
+
+typedef struct s_wall_draw
+{
+	int		draw_start;
+	int		draw_end;
+	float	tex_pos;
+	float	step;
+	int		ray;
+	int		text_x;
+	float	wall_height;
+}	t_wall_draw;
+
+typedef struct s_vec2f
+{
+	float	x;
+	float	y;
+}	t_vec2f;
 
 typedef struct s_image
 {
