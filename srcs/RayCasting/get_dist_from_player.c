@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 11:58:36 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 17:42:11 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:04:12 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ float	get_dist_from_player(t_map *map, float rayAngle, t_rc *rc)
 		rc->w_or = get_w_or(cast.dx, 0);
 	else
 		rc->w_or = get_w_or(0, cast.dy);
-	rc->impact_x = get_impact_x(map->play.x + cast.distance * cast.dx,
-			map->play.y + cast.distance * cast.dy, rc->w_or);
+	get_impacts(map->play.x + cast.distance * cast.dx,
+		map->play.y + cast.distance * cast.dy,
+		rc->w_or, &rc->impact_x, &rc->impact_y);
 	return (cast.distance);
 }

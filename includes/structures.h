@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 10:41:20 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 17:06:57 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 09:48:16 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_rc
 	float	distance;
 	float	pr_hght;
 	float	impact_x;
+	float	impact_y;
 	float	correct;
 	float	dis_proj_plane;
 	float	corrected_distance;
