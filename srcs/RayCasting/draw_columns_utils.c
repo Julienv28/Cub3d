@@ -6,7 +6,7 @@
 /*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/23 14:22:28 by juvitry           #+#    #+#             */
-/*   Updated: 2025/07/01 17:08:33 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 11:02:03 by juvitry          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,28 @@
 
 int	init_text_x(t_rc *rc, t_image *texture)
 {
-	float	textures;
+	float	hit_coord;
+	int		tex_x;
 
-	textures = (int)(rc->impact_x * (float)(texture->x));
-	if (textures < 0.0f)
-		textures = 0.0f;
-	if (textures >= texture->x)
-		textures = texture->x - 1;
-	return (textures);
+	if (rc->w_or == NORTH || rc->w_or == SOUTH)
+		hit_coord = rc->impact_x;
+	else
+		hit_coord = rc->impact_y;
+	hit_coord -= floor(hit_coord);
+	tex_x = (int)(hit_coord * texture->x);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= texture->x)
+		tex_x = texture->x - 1;
+	if (rc->w_or == SOUTH || rc->w_or == WEST)
+		tex_x = texture->x - 1 - tex_x;
+	return (tex_x);
 }
 
 int	set_text_y(t_rc *rc, int y, t_image *texture)
 {
 	int		textures_height;
-	int		wall_height_on_screen;
+	float	wall_height_on_screen;
 	int		relative_y;
 	float	ratio;
 	int		text_y;
