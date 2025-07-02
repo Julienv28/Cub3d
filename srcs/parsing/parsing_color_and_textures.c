@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_color_and_textures.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 13:16:09 by opique            #+#    #+#             */
-/*   Updated: 2025/07/01 11:02:49 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 12:09:36 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,15 @@ int	parse_color(char *line, t_color *color, t_data *data)
 		i++;
 	r = parse_number(line, &i);
 	if (!check_comma(line, &i) || !check_range(r))
-		return (print_col_error("Error: red color invalid\n", data, line), 0);
+		return (print_col_error("Error\nred color invalid.\n", data, line), 0);
 	g = parse_number(line, &i);
 	if (!check_comma(line, &i) || !check_range(g))
-		return (print_col_error("Error: green color invalid\n", data, line), 0);
+		return (print_col_error("Error\ngreen color invalid.\n", data, line), 0);
 	b = parse_number(line, &i);
 	if (!check_line_end(line, i) || !check_range(b))
-		return (print_col_error("Error: blue color invalid\n", data, line), 0);
+		return (print_col_error("Error\nblue color invalid.\n", data, line), 0);
 	if (b < 0 || b > 255)
-		return (print_col_error("Error: RGB invalid format\n", data, line), 0);
+		return (print_col_error("Error\nRGB invalid format.\n", data, line), 0);
 	color->r = r;
 	color->g = g;
 	color->b = b;

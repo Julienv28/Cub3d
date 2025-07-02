@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   load_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: juvitry <juvitry@student.42.fr>            +#+  +:+       +#+        */
+/*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 15:27:08 by opique            #+#    #+#             */
-/*   Updated: 2025/07/01 11:41:24 by juvitry          ###   ########.fr       */
+/*   Updated: 2025/07/02 12:08:48 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,9 +63,9 @@ static int	process_map_line(t_map *map, char *line, t_data *data)
 	if (!is_param_map(line))
 	{
 		if (is_param_prefix_only(line))
-			ft_putstr_fd("Error: map mal placee\n", STDERR_FILENO);
+			ft_putstr_fd("Error\nmap mal placee.\n", STDERR_FILENO);
 		else
-			ft_putstr_fd("Error: char non valid\n", STDERR_FILENO);
+			ft_putstr_fd("Error\ncaractere invalid.\n", STDERR_FILENO);
 		free(line);
 		free(data->buffer);
 		ft_free_paths_textures(data);
@@ -104,14 +104,14 @@ int	load_map_and_param(char **av, t_data *data, t_map *map)
 
 	data->buffer = NULL;
 	if (!cub_extansion(av[1]))
-		return (ft_putstr_fd("Error: bad extansion\n", STDERR_FILENO), 0);
+		return (ft_putstr_fd("Error\nbad extansion\n", STDERR_FILENO), 0);
 	fd = open(av[1], O_RDONLY);
 	if (fd < 0)
-		return (perror("Error: ouverture map"), 0);
+		return (perror("Error\nouverture map."), 0);
 	first_line = load_param(fd, data);
 	if (!first_line)
 	{
-		ft_putstr_fd("Error: missing map\n", STDERR_FILENO);
+		ft_putstr_fd("Error\nmissing map\n", STDERR_FILENO);
 		ft_free_paths_textures(data);
 		on_destroy(data);
 		return (free(data->buffer), close(fd), 0);

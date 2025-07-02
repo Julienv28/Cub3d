@@ -6,7 +6,7 @@
 /*   By: opique <opique@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/30 15:00:11 by opique            #+#    #+#             */
-/*   Updated: 2025/06/30 17:11:13 by opique           ###   ########.fr       */
+/*   Updated: 2025/07/02 12:01:33 by opique           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_sides(t_map *map, t_data *data)
 		line = map->map[y];
 		if (line[0] != '1' || line[ft_strlen(line) - 1] != '1')
 		{
-			ft_putstr_fd("Error: map not closed (sides).\n", STDERR_FILENO);
+			ft_putstr_fd("Error\nmap not closed.\n", STDERR_FILENO);
 			ft_free_paths_textures(data);
 			return (0);
 		}
@@ -42,7 +42,7 @@ int	check_top_and_bottom(t_map *map, t_data *data)
 	while (line[x])
 	{
 		if (line[x] != '1')
-			return (ft_putstr_fd("Error: map not closed.\n", STDERR_FILENO),
+			return (ft_putstr_fd("Error\nmap not closed.\n", STDERR_FILENO),
 				ft_free_paths_textures(data), 0);
 		x++;
 	}
@@ -52,7 +52,7 @@ int	check_top_and_bottom(t_map *map, t_data *data)
 	{
 		if (line[x] != '1')
 		{
-			ft_putstr_fd("Error: map not closed.\n", STDERR_FILENO);
+			ft_putstr_fd("Error\nmap not closed.\n", STDERR_FILENO);
 			ft_free_paths_textures(data);
 			return (0);
 		}
@@ -78,7 +78,7 @@ int	check_map(t_map *map, t_data *data)
 	total_positions = map->north + map->south + map->east + map->west;
 	if (total_positions != 1)
 	{
-		ft_putstr_fd("Error: plus d'une position de joueur sur la carte\n", \
+		ft_putstr_fd("Error\nplus d'une position de joueur sur la carte.\n", \
 			STDERR_FILENO);
 		ft_free_paths_textures(data);
 		return (0);
